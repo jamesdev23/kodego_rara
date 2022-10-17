@@ -1,23 +1,20 @@
 //  updated 10-17-22
 package activity_01_d
 
-// import mu.KotlinLogging
-// private val logger = KotlinLogging.logger{}
-
 fun main() {
     var userInputList = Array<Int>(5){ 0 }
     var divideValueBy: Int? = null
     var answer: Int? = null
     var answerInFloat: Float? = null
 
-    // using for loop for inputs. also, prefer try catch for error-checking
+    // using for loop for inputs. also, no error checking method is specified so I use this
     for(index in 0 until 5) {
         run loop@ {
             try {
                 println("Enter the monetary amount ${index + 1}: ")
                 userInputList[index] = readLine()!!.toInt()
             } catch (e: NumberFormatException) {
-                println("Error: Input is not a number or exceeds max value")
+                println("Input is not a number.")
                 return@loop
             }
         }
