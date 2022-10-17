@@ -5,7 +5,6 @@ fun main() {
     var userInputList = Array<Int>(5){ 0 }
     var divideValueBy: Int? = null
     var answer: Int? = null
-    var answerInFloat: Float? = null
 
     // using for loop for inputs
     for(index in 0 until 5) {
@@ -18,9 +17,8 @@ fun main() {
 
     // using sum function on array to get sum of all 5 inputs
     answer = userInputList.sum() / divideValueBy
-    answerInFloat = answer.toFloat()
 
     // prints answer
-    println("Answer: $answerInFloat")
+    println("Answer: $answer")
 
 }
