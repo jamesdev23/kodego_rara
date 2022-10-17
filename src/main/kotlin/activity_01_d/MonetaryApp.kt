@@ -9,15 +9,8 @@ fun main() {
 
     // using for loop for inputs. also, no error checking method is specified so I use this
     for(index in 0 until 5) {
-        run loop@ {
-            try {
-                println("Enter the monetary amount ${index + 1}: ")
-                userInputList[index] = readLine()!!.toInt()
-            } catch (e: NumberFormatException) {
-                println("Input is not a number.")
-                return@loop
-            }
-        }
+        println("Enter the monetary amount ${index + 1}: ")
+        userInputList[index] = readLine()!!.toInt()
     }
 
     println("Divide the value by how many?: ")
