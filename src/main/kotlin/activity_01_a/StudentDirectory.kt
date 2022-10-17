@@ -1,8 +1,11 @@
 package activity_01_a
+
+// updated 10-17-22
 fun main() {
     // variable list
     // student info
     val courseName = "Mobile App Development (Part-Time)"
+    var studentList = ArrayList<String>()
     var studentName: String? = null
     var batchNumber: String? = "MD2P"
     var studentStatus: String? = null
