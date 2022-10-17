@@ -7,7 +7,7 @@ fun main() {
     var answer: Int? = null
     var answerInFloat: Float? = null
 
-    // using for loop for inputs. also, no error checking method is specified so I use this
+    // using for loop for inputs
     for(index in 0 until 5) {
         println("Enter the monetary amount ${index + 1}: ")
         userInputList[index] = readLine()!!.toInt()
