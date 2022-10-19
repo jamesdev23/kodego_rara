@@ -1,24 +1,35 @@
-//  updated 10-17-22
 package activity_01_d
-
 fun main() {
-    var userInputList = Array<Int>(5){ 0 }
-    var divideValueBy: Int? = null
-    var answer: Int? = null
+    var userInput = Array<Float>(5) { 0.0F }
+    var divideValueBy:Int = 0
+    var isANumber = true
+    // using Float just in casea
+    var total:Float
 
-    // using for loop for inputs
-    for(index in 0 until 5) {
-        println("Enter the monetary amount ${index + 1}: ")
-        userInputList[index] = readLine()!!.toInt()
+    // using for loop for monetary inputs
+    for(index in 0 .. 5) {
+        var tempInput:String
+        if(index < 5){
+            println("Enter monetary amount ${index + 1}: ")
+        }else{
+            println("Divide the value by how many?: ")
+        }
+        tempInput = readLine().toString()
+        for(char in tempInput){
+            isANumber = !(char < '0' || char > '9')
+        }
+
+        if(!isANumber || tempInput.length == 0) {
+            println("Error: Input is not a number")
+        }else if(index < 5){
+            userInput[index] = tempInput.toFloat()
+        }else{
+            divideValueBy = tempInput.toInt()
+        }
     }
 
-    println("Divide the value by how many?: ")
-    divideValueBy = readLine()!!.toInt()
-
-    // using sum function on array to get sum of all 5 inputs
-    answer = userInputList.sum() / divideValueBy
-
-    // prints answer
-    println("Answer: $answer")
+    total = userInput.sum() / divideValueBy
+    val totalRoundOff = String.format("%.2f", total)
+    println("Total: $totalRoundOff")
 
 }
