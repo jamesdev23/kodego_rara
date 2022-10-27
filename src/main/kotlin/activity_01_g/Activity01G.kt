@@ -16,7 +16,7 @@ fun main(){
     }
 
     // output
-    if( word == null || word.length == 0 ){
+    if(word.isEmpty()){
         println("Error: input is null or empty")
     }
     else if(word.equals(reverse,ignoreCase = true) ){

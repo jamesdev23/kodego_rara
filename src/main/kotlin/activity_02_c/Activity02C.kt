@@ -40,7 +40,7 @@ fun main(){
     println("- Add Grocery Item Info")
     println("- Check Grocery Item List")
     println("Proceed to add grocery item...")
-    while(addGrocery == true) {
+    while(addGrocery) {
         println("Enter item name: ")
         itemName = readLine().toString()
         println("Enter item category (perishable/nonperishable): ")
@@ -114,7 +114,7 @@ fun main(){
             ++ count
             ++ column
             if(column == 4){
-                column = column - 4
+                column -= 4
                 println(" ")
             }
         }while(count < itemPerishable.size)
@@ -124,7 +124,7 @@ fun main(){
             ++ count2
             ++ column2
             if(column2 == 4){
-                column2 = column2 - 4
+                column2 -= 4
                 println(" ")
             }
         }while(count2 < itemNonperishable.size)

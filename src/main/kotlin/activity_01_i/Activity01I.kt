@@ -117,7 +117,7 @@ fun main(){
         println(" ")
         println("Checking borrower\'s info...")
         println(" ")
-        if(borrowerInfo == null || borrowerInfo.size == 0){
+        if(borrowerInfo.size == 0){
             println("No entry found.")
         }else {
             println("Borrower Info: ")

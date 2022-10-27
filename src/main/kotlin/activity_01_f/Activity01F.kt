@@ -47,11 +47,11 @@ fun main(){
     }
 
     // output for unique characters
-    if(uniqueList.length == null || uniqueList.length == 0){
+    if(uniqueList.isEmpty()){
         println("No unique characters")
     }else{
         print("Unique characters: ")
-        for(index in 0 until uniqueList.length){
+        for(index in uniqueList.indices){
             print("${uniqueList[index]}")
             if(index < uniqueList.length - 1){
                 print(",")

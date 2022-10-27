@@ -33,7 +33,7 @@ fun main() {
     var optionsInput:String? = null
     var firstName:String? = null
     var lastName:String? = null
-    var classStartDate:String? = null
+    var startDate:String? = null
     var studentRecord = ArrayList<String>()
     var studentRecordColumn = arrayListOf("Student Name","Batch Number","Class Start","Status","Dropped","Attendance Count",
         "Late Attendance","Exercise Status","Exercise Completed","Exercise in Progress","Exercise Count",
@@ -52,15 +52,15 @@ fun main() {
 
     // add student
     println("Proceed to add student...")
-    while(addStudent == true) {
+    while(addStudent) {
         println("Enter first name: ")
         firstName = readLine()!!.toString()
-        if (firstName == null || firstName.isEmpty()) {
+        if (firstName.isEmpty()) {
             println("Student name can't be empty.")
         }
         println("Enter last name: ")
         lastName = readLine()!!.toString()
-        if (lastName == null || firstName.isEmpty()) {
+        if (firstName.isEmpty()) {
             println("Student name can't be empty.")
         }
         studentName = "$firstName $lastName"
@@ -70,12 +70,12 @@ fun main() {
             println("Error: This directory only adds student for this course.")
         }
         println("Enter class start date (mm-dd-YYYY): ")
-        classStartDate = readLine().toString()
+        startDate = readLine().toString()
         // adds a bunch of record to student record. total of 20 records
         studentList.add(studentName)
         studentRecord.add(studentName)
         studentRecord.add(batchNumber)
-        studentRecord.add(classStartDate)
+        studentRecord.add(startDate)
         studentRecord.add(studentStatus)
         studentRecord.add(isDropped)
         studentRecord.add(attendanceCount)
@@ -132,7 +132,7 @@ fun main() {
                 ++ index
                 ++ column
                 if(column == 20){
-                    column = column - 20
+                    column -= 20
                     println(" ")
                 }
             }while(index < studentRecord.size)

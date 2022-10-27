@@ -39,7 +39,7 @@ fun main() {
     println("- Add Borrowable item")
     println("- Add Item Info")
     println("Proceed to add borrowable item...")
-    while(addBook == true) {
+    while(addBook) {
         println("Enter book name: ")
         bookName = readLine().toString()
         println("Adding book to list...")
@@ -96,7 +96,7 @@ fun main() {
             ++ count
             ++ column
             if(column == 6){
-                column = column - 6
+                column -= 6
                 println(" ")
             }
         }while(count < bookCharacteristic.size)
