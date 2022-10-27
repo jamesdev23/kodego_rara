@@ -97,7 +97,6 @@ fun main(){
             var endDate = bookBorrowDateStart.plus(Period.of(0,0,borrowDuration)).toString()
             borrowerInfo.add(endDate)
             println("Added entry to borrowed book list")
-            println("Book Borrow Successfully")
         }
         println("Do you want to borrow another book? (Y/N): ")
         optionYesNo = readLine().toString()
