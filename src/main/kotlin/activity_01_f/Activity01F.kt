@@ -1,62 +1,67 @@
 package activity_01_f
+import mu.KotlinLogging
 
-//  description: find unique characters
+private val logger = KotlinLogging.logger{}
+
+//  description: find unique characters in both string
+//  Union of Unique characters in both Strings
 //  scope: string, loops
 
 fun main(){
     var string1:String = ""
     var string2:String = ""
-    var uniqueList = ""
-    var usedChar = ""
+    var uniqueChars1 = mutableSetOf<Char>()
+    var uniqueChars2 = mutableSetOf<Char>()
+    var shortString = ""
+    var longString = ""
 
     // input
-    println("Enter first string: ")
+    println("String 1: ")
     string1 = readLine().toString()
-    println("Enter second string: ")
+    println("String 2: ")
     string2 = readLine().toString()
 
-    // comparing string1 to string2
-    for (counter1 in 0 until string1.length) {
-        var isCommon = false
-
-        for (counter2 in 0 until string2.length) {
-            if( string1[counter1] == string2[counter2] ){
-                isCommon = true
-                break
-            }
-        }
-        if(!isCommon && !(usedChar.contains(string1[counter1])) ){
-            uniqueList += string1[counter1]
-            usedChar += string1[counter1]
-        }
-    }
-
-    // comparing string2 to string1
-    for (counter2 in 0 until string2.length) {
-        var isCommon = false
-        for (counter1 in 0 until string1.length) {
-            if (string2[counter2] == string1[counter1] ){
-                isCommon = true
-                break
-            }
-        }
-        if(!isCommon && !(usedChar.contains(string2[counter2])) ){
-            uniqueList += string2[counter2]
-            usedChar += string2[counter2]
-        }
-    }
-
-    // output for unique characters
-    if(uniqueList.isEmpty()){
-        println("No unique characters")
+    if(string1.length < string2.length){
+        shortString = string1
+        longString = string2
     }else{
-        print("Unique characters: ")
-        for(index in uniqueList.indices){
-            print("${uniqueList[index]}")
-            if(index < uniqueList.length - 1){
-                print(",")
+        shortString = string2
+        longString = string1
+    }
+
+    // compare long and short string
+    for(index1 in longString.indices){
+        var common = false
+        for(index2 in shortString.indices){
+            if(longString[index1] == shortString[index2]){
+                common = true
             }
         }
+        if(!common){
+            uniqueChars1.add(longString[index1])
+        }
     }
+
+    // compare short and uniqueChars
+    for(index1 in shortString.indices){
+        var common = false
+        for(index2 in uniqueChars1.indices){
+            if(shortString[index1] == uniqueChars1.elementAt(index2)){
+                common = true
+            }
+        }
+        if(!common){
+            uniqueChars2.add(shortString[index1])
+        }
+    }
+
+    uniqueChars1.addAll(uniqueChars2)
+
+    print("Unique: ")
+    uniqueChars1.forEach(){
+        print(it)
+    }
+
+
 }
 
