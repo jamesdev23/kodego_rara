@@ -1,7 +1,4 @@
 package activity_03_a
-import mu.KotlinLogging
-
-private val logger = KotlinLogging.logger{}
 
 // make array of 20 names. make functions according to instruction
 
@@ -19,7 +16,7 @@ fun main(){
     println("4. Remove Student")
     println("5. Student Count")
     println("6. Search Student Name (using wildcard)")
-    println("7. Search Student name (whole name)")
+    println("7. Search Student Name (whole name)")
     println("8. Search Student")
     print("Prompt: ")
     prompt = readLine().toString()
