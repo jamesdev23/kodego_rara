@@ -2,8 +2,9 @@ package activity_03_a
 
 // make array of 20 names. make functions according to instruction
 
-val nameList:ArrayList<String> = arrayListOf("Marco","Eugene","Sarah","Isaiah","Anthony","Henry","Elizabeth","Olivia",
+private val nameList:ArrayList<String> = arrayListOf("Marco","Eugene","Sarah","Isaiah","Anthony","Henry","Elizabeth","Olivia",
     "Sara","Maria","Mary","Christopher","Andrew","Daniel","Matthew","Michael","Nicholas","James","Brian","Ryan")
+
 
 fun main(){
     var prompt:String = ""
@@ -96,7 +97,7 @@ fun searchStudent(name: String){
 
 fun searchStudentWildSearch(name: String){
     for(index in nameList.indices){
-        if(nameList[index].contains(name)){
+        if(nameList[index].contains(name,ignoreCase = true)){
             println(nameList[index])
         }
     }
@@ -104,7 +105,7 @@ fun searchStudentWildSearch(name: String){
 
 fun searchStudentName(name: String){
     for(index in nameList.indices){
-        if(nameList[index] == name){
+        if(nameList[index].equals(name,ignoreCase = true)){
             println(nameList[index])
         }
     }
