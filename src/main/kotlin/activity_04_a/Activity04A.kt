@@ -1,5 +1,10 @@
 package activity_04_a
-class Student(var firstname:String = "", var lastname:String = "", var nickname:String = "", var id:Int = 0, var yearenrolled:String = ""){
+
+// Student, but using class instead of string. Also, search will ask either first/last/nickname.
+class Student(var firstname:String = "", var lastname:String = "", var nickname:String = "",
+              var id:Int = 0, var yearenrolled:String = "")
+
+class StudentList {
     var firstNameList:ArrayList<String> = arrayListOf("Marco","Eugene","Sarah","Isaiah","Anthony","Henry","Elizabeth",
         "Olivia", "Sara","Maria","Mary","Christopher","Andrew","Daniel","Matthew","Michael","Jake","James",
         "Raymond","James Nico")
@@ -32,22 +37,22 @@ fun main() {
         println("Enter First Name: ")
         firstName = readLine().toString()
         student.firstname = firstName
-        resultList = searchStudentWildSearch(firstname = student.firstname)
-        showResult()
+        resultList = searchStudentWildSearch(student.firstname,"","")
+        showSearchResult()
     }
     if(prompt == "lastname"){
         println("Enter Last Name: ")
         lastName = readLine().toString()
         student.lastname = lastName
-        resultList = searchStudentWildSearch(lastname = student.lastname)
-        showResult()
+        resultList = searchStudentWildSearch("",student.lastname,"")
+        showSearchResult()
     }
     if(prompt == "nickname"){
         println("Enter Nickname: ")
         nickname = readLine().toString()
         student.nickname = nickname
-        resultList = searchStudentWildSearch(nickname = student.nickname)
-        showResult()
+        resultList = searchStudentWildSearch("","",student.nickname)
+        showSearchResult()
     }
 
 }
@@ -61,15 +66,15 @@ fun searchStudentWildSearch(firstname:String = "", lastname:String = "", nicknam
 
     if (firstname.isNotEmpty()) {
         name = firstname
-        searchList = Student().firstNameList
+        searchList = StudentList().firstNameList
     }
     if (lastname.isNotEmpty()) {
         name = lastname
-        searchList = Student().lastNameList
+        searchList = StudentList().lastNameList
     }
     if (nickname.isNotEmpty()) {
         name = nickname
-        searchList = Student().nicknameList
+        searchList = StudentList().nicknameList
     }
     for (index in searchList.indices) {
         if (searchList[index].contains(name,ignoreCase = true)) {
@@ -77,15 +82,16 @@ fun searchStudentWildSearch(firstname:String = "", lastname:String = "", nicknam
             found = true
         }
     }
-    if (found) {
+    // if match found, return a list of search result. otherwise, return empty arraylist
+    if(found){
         return searchResult
-    } else {
+    }else {
         return ArrayList()
     }
 }
 // act04_a changes end
 
-fun showResult(list: ArrayList<String> = resultList){
+fun showSearchResult(list: ArrayList<String> = resultList){
     println("Search Result: ")
     list.forEach() {
         println(it)
