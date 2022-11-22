@@ -1,6 +1,5 @@
 open class Product {
     var name:String = ""
-        private set
     var price:Double = 0.0
 
     constructor(name:String,price:Double) {
@@ -44,7 +43,7 @@ enum class OrderStatus{
     UNKNOWN
 }
 
-class Cart(var customer:Customer){
+open class Cart(var customer:Customer){
     var uniqueID:String = ""
     var items:HashMap<Product,Float> = HashMap()
     var status:OrderStatus = OrderStatus.UNKNOWN
@@ -55,6 +54,26 @@ class Cart(var customer:Customer){
         //items.put(product, quantity)
         items[product] = quantity
     }
+    fun addFruit(product: Fruit,quantity: Float){
+        items[product] = quantity
+    }
+    fun addShakes(product: Shakes,quantity: Float){
+        items[product] = quantity
+    }
+
+    fun addJuices(product: Juices,quantity: Float){
+        items[product] = quantity
+    }
+
+    fun addSandwiches(product: Sandwiches,quantity: Float){
+        items[product] = quantity
+    }
+}
+
+class SaladsOrder(customer: Customer) : Cart(customer){
+    fun addItems(product: Salads,quantity: Float){
+        items[product] = quantity
+    }
 }
 
 data class Customer(var address:String,var mobilenumber:String,
@@ -62,8 +81,24 @@ data class Customer(var address:String,var mobilenumber:String,
 
 
 fun main(){
+    // vars
+    var customer = Customer("","","","")
+    var customerCart = Cart(customer)
+    var fruits = arrayListOf("apple","banana","lemon","mango","strawberry")
+    var shakes = arrayListOf("vanilla shake","strawberry shake","mixed berry","chocolate blend ","chocolate-banana")
+    var juices = arrayListOf("apple juice","strawberry juice","orange juice","pineapple juice","carrot juice")
+    var sandwiches = arrayListOf("egg sandwich","chicken sandwich","ham sandwich","grilled cheese sandwich","grilled chicken sandwich")
+    var salads = arrayListOf("caesar salad","leafy green salad","greek salad","wedge salad","cobb salad")
+    var order1 = Fruit("apple",20.0)
+    var quantity = 2.0F
 
+    customerCart.addFruit(order1, quantity)
 
+    customerCart.items.forEach(){
+        println(it)
+    }
+
+    println("${order1.name} Qty: ${quantity}")
 
 }
 
