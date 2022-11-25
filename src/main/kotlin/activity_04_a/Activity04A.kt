@@ -1,24 +1,26 @@
 package activity_04_a
 
 // Student, but using class instead of string. Also, search will ask either first/last/nickname.
-class Student(var firstname:String = "", var lastname:String = "", var nickname:String = "",
-              var id:Int = 0, var yearenrolled:String = "")
+class Student(var firstname:String,var lastname:String,var nickname:String){
+    var ID:String = ""
+    var yearEnrolled:String = ""
+}
 
-class StudentList {
-    var firstNameList:ArrayList<String> = arrayListOf("Marco","Eugene","Sarah","Isaiah","Anthony","Henry","Elizabeth",
+private var firstNameList:ArrayList<String> = arrayListOf("Marco","Eugene","Sarah","Isaiah","Anthony","Henry","Elizabeth",
         "Olivia", "Sara","Maria","Mary","Christopher","Andrew","Daniel","Matthew","Michael","Jake","James",
         "Raymond","James Nico")
-    var lastNameList:ArrayList<String> = arrayListOf("Marco","Eugene","Sarah","Isaiah","Anthony","Henry","Elizabeth",
+
+private var lastNameList:ArrayList<String> = arrayListOf("Marco","Eugene","Sarah","Isaiah","Anthony","Henry","Elizabeth",
         "Olivia", "Sara","Maria","Mary","Christopher","Andrew","Daniel","Matthew","Michael","Jake","James",
         "Raymond","Rara")
-    var nicknameList:ArrayList<String> = arrayListOf("Marco","Eugene","Sarah","Isaiah","Anthony","Henry","Elizabeth",
+
+private var nicknameList:ArrayList<String> = arrayListOf("Marco","Eugene","Sarah","Isaiah","Anthony","Henry","Elizabeth",
         "Olivia", "Sara","Maria","Mary","Christopher","Andrew","Daniel","Matthew","Michael","Jake","James",
         "Raymond","Nico")
-}
 
 private var resultList: ArrayList<String> = ArrayList()
 
-fun main() {
+fun main(){
     var firstName = ""
     var lastName = ""
     var nickname = ""
@@ -66,15 +68,15 @@ fun searchStudentWildSearch(firstname:String = "", lastname:String = "", nicknam
 
     if (firstname.isNotEmpty()) {
         name = firstname
-        searchList = StudentList().firstNameList
+        searchList = firstNameList
     }
     if (lastname.isNotEmpty()) {
         name = lastname
-        searchList = StudentList().lastNameList
+        searchList = lastNameList
     }
     if (nickname.isNotEmpty()) {
         name = nickname
-        searchList = StudentList().nicknameList
+        searchList = nicknameList
     }
     for (index in searchList.indices) {
         if (searchList[index].contains(name,ignoreCase = true)) {
