@@ -1,35 +1,32 @@
 package activity_06_c
 
 class Checkout {
+    fun checkCart(itemName:String, quantity:Int, price: Double) {
+        if(itemName.isEmpty())
+            throw CartException.ItemNameException.ItemNameIsEmpty()
 
-    fun computeCart(quantity:Int, price: Double): Double? {
-        var result = 0.0
-
-        // scenarios (5 total)
-        if(quantity > 1_000 || price > 1_000_000.0)
-            throw CartException.QuantityOrPriceExceedsMaximumValue()
+        if(quantity > 999 || price > 999_999.0)
+            throw CartException.QuantityOrPriceExceedsMaxLimit()
 
         if(quantity == 0)
             throw CartException.QuantityException.QuantityIsZero()
 
-        if(quantity < 0)
-            throw CartException.QuantityException.QuantityBelowZero()
-
         if(price == 0.0)
             throw CartException.PriceException.PriceIsZero()
 
+        if(quantity < 0)
+            throw CartException.QuantityException.QuantityBelowZero()
+
         if(price < 0.0)
             throw CartException.PriceException.PriceBelowZero()
-
-        result = quantity * price
-
-        return result
     }
 }
 
 sealed class CartException(message:String) : Exception(message){
-
-    class QuantityOrPriceExceedsMaximumValue(message:String = "Quantity or Price Exceeds Maximum Cart Limit"):CartException(message)
+    sealed class ItemNameException(message: String) : CartException(message){
+        class ItemNameIsEmpty(message:String = "Item name is empty") : ItemNameException(message)
+    }
+    class QuantityOrPriceExceedsMaxLimit(message:String = "Quantity or Price Exceeds Max Limit"):CartException(message)
 
     sealed class QuantityException(message: String) : CartException(message){
         class QuantityIsZero(message:String = "Quantity is set to zero"):QuantityException(message)
@@ -43,6 +40,6 @@ sealed class CartException(message:String) : Exception(message){
 }
 
 fun main(){
-    var result = Checkout().computeCart(10,0.0)
+    var result = Checkout().checkCart("",1_000,1_000_000.0)
     println(result)
 }

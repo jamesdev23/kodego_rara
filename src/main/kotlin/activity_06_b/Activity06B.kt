@@ -55,7 +55,7 @@ class Illustrator(var firstName:String, var lastName:String, var middleName: Str
 // added class and methods for act_6b
 
 class User(var name:String){
-    var itemBorrowCount:Int = 0
+    var borrowCount:Int = 0
     var unpaidDues:Double = 0.0
 }
 
@@ -75,21 +75,29 @@ class Library{
     var borrowedItem:HashMap<User,Book> = HashMap()
 
     fun borrowItem(user:User,item:Book){
+        var isReserved = bookList.getValue(item.title) == "Reserved"
+        var isForInternalUse = bookList.getValue(item.title) == "Internal Use"
+        var isForFixing = bookList.getValue(item.title) == "For Fixing"
+
+        if(user.borrowCount >= 5)
+            throw LibraryException.UserException.UserHas5orMoreItems()
+
+        if(user.unpaidDues > 0.0)
+            throw LibraryException.UserException.UserHasUnpaidDues()
+
+        if(isReserved)
+            throw LibraryException.ItemException.ItemIsReserved()
+
+        if(isForInternalUse)
+            throw LibraryException.ItemException.ItemIsForInternalUser()
+
+        if(isForFixing)
+            throw LibraryException.ItemException.ItemIsForFixing()
+
         borrowedItem[user] = item
-        ++user.itemBorrowCount
+        ++user.borrowCount
     }
 
-    fun checkItemReserved(book:Book): Boolean{
-        return bookList.getValue(book.title) == "Reserved"
-    }
-
-    fun checkItemIsForInternalUse(book:Book): Boolean{
-        return bookList.getValue(book.title) == "Internal Use"
-    }
-
-    fun checkItemForFixing(book:Book): Boolean{
-        return bookList.getValue(book.title) == "For Fixing"
-    }
 }
 
 sealed class LibraryException(message:String) : Exception(message){
@@ -107,46 +115,26 @@ sealed class LibraryException(message:String) : Exception(message){
 fun main() {
     var user1 = User("James")
     var book1 = Book("Don Quixote")
-    var book2 = Book("Alice's Adventures in Wonderland")
-    var book3 = Book("The Adventures of Tom Sawyer")
-    var book4 = Book("Treasure Island")
-    var book5 = Book("Pride and Prejudice")
-    var book6 = Book("Wuthering Heights")
-    var book7 = Book("East of Eden")
-    var book8 = Book("The Scarlet Letter")
+    var book2 = Book("Wuthering Heights")
+    var book3 = Book("East of Eden")
+    var book4 = Book("The Scarlet Letter")
 
-    // adding items for 5 items exception
+    // user 5 or more borrowed items exception
+    user1.borrowCount = 5
     Library().borrowItem(user1,book1)
-    Library().borrowItem(user1,book2)
-    Library().borrowItem(user1,book3)
-    Library().borrowItem(user1,book4)
-    Library().borrowItem(user1,book5)
 
-    // adding entry to unpaid dues list
+    // unpaid dues exception
     user1.unpaidDues = 500.0
+    Library().borrowItem(user1,book1)
 
-    var isReserved = Library().checkItemReserved(book6)
-    var isForInternalUse = Library().checkItemIsForInternalUse(book7)
-    var isForFixing = Library().checkItemForFixing(book8)
-    // println(user1.itemBorrowCount)
+    // "reserved" exception
+    Library().borrowItem(user1,book2)
 
+    // "internal use" exception
+    Library().borrowItem(user1,book3)
 
-    // throw exceptions
-
-    if(user1.itemBorrowCount >= 5)
-        throw LibraryException.UserException.UserHas5orMoreItems()
-
-    if(user1.unpaidDues > 0.0)
-        throw LibraryException.UserException.UserHasUnpaidDues()
-
-    if(isReserved)
-        throw LibraryException.ItemException.ItemIsReserved()
-
-    if(isForInternalUse)
-        throw LibraryException.ItemException.ItemIsForInternalUser()
-
-    if(isForFixing)
-        throw LibraryException.ItemException.ItemIsForFixing()
+    // "for fixing" exception
+    Library().borrowItem(user1,book4)
 
 }
 
