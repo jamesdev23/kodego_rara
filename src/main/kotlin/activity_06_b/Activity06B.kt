@@ -54,7 +54,7 @@ class Illustrator(var firstName:String, var lastName:String, var middleName: Str
 
 // added class and methods for act_6b
 
-class User(var name:String){
+data class User(var name:String){
     var borrowCount:Int = 0
     var unpaidDues:Double = 0.0
 }

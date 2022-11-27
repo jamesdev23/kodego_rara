@@ -33,15 +33,6 @@ class Cart(var customer:Customer){
     fun addItems(grocery:Grocery,quantity:Float){
         items[grocery] = quantity
     }
-    fun addItems(cannedGoods:CannedGoods,quantity:Float){
-        items[cannedGoods] = quantity
-    }
-    fun addItems(condiments:Condiments,quantity:Float){
-        items[condiments] = quantity
-    }
-    fun addItems(poultry:Poultry,quantity:Float){
-        items[poultry] = quantity
-    }
 }
 
 data class Customer(var name:String)
@@ -57,7 +48,7 @@ class Carts {
     }
 
     fun removeFromCart(cart: Cart, grocery: Grocery) {
-        // removes said item and it's duplicate
+        // removes said item and its duplicate
         if (cart.items.containsKey(grocery)) {
             cart.items.remove(grocery)
         }

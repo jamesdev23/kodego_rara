@@ -11,7 +11,7 @@ open class Person(var firstname:String,var middlename:String,var lastname:String
 
 open class Student(firstname: String,middlename: String,lastname: String) : Person(firstname,middlename,lastname){
     var yearEntered:String = ""
-    var ID:String = ""
+    var id:String = ""
 }
 
 class CertificateStudent{
@@ -39,7 +39,11 @@ class MasterStudent{
     var masterDegreeTaken:String = ""
 }
 
-class GraduateStudent {}
+class GraduateStudent {
+    var collegeList:ArrayList<String> = ArrayList()
+    var yearJoined:String = ""
+    var graduateDegreeTaken:String = ""
+}
 
 enum class StudentStatus {
     LEAVE_OF_ABSENCE,

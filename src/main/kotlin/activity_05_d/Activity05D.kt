@@ -6,7 +6,7 @@ import kotlin.random.Random
 // game: snakes and ladders
 
 class Board {
-    val board: Array<IntRange> = arrayOf(1..100)
+    val board: IntArray = IntArray(100) { i -> i + 1 }
 }
 
 class Snakes {
@@ -19,7 +19,7 @@ class Ladders {
     // each game versions has different ladders location, so I'll leave it blank for now
 }
 
-open class Players (var name:String){
+open class Player (var name:String){
     var defaultName:Array<String> = arrayOf("Player 1","Player 2","Player 3","Player 4")
     var count:Int = 2
     var maxPlayers = 4
@@ -31,16 +31,20 @@ class Dice{
 }
 
 class PlayerTurn{
-    var currentSquare = 1
-    var nextSquare = 2
+    var currentSquare = 0
+    var nextSquare:Int = 0
     fun checkSquare(position:Int){
         if(Snakes().location.containsKey(position)){
             println("You've landed on a Snake. Going down...")
         }
         if(Ladders().location.containsKey(position)){
-            println("You've landed on a Ladder. Going up..")
+            println("You've landed on a Ladder. Going up...")
         }
 
+    }
+    fun calculateNextSquare(position: Int,diceRoll: Int): Int{
+        nextSquare = currentSquare + diceRoll
+        return nextSquare
     }
 }
 
@@ -49,12 +53,15 @@ class Rules{
 }
 
 class Result{
-    fun turnResult(player:Players){
+    fun turnResult(player:Player){
         println("$player, on square${PlayerTurn().currentSquare}, rolls a ${Dice().random} and moves to square${PlayerTurn().nextSquare}.")
+        if(PlayerTurn().nextSquare == 100){
+            println("You win!")
+        }
     }
 }
 fun main() {
-    var player1 = Players("")
+    var player1 = Player("Player1")
     var diceResult = Dice().random
 
     println(diceResult)
