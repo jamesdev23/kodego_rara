@@ -2,7 +2,6 @@ package activity_06_b
 
 import java.util.*
 import kotlin.collections.ArrayList
-import kotlin.reflect.KProperty
 
 open class Publication {
     var publisherName:String = ""

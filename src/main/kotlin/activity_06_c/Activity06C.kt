@@ -1,19 +1,18 @@
 package activity_06_c
-
 class CartFunction {
-    fun checkCart(itemname: String, price: Double, quantity: Float) {
-        if (itemname.isEmpty())
-            throw activity_07_c.CartException.EmptyException.ItemNameIsEmpty()
+    fun checkCart(itemName: String, price: Double, quantity: Float) {
+        if (itemName.isEmpty())
+            throw CartException.EmptyException.ItemNameIsEmpty()
         if (quantity > 999 || price > 999_999.0)
-            throw activity_07_c.CartException.QuantityPriceException.QuantityOrPriceExceedsMaxLimit()
+            throw CartException.QuantityPriceException.QuantityOrPriceExceedsMaxLimit()
         if (price == 0.0)
-            throw activity_07_c.CartException.QuantityPriceException.PriceIsZero()
+            throw CartException.QuantityPriceException.PriceIsZero()
         if (price < 0.0)
-            throw activity_07_c.CartException.QuantityPriceException.PriceBelowZero()
+            throw CartException.QuantityPriceException.PriceBelowZero()
         if (quantity == 0.0F)
-            throw activity_07_c.CartException.QuantityPriceException.QuantityIsZero()
+            throw CartException.QuantityPriceException.QuantityIsZero()
         if (quantity < 0.0F)
-            throw activity_07_c.CartException.QuantityPriceException.QuantityBelowZero()
+            throw CartException.QuantityPriceException.QuantityBelowZero()
     }
 }
 
@@ -31,7 +30,7 @@ sealed class CartException(message:String) : Exception(message){
 }
 
 fun main(){
-    var CartFunction = CartFunction()
-    var result = CartFunction.checkCart("",1_000_000.0,1_000.0F)
+    val CartFunction = CartFunction()
+    val result = CartFunction.checkCart("",1_000_000.0,1_000.0F)
     println(result)
 }
