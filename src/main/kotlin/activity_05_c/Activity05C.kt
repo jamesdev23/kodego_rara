@@ -39,10 +39,6 @@ data class Customer(var name:String)
 
 class Carts {
     fun addItemToCart(cart: Cart, grocery: Grocery, quantity: Float) {
-        // add conditional to add duplicate item
-        if (cart.items.containsKey(grocery)) {
-            cart.addItems(grocery, quantity)
-        }
         cart.addItems(grocery, quantity)
         println("Added ${grocery.name} (Qty:${quantity.toInt()}) to cart.")
     }
