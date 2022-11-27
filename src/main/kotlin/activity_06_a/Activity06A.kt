@@ -17,8 +17,8 @@ class Grade {
     }
 }
 fun main(){
-    var grades1 = intArrayOf(75,80,83,85,90,95,80,91,82,99,100) // <- 11 entries
-    var grades2 = intArrayOf(75,80,83,85,90,95,80,91,82,99)
+    val grades1 = intArrayOf(75,80,83,85,90,95,80,91,82,99,100) // <- 11 entries
+    val grades2 = intArrayOf(75,80,83,85,90,95,80,91,82,99)
 
     // expected: invalid output exception
     Grade().checkGrades(grades1)
