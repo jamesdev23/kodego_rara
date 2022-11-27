@@ -1,18 +1,19 @@
 package activity_06_a
 
 sealed class GradeException(message:String): Exception(message) {
-    class InvalidOutputException(message: String = "Invalid Output"): GradeException(message)
+    class InvalidInputException(message: String = "Invalid Input"): GradeException(message)
     class IncompleteGradeException(message: String = "Incomplete Grades"): GradeException(message)
 }
 
 class Grade {
     fun checkGrades(gradeList:IntArray){
         if(gradeList.size > 10)
-            throw GradeException.InvalidOutputException()
+            throw GradeException.InvalidInputException()
 
-        for(grade in gradeList){
-            if(grade == 0) throw GradeException.IncompleteGradeException()
-        }
+        // using this instead of finding the zero grade one by one
+        if(gradeList.min() == 0)
+            throw GradeException.IncompleteGradeException()
+
     }
 }
 fun main(){
@@ -23,7 +24,7 @@ fun main(){
     Grade().checkGrades(grades1)
 
     // expected: incomplete grade exception
-    grades2[0] = 0
+    grades2[2] = 0
     Grade().checkGrades(grades2)
 
 }
