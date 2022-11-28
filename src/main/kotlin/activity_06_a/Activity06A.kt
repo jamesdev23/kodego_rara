@@ -65,7 +65,7 @@ class Grades {
             throw GradesException.InvalidInputException()
 
         // using this instead of finding the zero grade one by one
-        if(gradeList.min() == 0)
+        if(gradeList.min() == 0 || gradeList.size < 10)
             throw GradesException.IncompleteGradeException()
 
     }

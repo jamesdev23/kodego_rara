@@ -14,11 +14,11 @@ open class Student(firstname: String,middlename: String,lastname: String) : Pers
     var id:String = ""
 }
 
-class CertificateStudent{
+class CertificateStudent(firstname: String,middlename: String,lastname: String):Student(firstname, middlename, lastname){
     var courseTaken:ArrayList<String> = ArrayList()
 }
 
-class UnderGraduateStudent{
+class UnderGraduateStudent(firstname: String,middlename: String,lastname: String):Student(firstname, middlename, lastname){
     var collegeList:ArrayList<String> = ArrayList()
     var yearJoined:String = ""
     var degreeTaken:String = ""
@@ -33,13 +33,13 @@ class UnderGraduateStudent{
     }
 }
 
-class MasterStudent{
+class MasterStudent(firstname: String,middlename: String,lastname: String):Student(firstname, middlename, lastname){
     var collegeList:ArrayList<String> = ArrayList()
     var yearJoined:String = ""
     var masterDegreeTaken:String = ""
 }
 
-class GraduateStudent {
+class GraduateStudent(firstname: String,middlename: String,lastname: String):Student(firstname, middlename, lastname){
     var collegeList:ArrayList<String> = ArrayList()
     var yearJoined:String = ""
     var graduateDegreeTaken:String = ""
@@ -55,8 +55,8 @@ enum class StudentStatus {
 }
 
 fun main(){
-    var student1 = CertificateStudent()
-    var student2 = CertificateStudent()
+    var student1 = CertificateStudent("","","")
+    var student2 = CertificateStudent("","","")
     var student3 = Student("","","")
 
     student1.courseTaken.add("Computer Science")
