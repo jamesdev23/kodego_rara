@@ -37,8 +37,8 @@ class Cart(var customer:Customer){
 data class Customer(var name:String)
 
 class CartFunction {
-    fun checkCart(itemname:String,price:Double,quantity:Float) {
-        if(itemname.isEmpty())
+    fun checkCart(itemName:String,price:Double,quantity:Float) {
+        if(itemName.isEmpty())
             throw CartException.EmptyException.ItemNameIsEmpty()
         if(quantity > 999 || price > 999_999.0)
             throw CartException.QuantityPriceException.QuantityOrPriceExceedsMaxLimit()
@@ -91,13 +91,13 @@ sealed class CartException(message:String) : Exception(message){
 fun main(){
 //    var customer1 = Customer("James")
 //    var customer1Cart = Cart(customer1)
-//    var CartFunction = CartFunction()
+//    var cartFunction = CartFunction()
 //    var item1 = CannedGoods("Spam Regular Luncheon Meat 340g",228.0)
 //    var item2 = Poultry("Egg",8.0)
 //    var item3 = Condiments("Pepper Ground 28g",56.0)
 //    var item4 = Poultry("Overpriced Egg",1_000_000.0)
 //
 //    // cart checkout
-//    CartFunction.checkCart("",100.0,1.0F)
+//    cartFunction.checkCart("",100.0,1.0F)
 
 }

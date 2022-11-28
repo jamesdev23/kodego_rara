@@ -30,7 +30,7 @@ sealed class CartException(message:String) : Exception(message){
 }
 
 fun main(){
-    val CartFunction = CartFunction()
-    val result = CartFunction.checkCart("",1_000_000.0,1_000.0F)
+    val cartFunction = CartFunction()
+    val result = cartFunction.checkCart("",1_000_000.0,1_000.0F)
     println(result)
 }
