@@ -3,16 +3,16 @@ package activity_05_d
 import kotlin.random.Random
 
 // game: snakes and ladders. coverage: all OOP concept
+
 open class Board{
     val board:Map<Int,Int> = mapOf(
         4 to 14,  9 to 31, 17 to  7, 20 to 38, 28 to 84, 40 to 59, 51 to 67, 54 to 34,
         62 to 19, 63 to 81, 64 to 60, 71 to 91, 87 to 24, 93 to 73, 95 to 75, 99 to 78)
-    private var playerLocation:HashMap<Players,Int> = HashMap()
 }
 
 class Snakes : Board(){
     val location:Map<Int,Int> = mapOf(
-        17 to  7, 28 to 84, 54 to 34,62 to 19,64 to 60, 87 to 24, 93 to 73, 95 to 75, 99 to 78)
+        17 to 7, 28 to 84, 54 to 34,62 to 19,64 to 60, 87 to 24, 93 to 73, 95 to 75, 99 to 78)
 }
 
 class Ladders : Board(){
@@ -28,10 +28,17 @@ class Players(var number:Int){
     var fourPlayers:IntArray = intArrayOf(1, 1, 1, 1)
 }
 
-
-
 class Dice{
     val random = Random
+}
+
+// the only abstraction on this code
+abstract class PlayerMove{
+    private var moveFromLeftToRight = true
+    private var moveFromRightToLeft = true
+    class PlayerInitialSquare{
+        var square:Int = 1
+    }
 }
 
 class Rules {
@@ -78,7 +85,7 @@ class Turn{
 fun main() {
     // four players starting on square 1
     var choice:Int = 1
-    println("Player number (1/2/3/4):")
+    print("Player number (1/2/3/4): ")
     choice = readLine()!!.toInt()
     val player = choice
     val players = Players(player).fourPlayers
