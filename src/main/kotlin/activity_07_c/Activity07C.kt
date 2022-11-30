@@ -109,9 +109,16 @@ class Cart(var customer:Customer){
 }
 
 class CartFunction {
-    fun checkCart(itemName: String, price: Double, quantity: Float) {
+    fun checkAddCart(itemName: String, price: Double, quantity: Float) {
         if (itemName.isEmpty())
-            throw CartException.EmptyException.ItemNameIsEmpty()
+            throw CartException.EmptyOrNotANumberException.ItemNameIsEmpty()
+        if (price.isNaN())
+            throw CartException.EmptyOrNotANumberException.PriceIsNotANumber()
+        if (quantity.isNaN())
+            throw CartException.EmptyOrNotANumberException.QuantityIsNotANumber()
+    }
+
+    fun checkCart(itemName: String, price: Double, quantity: Float) {
         if (price >= 1_000_000.0)
             throw CartException.QuantityPriceException.PriceExceedsMaxLimit()
         if (quantity >= 1_000)
@@ -128,7 +135,7 @@ class CartFunction {
 
     fun addItemToCart(cart: Cart, grocery: Grocery, quantity: Float) {
         // checks cart
-        checkCart(grocery.name,grocery.price,quantity)
+        checkAddCart(grocery.name,grocery.price,quantity)
 
         if(cart.items.containsKey(grocery)){
             var newQuantity = cart.items.getValue(grocery) + quantity
@@ -178,8 +185,10 @@ class CartFunction {
 }
 
 sealed class CartException(message:String) : Exception(message){
-    sealed class EmptyException(message: String) : CartException(message){
-        class ItemNameIsEmpty(message:String = "Item name is empty") : EmptyException(message)
+    sealed class EmptyOrNotANumberException(message: String) : CartException(message){
+        class ItemNameIsEmpty(message:String = "Item name is empty") : EmptyOrNotANumberException(message)
+        class PriceIsNotANumber(message:String = "Price is not a number") : EmptyOrNotANumberException(message)
+        class QuantityIsNotANumber(message:String = "Quantity is not a number") : EmptyOrNotANumberException(message)
     }
     sealed class QuantityPriceException(message: String) : CartException(message){
         class PriceExceedsMaxLimit(message:String = "Price Exceeds Max Limit (1,000,000)"):CartException(message)
