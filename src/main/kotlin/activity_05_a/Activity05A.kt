@@ -55,18 +55,15 @@ enum class StudentStatus {
 }
 
 fun main(){
-    var student1 = CertificateStudent("","","")
-    var student2 = CertificateStudent("","","")
-    var student3 = Student("","","")
-
+    var student1 = CertificateStudent("James","","")
     student1.courseTaken.add("Computer Science")
     student1.courseTaken.add("Network Technician")
     student1.courseTaken.add("Electrical Technician")
+
+    var student2 = CertificateStudent("Edward","","")
     student2.courseTaken.add("Public Speaking")
     student2.courseTaken.add("Debate")
     student2.courseTaken.add("Advertising Article")
 
-    student3.firstname = "James"
-    student3.address = "sample address"
 }
 

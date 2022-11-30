@@ -112,7 +112,7 @@ class Clothes(){
 }
 
 // assuming this is pet food and other pet items
-class Pet(){
+class PetCare(){
     var itemName:String = ""
     var brand:String = ""
     var quantity:Int = 0

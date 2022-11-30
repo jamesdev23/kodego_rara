@@ -1,5 +1,11 @@
 package activity_05_c
 
+import java.text.DecimalFormat
+import java.util.*
+import kotlin.collections.ArrayList
+import kotlin.collections.HashMap
+
+
 // grocery in OOP
 
 open class Grocery{
@@ -12,22 +18,98 @@ open class Grocery{
     }
 }
 
+// grocery items - 12 total
+class Bread(name:String, price:Double): Grocery(name, price) {
+    var weight:Int = 0
+    var brand:String = ""
+    var breadType:String = ""
+    var sku:Int = 0
+    var manufactureDate: Date = Date()
+    var bestBeforeDate: Date = Date()
+}
+class BreadSpread(name:String, price:Double): Grocery(name, price) {
+    var brand:String = ""
+    var breadSpreadtype:String = ""
+    var sku:Int = 0
+    var manufactureDate: Date = Date()
+    var bestBeforeDate: Date = Date()
+}
+
 class CannedGoods(name:String, price:Double): Grocery(name, price) {
-    var quantity:Float = 0.0F
-    var quantityUnits:String = "per Piece"
+    var brand:String = ""
+    var cannedGoodsType:String = ""
+    var sku:String = ""
+    var manufactureDate: Date = Date()
+    var bestBeforeDate: Date = Date()
 }
 class Condiments(name:String, price: Double): Grocery(name,price){
-    var quantity:Float = 0.0F
-    var quantityUnits:String = "per Piece"
+    var brand:String = ""
+    var condimentType:String = ""
+    var sku:String = ""
+    var manufactureDate: Date = Date()
+    var bestBeforeDate: Date = Date()
 }
+
+class FrozenProducts(name:String, price:Double): Grocery(name, price) {
+    var brand:String = ""
+    var frozenProductType:String = ""
+    var sku:String = ""
+    var manufactureDate: Date = Date()
+    var bestBeforeDate: Date = Date()
+}
+
+class Fruits(name:String, price:Double): Grocery(name, price) {
+    var fruitType:String = ""
+    var weight:String = ""
+    var sku:String = ""
+}
+
+class PersonalCare(name:String, price:Double): Grocery(name, price) {
+    var brand:String = ""
+    var itemType:String = ""
+    var sku:String = ""
+    var manufactureDate: Date = Date()
+    var expirationDate: Date = Date()
+}
+
+class PetCare(name:String, price:Double): Grocery(name, price) {
+    var brand:String = ""
+    var petCareItemType:String = ""
+    var sku:String = ""
+    var manufactureDate: Date = Date()
+    var bestBeforeDate: Date = Date()
+}
+
 class Poultry(name:String, price: Double): Grocery(name,price){
-    var quantity:Float = 0.0F
-    var quantityUnits:String = "per Piece"
+    var poultryType:String = ""
+    var bestBeforeDate: Date = Date()
+    var sku:String = ""
 }
 
+class SanitaryProducts(name:String, price:Double): Grocery(name, price) {
+    var brand:String = ""
+    var sanitaryProductType:String = ""
+    var sku:String = ""
+    var manufactureDate: Date = Date()
+}
 
+class Snacks(name:String, price:Double): Grocery(name, price) {
+    var brand:String = ""
+    var snackType:String = ""
+    var sku:String = ""
+    var manufactureDate: Date = Date()
+    var bestBeforeDate: Date = Date()
+}
+
+class Vegetables(name:String, price:Double): Grocery(name, price) {
+    var vegetableType:String = ""
+    var weight:String = ""
+    var sku:String = ""
+}
+
+// cart
 class Cart(var customer:Customer){
-    var uniqueID = ""
+    var uniqueID:Any? = ""
     var items:HashMap<Grocery,Float> = HashMap()
 
     fun addItems(grocery:Grocery,quantity:Float){
@@ -35,51 +117,86 @@ class Cart(var customer:Customer){
     }
 }
 
+// customer
 data class Customer(var name:String)
 
-class Carts {
+// add,remove and checkout cart
+class CartFunction {
     fun addItemToCart(cart: Cart, grocery: Grocery, quantity: Float) {
-        cart.addItems(grocery, quantity)
-        println("Added ${grocery.name} (Qty:${quantity.toInt()}) to cart.")
+        // checks if item in cart. if it exists, updates quantity
+        if(cart.items.containsKey(grocery)){
+            val newQuantity = cart.items.getValue(grocery) + quantity
+            cart.addItems(grocery, newQuantity)
+        }else {
+            cart.addItems(grocery, quantity)
+        }
+        println("Added ${grocery.name} (Qty: ${quantity.toInt()}) to cart.")
     }
 
     fun removeFromCart(cart: Cart, grocery: Grocery) {
         // removes said item and its duplicate
-        if (cart.items.containsKey(grocery)) {
+        if(cart.items.containsKey(grocery)) {
             cart.items.remove(grocery)
         }
         println("Removed ${grocery.name} to cart.")
     }
 
     fun checkoutCart(cart: Cart) {
+        var itemCost:Double
+        val totalCost:Double
+        val itemCostList:ArrayList<Double> = ArrayList()
+        val separator = CharArray(60) { '-' }
+
         if (cart.items.isEmpty()) {
             println("Cart is empty.")
         }
-        cart.items.forEach {
-            println("Item: ${it.key.name} | Price: ${it.key.price} | Quantity: ${it.value.toInt()}")
+
+        // calculating total per item and total cost
+        for(items in cart.items.entries){
+            itemCost = items.key.price * items.value
+            itemCostList.add(itemCost)
         }
-        print("Total: ${cart.items.size} item/s")
+        totalCost = itemCostList.sum()
+
+        // print cart items
+        println(separator)
+        cart.items.forEach {
+            println("${it.key.name} | Qty: ${it.value.toInt()} | ₱ ${priceFormat(it.key.price)} | Cost: ₱ ${priceFormat((it.key.price) * it.value)}")
+        }
+        println(separator)
+        print("Total Cost: ₱ ${priceFormat(totalCost)} ")
     }
+
+    fun priceFormat(number:Double): String{
+        val decimalFormat = DecimalFormat("#,###.00")
+        return decimalFormat.format(number)
+    }
+
 }
 
 fun main(){
     var customer1 = Customer("James")
-    var customer1Cart = Cart(customer1)
-    var item1 = CannedGoods("Spam Regular Luncheon Meat 340g",228.0)
-    var item2 = Poultry("Egg",8.0)
-    var item3 = Condiments("Pepper Ground 28g",56.0)
+    var cart1 = Cart(customer1)
+    var item1 = CannedGoods("Spam Regular Luncheon Meat 340g",228.00)
+    var item2 = BreadSpread("Nutella Chocolate Hazelnut Spread 680g",441.0)
+    var item3 = Condiments("Pepper Ground 28g",56.00)
+    var item4 = Poultry("Overpriced Egg",1_000_000.0)
+    var cartFunction = CartFunction()
 
     // add cart items
-    Carts().addItemToCart(customer1Cart,item1,2.0F)
-    Carts().addItemToCart(customer1Cart,item2,6.0F)
-    Carts().addItemToCart(customer1Cart,item2,6.0F)
-    Carts().addItemToCart(customer1Cart,item3,1.0F)
+    cartFunction.addItemToCart(cart1,item1,100.0F)
+    cartFunction.addItemToCart(cart1,item1,200.0F)
+    cartFunction.addItemToCart(cart1,item2,3.0F)
+    cartFunction.addItemToCart(cart1,item3,3.0F)
+    cartFunction.addItemToCart(cart1,item3,3.0F)
+    cartFunction.addItemToCart(cart1,item4,3.0F)
+
 
     // remove cart item
-    Carts().removeFromCart(customer1Cart,item2)
+    cartFunction.removeFromCart(cart1,item4)
 
     // cart checkout
-    Carts().checkoutCart(customer1Cart)
+    cartFunction.checkoutCart(cart1)
 
 }
 

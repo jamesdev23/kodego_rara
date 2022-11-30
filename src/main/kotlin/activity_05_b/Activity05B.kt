@@ -5,16 +5,12 @@ import java.util.*
 open class Publication {
     var publisherName:String = ""
     var address:String = ""
-    var monthPublished:String = ""
-    var yearPublished: Date = Date()
-
-    fun publicationType(){
-        /* method sample */
-    }
+    open var yearPublished: Date = Date()
 }
 
 class Book (var title:String) : Publication(){
     var authors:String = ""
+    override var yearPublished:Date = Date()
     var edition:String = ""
     var ISBN:Int = 0
     var publisher:String = ""
@@ -24,14 +20,22 @@ class Book (var title:String) : Publication(){
 
 class Magazine : Publication(){
     var editor:String = ""
+    var monthPublished:Date = Date()
+    override var yearPublished:Date = Date()
+
 }
 
 class Newspaper(var name:String) : Publication(){
-    var dayPublished:String = ""
+    var dayPublished:Date = Date()
+    var monthPublished:Date = Date()
+    override var yearPublished:Date = Date()
+    var headline:String = ""
 }
 
 
 class Comics(var title:String) : Publication(){
+    var monthPublished:Date = Date()
+    override var yearPublished:Date = Date()
     var illustrators:String = ""
     var publisher: String = ""
 }
@@ -51,6 +55,10 @@ class Authors(var firstName:String,var lastName:String,var middleName:String){
 
 class Illustrator(var firstName:String, var lastName:String, var middleName: String){
     var birthDate:Date = Date()
+}
+
+fun main(){
+
 }
 
 
