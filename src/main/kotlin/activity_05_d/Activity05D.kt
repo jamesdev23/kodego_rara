@@ -2,69 +2,98 @@ package activity_05_d
 
 import kotlin.random.Random
 
-// coverage: all oop concepts
-// game: snakes and ladders
-
-class Board {
-    val board: IntArray = IntArray(100) { i -> i + 1 }
+// game: snakes and ladders. coverage: all OOP concept
+open class Board{
+    val board:Map<Int,Int> = mapOf(
+        4 to 14,  9 to 31, 17 to  7, 20 to 38, 28 to 84, 40 to 59, 51 to 67, 54 to 34,
+        62 to 19, 63 to 81, 64 to 60, 71 to 91, 87 to 24, 93 to 73, 95 to 75, 99 to 78)
+    private var playerLocation:HashMap<Players,Int> = HashMap()
 }
 
-class Snakes {
-    val location:Map<Int,Int> = mapOf()
-    // each game versions has different snakes location, so I'll leave it blank for now
+class Snakes : Board(){
+    val location:Map<Int,Int> = mapOf(
+        17 to  7, 28 to 84, 54 to 34,62 to 19,64 to 60, 87 to 24, 93 to 73, 95 to 75, 99 to 78)
 }
 
-class Ladders {
-    val location:Map<Int,Int> = mapOf()
-    // each game versions has different ladders location, so I'll leave it blank for now
+class Ladders : Board(){
+    val location:Map<Int,Int> = mapOf(
+        4 to 14, 9 to 31, 20 to 38, 28 to 84, 40 to 59, 51 to 67, 63 to 81, 71 to 91)
 }
 
-open class Player (var name:String){
-    var defaultName:Array<String> = arrayOf("Player 1","Player 2","Player 3","Player 4")
-    var count:Int = 2
-    var maxPlayers = 4
+class Players(var number:Int){
+    private var defaultPlayers:Int = 2
+    private var defaultPlayerName = "Player "
+    var twoPlayers:IntArray = intArrayOf(1, 1)
+    var threePlayers:IntArray = intArrayOf(1, 1, 1)
+    var fourPlayers:IntArray = intArrayOf(1, 1, 1, 1)
 }
+
+
 
 class Dice{
-    var playerName = ""
-    val random = Random.nextInt(1,6)
+    val random = Random
 }
 
-class PlayerTurn{
-    var currentSquare = 0
-    var nextSquare:Int = 0
-    fun checkSquare(position:Int){
-        if(Snakes().location.containsKey(position)){
-            println("You've landed on a Snake. Going down...")
-        }
-        if(Ladders().location.containsKey(position)){
-            println("You've landed on a Ladder. Going up...")
-        }
+class Rules {
+    val rerollIfSix = true
+}
 
+class Turn{
+
+    // method to get if player lands on ladder. if false, lands on a normal square or snake
+    fun checkIfLandedOnLadder(square:Int): Boolean{
+        return (Ladders().location.equals(square))
     }
-    fun calculateNextSquare(position: Int,diceRoll: Int): Int{
-        nextSquare = currentSquare + diceRoll
-        return nextSquare
+
+    fun checkIfLandedOnSnake(square:Int): Boolean{
+        return (Snakes().location.equals(square))
     }
-}
-
-class Rules{
-    var sixRollsAgain = true
-}
-
-class Result{
-    fun turnResult(player:Player){
-        println("$player, on square${PlayerTurn().currentSquare}, rolls a ${Dice().random} and moves to square${PlayerTurn().nextSquare}.")
-        if(PlayerTurn().nextSquare == 100){
-            println("You win!")
+    fun playerTurn(player: Players, square: Int): Int {
+        var square2 = square
+        while (true) {
+            val roll = 1 + Dice().random.nextInt(6)
+            print("Player ${player.number}, on square $square2, rolls a $roll")
+            if (square2 + roll > 100) {
+                println(" but cannot move.")
+            } else {
+                square2 += roll
+                println(" and moves to square $square2.")
+                if (square2 == 100) return 100
+                if (checkIfLandedOnLadder(square2)) {
+                    val next = Ladders().location.getValue(square2)
+                    println("Landed on a ladder. Climb up to $next.")
+                    if (next == 100) return 100
+                    square2 = next
+                } else if (checkIfLandedOnSnake(square2)) {
+                    val next2 = Snakes().location.getValue(square2)
+                    println("Landed on a snake. Going down to $next2.")
+                    square2 = next2
+                }
+            }
+            if (roll < 6 || !Rules().rerollIfSix) return square2
+            println("Rolled a 6 so roll again.")
         }
     }
 }
 fun main() {
-    var player1 = Player("Player1")
-    var diceResult = Dice().random
-
-    println(diceResult)
+    // four players starting on square 1
+    var choice:Int = 1
+    println("Player number (1/2/3/4):")
+    choice = readLine()!!.toInt()
+    val player = choice
+    val players = Players(player).fourPlayers
+    while (true) {
+        for ((index, square) in players.withIndex()) {
+            val playerPlusIndex = Players(index + 1)
+            val nextSquare = Turn().playerTurn(playerPlusIndex, square)
+            if (nextSquare == 100) {
+                println("Player ${index+1} wins!")
+                return
+            }
+            players[index] = nextSquare
+            println()
+        }
+    }
 }
 
 
