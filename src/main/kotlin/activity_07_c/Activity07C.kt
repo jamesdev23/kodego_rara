@@ -143,7 +143,7 @@ class CartFunction {
         }else {
             cart.addItems(grocery, quantity)
         }
-        // println("Added ${grocery.name} (Qty: ${quantity.toInt()}) to cart.")
+        println("Added ${grocery.name} (Qty: ${quantity.toInt()}) to cart.")
     }
 
     fun removeFromCart(cart: Cart, grocery: Grocery) {
@@ -208,5 +208,12 @@ fun main(){
 //    var item2 = BreadSpread("Nutella Chocolate Hazelnut Spread 680g",441.0)
 //    var item3 = Condiments("Pepper Ground 28g",56.0)
 //    var item4 = Poultry("Overpriced Egg",1_000_000.0)
-
+//
+//    cartFunction.addItemToCart(cart1,item1,1.0F)
+//    cartFunction.addItemToCart(cart1,item2,10.0F)
+//    cartFunction.addItemToCart(cart1,item3,5.0F)
+//
+//    cartFunction.removeFromCart(cart1,item3)
+//
+//    cartFunction.checkoutCart(cart1)
 }

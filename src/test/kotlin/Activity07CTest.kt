@@ -9,7 +9,7 @@ internal class CartTest {
     val noName = Bread("",30.0)
     val priceNaN = Bread("Bread Loaf", Double.NaN)
     val bread = Bread("Bread Load",30.0)
-    val price1000000000andUp = Bread("Bread Loaf",10_000_000.0)
+    val price1000000andUp = Bread("Bread Loaf",10_000_000.0)
     val noPrice = Bread("Bread Loaf", 0.0)
     val priceNegative = Bread("Bread Loaf",-1_000.0)
 
@@ -21,7 +21,7 @@ internal class CartTest {
         }
 
         assertThrows<CartException.EmptyOrNotANumberException.PriceIsNotANumber> {
-            cartFunction.addItemToCart(cart1,priceNaN,1.0F)
+            cartFunction.addItemToCart(cart1,priceNaN,10.0F)
         }
 
         assertThrows<CartException.EmptyOrNotANumberException.QuantityIsNotANumber> {
@@ -34,7 +34,7 @@ internal class CartTest {
 
         assertThrows<CartException.QuantityPriceException.PriceExceedsMaxLimit> {
             cart1.items.clear()
-            cart1.items[price1000000000andUp] = 10.0F
+            cart1.items[price1000000andUp] = 10.0F
             cartFunction.checkoutCart(cart1)
         }
 
