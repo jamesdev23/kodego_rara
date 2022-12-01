@@ -1,6 +1,7 @@
 package activity_05_c
 
 import java.text.DecimalFormat
+import java.text.NumberFormat
 import java.util.*
 import kotlin.collections.ArrayList
 import kotlin.collections.HashMap
@@ -161,15 +162,17 @@ class CartFunction {
         // print cart items
         println(separator)
         cart.items.forEach {
-            println("${it.key.name} | Qty: ${it.value.toInt()} | ₱ ${priceFormat(it.key.price)} | Cost: ₱ ${priceFormat((it.key.price) * it.value)}")
+            println("${it.key.name} | Qty: ${it.value.toInt()} | ${priceFormat(it.key.price)} | Cost: ${priceFormat((it.key.price) * it.value)}")
         }
         println(separator)
-        print("Total Cost: ₱ ${priceFormat(totalCost)} ")
+        print("Total Cost: ${priceFormat(totalCost)} ")
     }
 
     fun priceFormat(number:Double): String{
         val decimalFormat = DecimalFormat("#,###.00")
-        return decimalFormat.format(number)
+        val formattedPrice = decimalFormat.format(number)
+
+        return "₱ $formattedPrice"
     }
 
 }
