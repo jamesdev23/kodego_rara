@@ -171,20 +171,21 @@ class CartFunction {
     fun priceFormat(number:Double): String{
         val decimalFormat = DecimalFormat("#,###.00")
         val formattedPrice = decimalFormat.format(number)
+        val currencySign = "₱"
 
-        return "₱ $formattedPrice"
+        return "$currencySign $formattedPrice"
     }
 
 }
 
 fun main(){
-    var customer1 = Customer("James")
-    var cart1 = Cart(customer1)
-    var item1 = CannedGoods("Spam Regular Luncheon Meat 340g",228.00)
-    var item2 = BreadSpread("Nutella Chocolate Hazelnut Spread 680g",441.0)
-    var item3 = Condiments("Pepper Ground 28g",56.00)
-    var item4 = Poultry("Overpriced Egg",1_000_000.0)
-    var cartFunction = CartFunction()
+    val customer1 = Customer("James")
+    val cart1 = Cart(customer1)
+    val item1 = CannedGoods("Spam Regular Luncheon Meat 340g",228.00)
+    val item2 = BreadSpread("Nutella Chocolate Hazelnut Spread 680g",441.0)
+    val item3 = Condiments("Pepper Ground 28g",56.00)
+    val item4 = Poultry("Overpriced Egg",1_000_000.0)
+    val cartFunction = CartFunction()
 
     // add cart items
     cartFunction.addItemToCart(cart1,item1,100.0F)
