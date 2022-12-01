@@ -10,7 +10,7 @@ open class Publication {
     var yearPublished: Date = Date()
 
     fun publicationType(){
-        /* method sample */
+        // TODO: Not yet implemented
     }
 }
 

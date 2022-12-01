@@ -5,9 +5,7 @@ import kotlin.random.Random
 // game: snakes and ladders. coverage: all OOP concept
 
 open class Board{
-    val board:Map<Int,Int> = mapOf(
-        4 to 14,  9 to 31, 17 to  7, 20 to 38, 28 to 84, 40 to 59, 51 to 67, 54 to 34,
-        62 to 19, 63 to 81, 64 to 60, 71 to 91, 87 to 24, 93 to 73, 95 to 75, 99 to 78)
+    val board:IntArray = IntArray(100) { i -> i + 1 }
 }
 
 class Snakes : Board(){
