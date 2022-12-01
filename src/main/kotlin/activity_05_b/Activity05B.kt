@@ -40,7 +40,7 @@ class Comics(var title:String) : Publication(){
     var publisher: String = ""
 }
 
-// #2 answer: using enum. For readability and efficiency of not adding 4 diff. classes.
+// #2 answer: using enum. more readable and efficient than using class
 enum class AudioVideoTypes {
     RECORDINGS,
     DOCUMENTARY,
