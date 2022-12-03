@@ -201,19 +201,19 @@ sealed class CartException(message:String) : Exception(message){
 }
 
 fun main(){
-//    var customer1 = Customer("James")
-//    var cart1 = Cart(customer1)
-//    var cartFunction = CartFunction()
-//    var item1 = CannedGoods("Spam Regular Luncheon Meat 340g",228.0)
-//    var item2 = BreadSpread("Nutella Chocolate Hazelnut Spread 680g",441.0)
-//    var item3 = Condiments("Pepper Ground 28g",56.0)
-//    var item4 = Poultry("Overpriced Egg",1_000_000.0)
-//
-//    cartFunction.addItemToCart(cart1,item1,1.0F)
+    var customer1 = Customer("James")
+    var cart1 = Cart(customer1)
+    var cartFunction = CartFunction()
+    var item1 = CannedGoods("Spam Regular Luncheon Meat 340g",228.0)
+    var item2 = BreadSpread("Nutella Chocolate Hazelnut Spread 680g",441.0)
+    var item3 = Condiments("Pepper Ground 28g",56.0)
+    var item4 = Poultry("Overpriced Egg",1_000_000.0)
+
+    cartFunction.addItemToCart(cart1,item1,1.0F)
 //    cartFunction.addItemToCart(cart1,item2,10.0F)
 //    cartFunction.addItemToCart(cart1,item3,5.0F)
 //
 //    cartFunction.removeFromCart(cart1,item3)
 //
-//    cartFunction.checkoutCart(cart1)
+    cartFunction.checkoutCart(cart1)
 }

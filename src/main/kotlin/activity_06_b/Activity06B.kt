@@ -117,23 +117,24 @@ fun main() {
     var book2 = Book("Wuthering Heights")
     var book3 = Book("East of Eden")
     var book4 = Book("The Scarlet Letter")
+    var library = Library()
 
     // user 5 or more borrowed items exception
     user1.borrowCount = 5
-    Library().borrowItem(user1,book1)
+    library.borrowItem(user1,book1)
 
     // unpaid dues exception
     user1.unpaidDues = 500.0
-    Library().borrowItem(user1,book1)
+    library.borrowItem(user1,book1)
 
     // "reserved" exception
-    Library().borrowItem(user1,book2)
+    library.borrowItem(user1,book2)
 
     // "internal use" exception
-    Library().borrowItem(user1,book3)
+    library.borrowItem(user1,book3)
 
     // "for fixing" exception
-    Library().borrowItem(user1,book4)
+    library.borrowItem(user1,book4)
 
 }
 

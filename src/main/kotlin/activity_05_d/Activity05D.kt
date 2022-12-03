@@ -30,7 +30,6 @@ class Dice{
     val random = Random
 }
 
-// the only abstraction on this code
 abstract class PlayerMove{
     private var moveFromLeftToRight = true
     private var moveFromRightToLeft = true

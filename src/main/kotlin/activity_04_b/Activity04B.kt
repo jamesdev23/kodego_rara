@@ -83,12 +83,14 @@ private var authorAndTitleList = hashMapOf<String,String>(
 private var resultList = ArrayList<String>()
 
 fun main(){
-    resultList = searchTitle(magazineTitle = "Don Quixote")
-    print("Magazine ")
+    val search1 = "Don Quixote"
+    val search2 = "Mark Twain"
+    println("Search Title: $search1")
+    resultList = searchTitle(magazineTitle = search1)
     showSearchResult()
 
+    println("Search Title by Author: $search2")
     resultList = searchTitleByAuthor("Mark Twain")
-    print("Title by Author ")
     showSearchResult()
 
 }

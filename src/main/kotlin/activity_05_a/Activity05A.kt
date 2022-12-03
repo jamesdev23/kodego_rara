@@ -24,7 +24,7 @@ class UnderGraduateStudent(firstname: String,middlename: String,lastname: String
     var degreeTaken:String = ""
     var degreeStart:String = ""
     var yearOfDegree:Int = 0
-    var studentStatus = StudentStatus.UNKNOWN
+    var studentStatus = StudentStatus.GRADUATED
 
     fun collegeDegreeEnd(studentStatus:StudentStatus){
         if(studentStatus == StudentStatus.GRADUATED){

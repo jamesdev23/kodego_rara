@@ -36,11 +36,11 @@ sealed class CartException(message:String) : Exception(message){
 fun main(){
     val checkout = Checkout()
     checkout.checkCart("",100.0,1.0F)
-    //checkout.checkCart("Overpriced Item",1_000_000.0,1.0F)
-    //checkout.checkCart("1000+ items",100.0,1_000.0F)
-    //checkout.checkCart("Item w/ no price",0.0,10.0F)
-    //checkout.checkCart("Item w/ no quantity",100.0,0.0F)
-    //checkout.checkCart("negative price",-100.0,10.0F)
-    //checkout.checkCart("negative quantity",100.0,-10.0F)
+    checkout.checkCart("Overpriced Item",1_000_000.0,1.0F)
+    checkout.checkCart("1000+ items",100.0,1_000.0F)
+    checkout.checkCart("Item w/ no price",0.0,10.0F)
+    checkout.checkCart("Item w/ no quantity",100.0,0.0F)
+    checkout.checkCart("negative price",-100.0,10.0F)
+    checkout.checkCart("negative quantity",100.0,-10.0F)
 
 }
