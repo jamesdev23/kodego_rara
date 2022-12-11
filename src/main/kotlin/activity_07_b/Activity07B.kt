@@ -1,4 +1,4 @@
-package activity_06_b
+package activity_07_b
 
 import java.util.*
 import kotlin.collections.ArrayList
@@ -112,32 +112,29 @@ sealed class LibraryException(message:String) : Exception(message){
 }
 
 fun main() {
-    var user1 = User("James")
-    var book1 = Book("Don Quixote")
-    var book2 = Book("Wuthering Heights")
-    var book3 = Book("East of Eden")
-    var book4 = Book("The Scarlet Letter")
-    var library = Library()
-
-    // user 5 or more borrowed items exception
-    user1.borrowCount = 5
-    library.borrowItem(user1,book1)
-
-    // unpaid dues exception
-    user1.unpaidDues = 500.0
-    library.borrowItem(user1,book1)
-
-    // "reserved" exception
-    library.borrowItem(user1,book2)
-
-    // "internal use" exception
-    library.borrowItem(user1,book3)
-
-    // "for fixing" exception
-    library.borrowItem(user1,book4)
+//    var user1 = User("James")
+//    var book1 = Book("Don Quixote")
+//    var book2 = Book("Wuthering Heights")
+//    var book3 = Book("East of Eden")
+//    var book4 = Book("The Scarlet Letter")
+//    var library = Library()
+//
+//    // user 5 or more borrowed items exception
+//    user1.borrowCount = 5
+//    library.borrowItem(user1,book1)
+//
+//    // unpaid dues exception
+//    user1.borrowCount = 0
+//    user1.unpaidDues = 500.0
+//    library.borrowItem(user1,book1)
+//
+//    // "reserved" exception
+//    library.borrowItem(user1,book2)
+//
+//    // "internal use" exception
+//    library.borrowItem(user1,book3)
+//
+//    // "for fixing" exception
+//    library.borrowItem(user1,book4)
 
 }
-
-
-
-

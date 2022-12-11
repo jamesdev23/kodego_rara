@@ -4,6 +4,7 @@ import org.junit.jupiter.api.assertThrows
 
 internal class CartTest {
     val cartFunction: CartFunction = CartFunction()
+
     val customer1 = Customer("Sample Customer")
     val cart1 = Cart(customer1)
     val noName = Bread("",30.0)
