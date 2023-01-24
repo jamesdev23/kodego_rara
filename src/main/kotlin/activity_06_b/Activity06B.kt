@@ -1,39 +1,57 @@
 package activity_06_b
 
 import java.util.*
-import kotlin.collections.ArrayList
 
-open class Publication {
-    var publisherName:String = ""
-    var address:String = ""
-    var monthPublished:String = ""
-    var yearPublished: Date = Date()
-
-    fun publicationType(){
-        // TODO: Not yet implemented
+open class Publication(var title: String, var authors: Authors, var yearPublished: Int, var publisher: Publisher) {
+    open fun getDetails(): String {
+        return "Title: $title, Authors: ${authors.firstName} ${authors.lastName}, Year Published: $yearPublished, Publisher: ${publisher.name}"
+    }
+    open fun searchByTitle(title: String): Boolean {
+        return this.title.equals(title, ignoreCase = true)
     }
 }
-
-class Book (var title:String) : Publication(){
-    var authors:String = ""
-    var edition:String = ""
-    var ISBN:Int = 0
-    var publisher:String = ""
-    var chapterList:ArrayList<String> = ArrayList()
-    private var numberOfPages:Int? = null
+class Book(var title: String) {
+    var authors: Authors = Authors("","")
+    var yearPublished: Int = 0
+    var edition: Int = 0
+    var ISBN: String = ""
+    var publisher: Publisher = Publisher("")
+    var chapters: List<String> = emptyList()
+    var pages: Int = 0
 }
 
-class Magazine : Publication(){
-    var editor:String = ""
+open class Article(var title: String,var content: String,var author: Authors)
+
+class Magazines(var editor: String, var monthPublished: Int, var yearPublished: Int, title:String, content:String,
+                author:Authors) : Article(title,content, author)
+
+class Newspaper(var name: String, var dayPublished: Int, var monthPublished: Int, var yearPublished: Int,
+                var headline: String, title:String, content:String,author:Authors) : Article(title,content, author)
+
+class Comics(var monthPublished: Int, var yearPublished: Int, var illustrators: activity_05_b.Illustrator,
+             var publisher: Publisher, title: String, content: String, author: Authors) : Article(title,content,author)
+
+class Publisher (var name: String){
+    var address: String = ""
+    var dateEstablished: Date = Date()
 }
 
-class Newspaper(var name:String) : Publication(){
-    var dayPublished:String = ""
+class Authors(var firstName: String, var lastName: String){
+    var middleName: String = ""
+    var dateOfBirth: Date = Date()
+    // class for books, magazines and newspaper
 }
 
-class Comics(var title:String) : Publication(){
-    var illustrators:String = ""
-    var publisher: String = ""
+class Illustrator(var firstName: String, var lastName: String){
+    var middleName: String = ""
+    var dateOfBirth: Date = Date()
+    // class for comics
+}
+
+class audioVideoRecording(var length: Int, var dateRecorded: String, var title: String, var publisher: Publisher) {
+    var hasVideo: Boolean = true
+    var hasAudio: Boolean = true
+    var hasBoth: Boolean = true
 }
 
 enum class AudioVideoTypes {
@@ -41,14 +59,6 @@ enum class AudioVideoTypes {
     DOCUMENTARY,
     MOVIES,
     POWERPOINT
-}
-
-class Authors(var firstName:String,var lastName:String,var middleName:String){
-    var birthDate: Date = Date()
-}
-
-class Illustrator(var firstName:String, var lastName:String, var middleName: String){
-    var birthDate:Date = Date()
 }
 
 // added class and methods for act_6b
@@ -61,22 +71,19 @@ data class User(var name:String){
 class Library{
 
     // book list w/ Status (Available/Reserved/Internal Use/For Fixing)
-    var bookList:HashMap<String,String> = hashMapOf(
-        "Don Quixote" to "Available",
-        "Alice's Adventures in Wonderland" to "Available",
-        "The Adventures of Tom Sawyer" to "Available",
-        "Treasure Island" to "Available",
-        "Pride and Prejudice" to "Available",
-        "Wuthering Heights" to "Reserved",
-        "East of Eden" to "Internal Use",
-        "The Scarlet Letter" to "For Fixing")
+    var bookList:HashMap<Book,String> = hashMapOf(
+        Book("Book 1") to "Available",
+        Book("Book 2") to "Reserved",
+        Book("Book 3") to "Internal Use",
+        Book("Book 4") to "For Fixing"
+    )
 
     var borrowedItem:HashMap<User,Book> = HashMap()
 
-    fun borrowItem(user:User,item:Book){
-        var isReserved = bookList.getValue(item.title) == "Reserved"
-        var isForInternalUse = bookList.getValue(item.title) == "Internal Use"
-        var isForFixing = bookList.getValue(item.title) == "For Fixing"
+    fun borrowItem(user:User,book:Book){
+        val reserved = bookList.getValue(book) == "Reserved"
+        val forInternalUse = bookList.getValue(book) == "Internal Use"
+        val forFixing = bookList.getValue(book) == "For Fixing"
 
         if(user.borrowCount >= 5)
             throw LibraryException.UserException.UserHas5orMoreItems()
@@ -84,16 +91,16 @@ class Library{
         if(user.unpaidDues > 0.0)
             throw LibraryException.UserException.UserHasUnpaidDues()
 
-        if(isReserved)
+        if(reserved)
             throw LibraryException.ItemException.ItemIsReserved()
 
-        if(isForInternalUse)
+        if(forInternalUse)
             throw LibraryException.ItemException.ItemIsForInternalUse()
 
-        if(isForFixing)
+        if(forFixing)
             throw LibraryException.ItemException.ItemIsForFixing()
 
-        borrowedItem[user] = item
+        borrowedItem[user] = book
         ++user.borrowCount
     }
 
@@ -113,11 +120,18 @@ sealed class LibraryException(message:String) : Exception(message){
 
 fun main() {
     var user1 = User("James")
-    var book1 = Book("Don Quixote")
-    var book2 = Book("Wuthering Heights")
-    var book3 = Book("East of Eden")
-    var book4 = Book("The Scarlet Letter")
-    var library = Library()
+
+    val book1 = Book("Book 1")
+    val book2 = Book("Book 2")
+    val book3 = Book("Book 3")
+    val book4 = Book("Book 4")
+
+    val library = Library()
+
+    library.bookList[book1] = "Available"
+    library.bookList[book2] = "Reserved"
+    library.bookList[book3] = "Internal Use"
+    library.bookList[book4] = "For Fixing"
 
     // user 5 or more borrowed items exception
     user1.borrowCount = 5

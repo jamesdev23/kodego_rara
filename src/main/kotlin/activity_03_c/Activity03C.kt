@@ -1,20 +1,58 @@
 package activity_03_c
 
-// create arraylist of 20 grocery items and make functions according to instruction
+import java.util.*
 
-val groceryItems:ArrayList<String> = arrayListOf("Coke","Sprite","C2 Lemon","C2 Apple","Fita",
+val groceryItems = arrayListOf("Coke","Sprite","C2 Lemon","C2 Apple","Fita",
     "Rebisco","Cloud 9","Refined White Sugar","Datu Puti Toyo","Datu Puti Suka",
     "Well-milled rice","Fidel Iodized Salt","UFC Ketchup","Ajinomoto MSG","Nutella",
     "Pinoy Tasty","Lily's Peanut Butter","Nescafe 3-in-1 Coffee","Nissin Noodles","Payless Pancit Canton")
 
-var Cart:HashMap<String,Int> = hashMapOf()
-fun main(){
+var Cart = hashMapOf<String,Int>()
+
+fun addToCart(item:String, quantity:Int) {
+    var entry = 1
+    var newItem = item
+    if(Cart.containsKey(item)){
+        while(Cart.containsKey(newItem)){
+            if(entry < 10){
+                newItem = item + "_0${entry}"
+            }else{
+                newItem = item + "_${entry}"
+            }
+            entry++
+        }
+    }
+    Cart[newItem] = quantity
+}
+
+fun checkOut(){
+    println("Checkout > Item in Cart: ")
+    println("=========================")
+    if(Cart.isEmpty()){
+        println("Cart is empty.")
+    }else {
+        Cart.forEach{
+            println("Item: ${it.key} | Quantity: ${it.value}")
+        }
+        println("=========================")
+        print("Total: ${Cart.size} item/s")
+    }
+}
+
+fun removefromCart(itemName:String){
+    var entry = 1
+    while(Cart.containsKey(itemName)){
+        Cart.remove(itemName)
+        println("Removed $itemName to cart.")
+        entry++
+    }
+}
+
+fun main() {
     var item:String? = null
     var quantity:Int? = null
     var prompt = ""
     var addMore = true
-    var removeMore = true
-
     println("Grocery Item List: ")
     println("===================")
     groceryItems.forEach{
@@ -40,14 +78,14 @@ fun main(){
 
         println("Do you want to add more item? (Y/N): ")
         prompt = readLine().toString()
-        if(prompt == "N" || prompt == "n"){
+        if(prompt.equals("N", true)){
             addMore = false
         }
     }
 
     print("Do you want to remove item? (Y/N): ")
     prompt = readLine().toString()
-    if (prompt == "Y" || prompt == "y") {
+    if (prompt.equals("Y", true)) {
         println("Items in cart: ")
         println("===============")
         Cart.forEach {
@@ -61,62 +99,9 @@ fun main(){
 
     print("Do you want to checkout? (Y/N): ")
     prompt = readLine().toString()
-    if(prompt == "Y" || prompt == "y") {
+    if(prompt.equals("Y", true)) {
         checkOut()
     }
-
 }
 
-fun addToCart(itemName:String, quantity:Int){
-    var entry = 0
-    var newItemName = itemName
-    // checks if item in cart. if it exists, creates a new entry
-    if(Cart.contains(itemName)){
-        while(Cart.contains(newItemName)){
-            ++entry
-            if(entry < 10){
-                newItemName = itemName + "_0${entry}"
-            }else{
-                newItemName = itemName + "_${entry}"
-            }
-        }
-        Cart.put(newItemName,quantity)
-    }else{
-        Cart.put(itemName,quantity)
-    }
-    println("Added $itemName (Qty:$quantity) to cart.")
-}
 
-fun checkOut(){
-    println("Checkout > Item in Cart: ")
-    println("=========================")
-    if(Cart.isEmpty()){
-        println("Cart is empty.")
-    }
-    Cart.forEach{
-        println("Item: ${it.key} | Quantity: ${it.value}")
-    }
-    println("=========================")
-    print("Total: ${Cart.size} item/s")
-}
-
-fun removefromCart(itemName:String){
-    var entry = 0
-    var newItemName = itemName
-    // removes said item and it's duplicate
-    if(Cart.containsKey(newItemName)){
-        while(Cart.containsKey(newItemName)){
-            Cart.remove(newItemName)
-            println("Removed $newItemName to cart.")
-            ++entry
-            if(entry < 10){
-                newItemName = itemName + "_0${entry}"
-            }else{
-                newItemName = itemName + "_${entry}"
-            }
-        }
-    }else{
-        Cart.remove(newItemName)
-        println("Removed $newItemName to cart.")
-    }
-}

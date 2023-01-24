@@ -3,14 +3,18 @@ import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 
 internal class LibraryTest {
-    val library: Library = Library()
+    private val library: Library = Library()
 
-    var user1 = User("SampleUser1")
-    var user2 = User("SampleUser2")
-    var book1 = Book("Don Quixote")
-    var bookReserved = Book("Wuthering Heights")
-    var bookForInteralUse = Book("East of Eden")
-    var bookForFixing = Book("The Scarlet Letter")
+    var user1 = User("user1")
+    var user2 = User("user2")
+    val book1 = Book("Book 1")
+    val book2 = Book("Book 2")
+    val book3 = Book("Book 3")
+    val book4 = Book("Book 4")
+
+    var bookReserved = book2
+    var bookForInteralUse = book3
+    var bookForFixing = book4
 
     @Test
     fun borrowItem() {

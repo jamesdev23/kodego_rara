@@ -1,44 +1,52 @@
 package activity_05_b
 
+import activity_06_b.Authors
 import java.util.*
 
-open class Publication {
-    var publisherName:String = ""
-    var address:String = ""
-    open var yearPublished: Date = Date()
+open class Publication(var title: String, var authors: Authors, var yearPublished: Int, var publisher: Publisher) {
+    open fun getDetails(): String {
+        return "Title: $title, Authors: ${authors.firstName} ${authors.lastName}, Year Published: $yearPublished, Publisher: ${publisher.name}"
+    }
+    open fun searchByTitle(title: String): Boolean {
+        return this.title.equals(title, ignoreCase = true)
+    }
+}
+class Book(var title: String) {
+    var authors: Authors = Authors("","")
+    var yearPublished: Int = 0
+    var edition: Int = 0
+    var ISBN: String = ""
+    var publisher: Publisher = Publisher("")
+    var chapters: List<String> = emptyList()
+    var pages: Int = 0
 }
 
-class Book (var title:String) : Publication(){
-    var authors:String = ""
-    override var yearPublished:Date = Date()
-    var edition:String = ""
-    var ISBN:Int = 0
-    var publisher:String = ""
-    var chapterList:ArrayList<String> = ArrayList()
-    private var numberOfPages:Int? = null
+open class Article(var title: String,var content: String,var author: Authors)
+
+class Magazines(var editor: String, var monthPublished: Int, var yearPublished: Int, title:String, content:String,
+                author: Authors
+) : Article(title,content, author)
+
+class Newspaper(var name: String, var dayPublished: Int, var monthPublished: Int, var yearPublished: Int,
+                var headline: String, title:String, content:String,author: Authors
+) : Article(title,content, author)
+
+class Comics(var monthPublished: Int, var yearPublished: Int, var illustrators: activity_05_b.Illustrator,
+             var publisher: Publisher, title: String, content: String, author: Authors
+) : Article(title,content,author)
+
+class Publisher (var name: String){
+    var address: String = ""
+    var dateEstablished: Date = Date()
 }
 
-class Magazine : Publication(){
-    var editor:String = ""
-    var monthPublished:Date = Date()
-    override var yearPublished:Date = Date()
-
-}
-
-class Newspaper(var name:String) : Publication(){
-    var dayPublished:Date = Date()
-    var monthPublished:Date = Date()
-    override var yearPublished:Date = Date()
-    var headline:String = ""
+class audioVideoRecording(var length: Int, var dateRecorded: String, var title: String, var publisher: Publisher){
+    var hasVideo: Boolean = true
+    var hasAudio: Boolean = true
+    var hasBoth: Boolean = true
 }
 
 
-class Comics(var title:String) : Publication(){
-    var monthPublished:Date = Date()
-    override var yearPublished:Date = Date()
-    var illustrators:String = ""
-    var publisher: String = ""
-}
 
 // #2 answer: using enum. more readable and efficient than using class
 enum class AudioVideoTypes {
@@ -48,13 +56,17 @@ enum class AudioVideoTypes {
     POWERPOINT
 }
 
-// #3 answer: using class. "Authors" class will be used for books and "Illustrator" class is for comics.
-class Authors(var firstName:String,var lastName:String,var middleName:String){
-    var birthDate: Date = Date()
+// #3 answer: using class. "Authors" class will be used for books,magazines,and newspaper and "Illustrator" class is for comics.
+class Authors(var firstName: String, var lastName: String){
+    var middleName: String = ""
+    var dateOfBirth: Date = Date()
+    // class for books, magazines and newspaper
 }
 
-class Illustrator(var firstName:String, var lastName:String, var middleName: String){
-    var birthDate:Date = Date()
+class Illustrator(var firstName: String, var lastName: String){
+    var middleName: String = ""
+    var dateOfBirth: Date = Date()
+    // class for comics
 }
 
 fun main(){
