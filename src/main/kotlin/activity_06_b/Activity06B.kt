@@ -2,9 +2,9 @@ package activity_06_b
 
 import java.util.*
 
-open class Publication(var title: String, var authors: Authors, var yearPublished: Int, var publisher: Publisher) {
+open class Publication(var title: String, var author: Authors, open var yearPublished: Int, open var publisher: Publisher) {
     open fun getDetails(): String {
-        return "Title: $title, Authors: ${authors.firstName} ${authors.lastName}, Year Published: $yearPublished, Publisher: ${publisher.name}"
+        return "Title: $title, Authors: ${author.firstName} ${author.lastName}, Year Published: $yearPublished, Publisher: ${publisher.name}"
     }
     open fun searchByTitle(title: String): Boolean {
         return this.title.equals(title, ignoreCase = true)
@@ -22,14 +22,17 @@ class Book(var title: String) {
 
 open class Article(var title: String,var content: String,var author: Authors)
 
-class Magazines(var editor: String, var monthPublished: Int, var yearPublished: Int, title:String, content:String,
-                author:Authors) : Article(title,content, author)
+class Magazines(var editor: String, var monthPublished: Int, title:String, author:Authors,yearPublished: Int,publisher: Publisher) : Publication(title,author,yearPublished,publisher) {
+    override var yearPublished: Int = 0
+}
+class Newspaper(var name: String, var dayPublished: Int, var monthPublished: Int, var headline: String, title:String, author:Authors,yearPublished: Int,publisher: Publisher) : Publication(title,author,yearPublished,publisher) {
+    override var yearPublished: Int = 0
+}
 
-class Newspaper(var name: String, var dayPublished: Int, var monthPublished: Int, var yearPublished: Int,
-                var headline: String, title:String, content:String,author:Authors) : Article(title,content, author)
-
-class Comics(var monthPublished: Int, var yearPublished: Int, var illustrators: activity_05_b.Illustrator,
-             var publisher: Publisher, title: String, content: String, author: Authors) : Article(title,content,author)
+class Comics(var monthPublished: Int, var illustrators: Illustrator, title: String,author: Authors,yearPublished: Int, publisher: Publisher) : Publication(title,author,yearPublished,publisher) {
+    override var yearPublished:Int = 0
+    override var publisher:Publisher = Publisher("")
+}
 
 class Publisher (var name: String){
     var address: String = ""
@@ -71,19 +74,19 @@ data class User(var name:String){
 class Library{
 
     // book list w/ Status (Available/Reserved/Internal Use/For Fixing)
-    var bookList:HashMap<Book,String> = hashMapOf(
-        Book("Book 1") to "Available",
-        Book("Book 2") to "Reserved",
-        Book("Book 3") to "Internal Use",
-        Book("Book 4") to "For Fixing"
+    var bookList:HashMap<String,String> = hashMapOf(
+        "Book 1" to "Available",
+        "Book 2" to "Reserved",
+        "Book 3" to "Internal Use",
+        "Book 4" to "For Fixing"
     )
 
     var borrowedItem:HashMap<User,Book> = HashMap()
 
     fun borrowItem(user:User,book:Book){
-        val reserved = bookList.getValue(book) == "Reserved"
-        val forInternalUse = bookList.getValue(book) == "Internal Use"
-        val forFixing = bookList.getValue(book) == "For Fixing"
+        val reserved = bookList.getValue(book.title) == "Reserved"
+        val forInternalUse = bookList.getValue(book.title) == "Internal Use"
+        val forFixing = bookList.getValue(book.title) == "For Fixing"
 
         if(user.borrowCount >= 5)
             throw LibraryException.UserException.UserHas5orMoreItems()
@@ -119,7 +122,7 @@ sealed class LibraryException(message:String) : Exception(message){
 }
 
 fun main() {
-    var user1 = User("James")
+    val user1 = User("James")
 
     val book1 = Book("Book 1")
     val book2 = Book("Book 2")
@@ -128,10 +131,10 @@ fun main() {
 
     val library = Library()
 
-    library.bookList[book1] = "Available"
-    library.bookList[book2] = "Reserved"
-    library.bookList[book3] = "Internal Use"
-    library.bookList[book4] = "For Fixing"
+    library.bookList[book1.title] = "Available"
+    library.bookList[book2.title] = "Reserved"
+    library.bookList[book3.title] = "Internal Use"
+    library.bookList[book4.title] = "For Fixing"
 
     // user 5 or more borrowed items exception
     user1.borrowCount = 5

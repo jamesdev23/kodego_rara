@@ -1,11 +1,12 @@
 package activity_05_b
 
 import activity_06_b.Authors
+import activity_06_b.Illustrator
 import java.util.*
 
-open class Publication(var title: String, var authors: Authors, var yearPublished: Int, var publisher: Publisher) {
+open class Publication(var title: String, var author: Authors, open var yearPublished: Int, open var publisher: Publisher) {
     open fun getDetails(): String {
-        return "Title: $title, Authors: ${authors.firstName} ${authors.lastName}, Year Published: $yearPublished, Publisher: ${publisher.name}"
+        return "Title: $title, Authors: ${author.firstName} ${author.lastName}, Year Published: $yearPublished, Publisher: ${publisher.name}"
     }
     open fun searchByTitle(title: String): Boolean {
         return this.title.equals(title, ignoreCase = true)
@@ -23,17 +24,17 @@ class Book(var title: String) {
 
 open class Article(var title: String,var content: String,var author: Authors)
 
-class Magazines(var editor: String, var monthPublished: Int, var yearPublished: Int, title:String, content:String,
-                author: Authors
-) : Article(title,content, author)
+class Magazines(var editor: String, var monthPublished: Int, title:String, author:Authors,yearPublished: Int,publisher: Publisher) : Publication(title,author,yearPublished,publisher) {
+    override var yearPublished: Int = 0
+}
+class Newspaper(var name: String, var dayPublished: Int, var monthPublished: Int, var headline: String, title:String, author:Authors,yearPublished: Int,publisher: Publisher) : Publication(title,author,yearPublished,publisher) {
+    override var yearPublished: Int = 0
+}
 
-class Newspaper(var name: String, var dayPublished: Int, var monthPublished: Int, var yearPublished: Int,
-                var headline: String, title:String, content:String,author: Authors
-) : Article(title,content, author)
-
-class Comics(var monthPublished: Int, var yearPublished: Int, var illustrators: activity_05_b.Illustrator,
-             var publisher: Publisher, title: String, content: String, author: Authors
-) : Article(title,content,author)
+class Comics(var monthPublished: Int, var illustrators: Illustrator, title: String, author: Authors, yearPublished: Int, publisher: Publisher) : Publication(title,author,yearPublished,publisher) {
+    override var yearPublished:Int = 0
+    override var publisher:Publisher = Publisher("")
+}
 
 class Publisher (var name: String){
     var address: String = ""

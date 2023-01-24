@@ -2,8 +2,7 @@ package activity_04_b
 
 import java.util.*
 
-class Book(
-    var title: String, var authors: Authors, var yearPublished: Int, var edition: Int,
+class Book(var title: String, var authors: Authors, var yearPublished: Int, var edition: Int,
     var ISBN: String, var publisher:Publisher, var chapters: List<String>, var pages: Int)
 class Authors(var firstName: String, var lastName: String, var middleName: String, var dateOfBirth: Date)
 
