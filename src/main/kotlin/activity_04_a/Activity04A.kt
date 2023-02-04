@@ -28,9 +28,7 @@ fun main(){
     var prompt = ""
 
     println("Student Record (Class)")
-    println("==============================")
     println("- Student Search w/ wildcard")
-    println("==============================")
 
     println("Search method (firstname/lastname/nickname:")
     prompt = readLine().toString()

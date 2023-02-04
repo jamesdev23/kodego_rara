@@ -27,14 +27,12 @@ fun addToCart(item:String, quantity:Int) {
 
 fun checkOut(){
     println("Checkout > Item in Cart: ")
-    println("=========================")
     if(Cart.isEmpty()){
         println("Cart is empty.")
     }else {
         Cart.forEach{
             println("Item: ${it.key} | Quantity: ${it.value}")
         }
-        println("=========================")
         print("Total: ${Cart.size} item/s")
     }
 }
@@ -54,7 +52,6 @@ fun main() {
     var prompt = ""
     var addMore = true
     println("Grocery Item List: ")
-    println("===================")
     groceryItems.forEach{
         println("- $it")
     }
@@ -87,11 +84,9 @@ fun main() {
     prompt = readLine().toString()
     if (prompt.equals("Y", true)) {
         println("Items in cart: ")
-        println("===============")
         Cart.forEach {
             println("Item: ${it.key} | Quantity: ${it.value}")
         }
-        println("===============")
         print("Item to remove: ")
         item = readLine().toString()
         removefromCart(item)

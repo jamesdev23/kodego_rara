@@ -33,9 +33,7 @@ fun main() {
     var count = 0
     var column = 0
 
-    println("===================")
     println("School Library Menu")
-    println("===================")
     println("- Add Borrowable item")
     println("- Add Item Info")
     println("Proceed to add borrowable item...")

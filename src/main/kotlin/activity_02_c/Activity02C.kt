@@ -31,15 +31,11 @@ fun main(){
     var count2 = 0
     var column2 = 0
 
-
-
-    println("========================")
     println("Grocery Inventory System")
-    println("========================")
     println("- Add Grocery Item")
     println("- Add Grocery Item Info")
     println("- Check Grocery Item List")
-    println("Proceed to add grocery item...")
+
     while(addGrocery) {
         println("Enter item name: ")
         itemName = readLine().toString()
@@ -50,14 +46,14 @@ fun main(){
         // add info to inventory list
         if(itemCategory == "perishable"){
             itemPerishable.add(itemName)
-            itemPerishable.add(itemCount.toString())
-            itemPerishable.add(itemColor)
-            itemPerishable.add(itemSKU.toString())
+            itemPerishable.add("1")
+            itemPerishable.add("N/A")
+            itemPerishable.add("N/A")
         }else{
             itemNonperishable.add(itemName)
-            itemNonperishable.add(itemCount.toString())
-            itemNonperishable.add(itemColor)
-            itemNonperishable.add(itemSKU.toString())
+            itemNonperishable.add("1")
+            itemNonperishable.add("N/A")
+            itemNonperishable.add("N/A")
         }
         println("Item added to grocery inventory list.")
         println("Do you want to add another grocery item? (Y/N): ")
@@ -84,8 +80,8 @@ fun main(){
             println("Adding new info...")
             var index = itemPerishable.indexOf(itemName)
             itemPerishable.set(index + 1, itemCount.toString())
-            itemPerishable.set(index + 3, itemColor)
-            itemPerishable.set(index + 4, itemSKU.toString())
+            itemPerishable.set(index + 2, itemColor)
+            itemPerishable.set(index + 3, itemSKU.toString())
         }else if(itemNonperishable.contains(itemName)){
             println("Found $itemName on nonperishable list.")
             println("Add Item count: ")
@@ -97,8 +93,8 @@ fun main(){
             println("Adding new info...")
             var index = itemPerishable.indexOf(itemName)
             itemNonperishable.set(index + 1, itemCount.toString())
-            itemNonperishable.set(index + 3, itemColor)
-            itemNonperishable.set(index + 4, itemSKU.toString())
+            itemNonperishable.set(index + 2, itemColor)
+            itemNonperishable.set(index + 3, itemSKU.toString())
         }else{
             println("Item name not found.")
         }
@@ -107,14 +103,13 @@ fun main(){
     optionsInput = readLine().toString()
     if(optionsInput == "Y" || optionsInput == "y"){
         println("Grocery List By Category:")
-        println("=========================")
         println("Perishable:")
         do{
             println("${itemColumn[column]}: ${itemPerishable[count]}")
             ++ count
             ++ column
-            if(column == 4){
-                column -= 4
+            if(column == 3){
+                column -= 3
                 println(" ")
             }
         }while(count < itemPerishable.size)
@@ -123,8 +118,8 @@ fun main(){
             println("${itemColumn[column2]}: ${itemNonperishable[count2]}")
             ++ count2
             ++ column2
-            if(column2 == 4){
-                column2 -= 4
+            if(column2 == 3){
+                column2 -= 3
                 println(" ")
             }
         }while(count2 < itemNonperishable.size)

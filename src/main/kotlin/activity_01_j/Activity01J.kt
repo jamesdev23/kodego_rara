@@ -32,16 +32,14 @@ fun main(){
     var totalPerItem = ArrayList<Float>()
 
 
-    println("============")
     println("Grocery Cart")
-    println("============")
     do{
         var addToCart = true
-        println("Enter item name: ")
+        print("Enter item name: ")
         itemName = readLine()!!.toString()
-        println("Quantity (per piece): ")
+        print("Quantity (per piece): ")
         itemQuantity = readLine()!!.toInt()
-        println("Price (per item): ")
+        print("Price (per item): ")
         itemPrice = readLine()!!.toFloat()
         if(itemPrice > 0 && itemQuantity > 0){
             itemCount ++
@@ -64,13 +62,11 @@ fun main(){
 
     println("Proceeds to Checkout...")
     println("Items in Cart: ")
-    println("======================================================================")
     for(index in 0 until itemCount){
         itemPriceRounded = String.format("%.2f", itemsInCartPrice[index])
         totalPerItemRounded = String.format("%.2f", totalPerItem[index])
         println("${index+1}. ${itemsInCart[index]} | ${itemsInCartQuantity[index]} pc/s. | P $itemPriceRounded | Total: P $totalPerItemRounded")
     }
-    println("======================================================================")
     println("No. of items: $itemCount")
     totalCost = totalPerItem.sum()
     totalCostRounded = String.format("%.2f", totalCost)

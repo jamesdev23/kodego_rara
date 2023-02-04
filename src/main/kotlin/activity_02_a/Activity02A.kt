@@ -42,9 +42,7 @@ fun main() {
     var column = 0
     var addStudent = true
 
-    println("=======================")
     println("Student Directory Menu:")
-    println("=======================")
     println("- Add Student")
     println("- View Student Directory")
     println("- Check Student Progress")
@@ -109,9 +107,8 @@ fun main() {
         // view student directory
         println("Proceed to view student directory...")
         println("Student List: ")
-        println("=============================")
         studentList.forEach() {
-            println("$it")
+            println(it)
         }
         println(" ")
         totalStudents = studentList.size
@@ -126,7 +123,6 @@ fun main() {
         if(studentRecord.contains(studentName)){
             var index = studentRecord.indexOf(studentName)
             println("Student Record: ")
-            println("=========================")
             do{
                 println("${studentRecordColumn[column]}: ${studentRecord[index]}")
                 ++ index

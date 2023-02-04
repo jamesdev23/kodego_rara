@@ -55,18 +55,15 @@ fun main(){
     var counter = 0
     var column = 0
 
-    println("===============")
     println("Librarian Menu: ")
-    println("===============")
     println("- Borrow a Book")
     println("- Borrowed Book Record")
-    println("Proceed to borrowing book...")
 
-    while(canBorrow == true) {
-        println("Enter Borrower's Name: ")
+    while(canBorrow) {
+        print("Enter Borrower's Name: ")
         bookBorrowerName = readLine().toString()
         borrowerInfo.add(bookBorrowerName)
-        println("Enter Borrower Type (visitor,student,faculty)")
+        print("Enter Borrower Type (visitor,student,faculty): ")
         var tempBorrowerType = readLine().toString()
         borrowerInfo.add(tempBorrowerType)
 
@@ -80,7 +77,8 @@ fun main(){
             println("Note: Faculty and other school staff can borrow a book up to 30 days")
             borrowDuration = 30
         } else {
-            println("Error: Not a valid option")
+            println("Invalid option.")
+            borrowDuration = 1
         }
         println("Book Title: ")
         bookTitle = readLine().toString()
@@ -98,7 +96,7 @@ fun main(){
             borrowerInfo.add(endDate)
             println("Added entry to borrowed book list")
         }
-        println("Do you want to borrow another book? (Y/N): ")
+        print("Do you want to borrow another book? (Y/N): ")
         optionYesNo = readLine().toString()
         if(optionYesNo == "N" || optionYesNo == "n"){
             canBorrow = false
@@ -107,12 +105,12 @@ fun main(){
 
 
     println("Proceed to Book Record...")
-    println("Do you want to check borrowed book list?(Y/N): ")
+    print("Do you want to check borrowed book list?(Y/N): ")
     optionYesNo = readLine().toString()
     if(optionYesNo == "Y" || optionYesNo == "y"){
         println("Book Borrowed List: ")
         bookBorrowed.forEach(){
-            println("$it")
+            println(it)
         }
         println(" ")
         println("Checking borrower\'s info...")
