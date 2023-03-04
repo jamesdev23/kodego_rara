@@ -24,12 +24,12 @@ class SnakesAndLaddersGame(private val players: List<Player>): SnakesAndLadders 
             board.movePlayer(player, roll)
             if (board.isPlayerOnLadder(player)) {
                 board.climbLadder(player)
-                println("${player.name} rolled $roll and landed on a ladder. Climb up to ${player.position}")
+                println("${player.name}, on ${player.currentPosition}, rolled $roll and landed on a ladder. Climb up to ${player.position}")
             } else if (board.isPlayerOnSnake(player)) {
                 board.slideDownSnake(player)
-                println("${player.name} rolled $roll and landed on a snake. Going down to ${player.position}")
+                println("${player.name}, on ${player.currentPosition}, rolled $roll and landed on a snake. Going down to ${player.position}")
             } else {
-                println("${player.name} rolled $roll and landed on number ${player.position}")
+                println("${player.name}, on ${player.currentPosition}, rolled $roll and landed on number ${player.position}")
             }
 
             currentTurn = (currentTurn + 1) % players.size
@@ -53,6 +53,7 @@ class Board {
     )
 
     fun movePlayer(player: Player, steps: Int) {
+        player.currentPosition = player.position
         val newPosition = player.position + steps
         player.position = if (newPosition <= size) newPosition else player.position
     }
@@ -84,6 +85,8 @@ class Board {
 
 class Player(val name: String) {
     var position: Int = 0
+
+    var currentPosition: Int = 0
 
     fun rollDice(dice: Dice): Int {
         return dice.roll()
