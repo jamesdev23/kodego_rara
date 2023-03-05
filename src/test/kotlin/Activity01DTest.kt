@@ -2,9 +2,9 @@ import activity_01_d.*
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 
-class MonetaryApplicationTest {
+class MonetaryAppTest {
     @Test
-    fun testMonetaryApplication() {
+    fun testMonetaryApp() {
         // Set up test input
         // 1st input
         val monetaryAmounts = mutableListOf(10.0, 20.0, 30.0, 40.0, 50.0)
