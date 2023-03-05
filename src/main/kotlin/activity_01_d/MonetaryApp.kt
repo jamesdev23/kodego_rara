@@ -12,7 +12,9 @@ fun main() {
     print("Divide the value by how many?: ")
     val divisor:Int = readLine()!!.toInt()
 
-    calculateResult(amountList, divisor)
+    val result = calculateResult(amountList, divisor)
+
+    println("Result: $result")
 }
 
 fun calculateResult(amountList: MutableList<Double>, divisor: Int): Double {
