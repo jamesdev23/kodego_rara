@@ -37,7 +37,7 @@ fun main(){
                 }
             }
             if(isPrime) {
-                print("$lowerNumber ")
+                print("$lowerNumber \n")
                 ++lowerNumber
             }
         }

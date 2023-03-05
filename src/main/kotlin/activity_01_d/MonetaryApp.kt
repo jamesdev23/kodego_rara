@@ -1,35 +1,21 @@
 package activity_01_d
 fun main() {
-    var userInput = Array<Float>(5) { 0.0F }
-    var divideValueBy:Int = 0
-    var isANumber = true
-    // using Float just in casea
-    var total:Float
+    val amountList = mutableListOf<Double>()
 
     // using for loop for monetary inputs
-    for(index in 0 .. 5) {
-        var tempInput:String
-        if(index < 5){
-            println("Enter monetary amount ${index + 1}: ")
-        }else{
-            println("Divide the value by how many?: ")
-        }
-        tempInput = readLine().toString()
-        for(char in tempInput){
-            isANumber = !(char < '0' || char > '9')
-        }
-
-        if(!isANumber || tempInput.length == 0) {
-            println("Error: Input is not a number")
-        }else if(index < 5){
-            userInput[index] = tempInput.toFloat()
-        }else{
-            divideValueBy = tempInput.toInt()
-        }
+    for(index in 0 .. 4) {
+        print("Enter a monetary amount: ")
+        val amount = readLine()!!.toDouble()
+        amountList.add(amount)
     }
 
-    total = userInput.sum() / divideValueBy
-    val totalRoundOff = String.format("%.2f", total)
-    println("Total: $totalRoundOff")
+    print("Divide the value by how many?: ")
+    val divisor:Int = readLine()!!.toInt()
 
+    calculateResult(amountList, divisor)
+}
+
+fun calculateResult(amountList: MutableList<Double>, divisor: Int): Double {
+    val totalAmount = amountList.sum()
+    return totalAmount / divisor
 }

@@ -44,7 +44,7 @@ class SnakesAndLaddersGame(private val players: List<Player>): SnakesAndLadders 
 
 class Board {
     val size: Int = 100
-    private val cells: Array<Cell> = Array(size) { Cell() }
+
     private val ladders: Map<Int, Int> = mapOf(
         1 to 38, 4 to 14, 9 to 31, 21 to 42, 28 to 84, 51 to 67, 71 to 91, 80 to 100
     )
@@ -80,7 +80,6 @@ class Board {
         }
     }
 
-    inner class Cell
 }
 
 class Player(val name: String) {
