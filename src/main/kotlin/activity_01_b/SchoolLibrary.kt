@@ -12,16 +12,16 @@ fun main() {
     var bookReturned = ArrayList<String>()
 
     // book info
-    var bookName: String? = null
-    var bookAuthor: String? = null
-    var bookPublisher: String? = null
-    var bookISBN: Int? = null
-    var bookType: String? = null
-    var bookCondition: String? = null
-    var bookQuantity: Int? = null
-    var bookRemarks: String? = null // for other book info
-    var bookBorrowStatus: String? = null
+    var bookName: String = ""
+    var bookAuthor: String = ""
+    var bookPublisher: String = ""
+    var bookISBN: Int = 0
+    var bookType: String = ""
+    var bookCondition: String = ""
+    var bookQuantity: Int = 0
+    var bookRemarks: String = "" // for other book info
+    var bookBorrowStatus: String = ""
 
     // book borrow and return date and time
-    var totalItemsInLibrary: Int? = null
+    var totalItemsInLibrary: Int = 0
 }

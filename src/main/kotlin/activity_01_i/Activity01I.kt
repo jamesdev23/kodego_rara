@@ -5,12 +5,12 @@ import java.time.Period
 // Borrowing book and check record. User: Librarian
 
 fun main(){
-    var optionsInput:String? = null
-    var optionYesNo:String? = null
-    var bookBorrowerName:String? = null
-    var bookTitle:String? = null
+    var optionsInput:String = ""
+    var optionYesNo:String = ""
+    var bookBorrowerName:String = ""
+    var bookTitle:String = ""
     var borrowDuration:Int = 0
-    var borrowDateEnd:String? = null
+    var borrowDateEnd:String = ""
     var borrowerInfoColumn = arrayListOf("Name","Type","Book Borrowed","Duration (in days)","Borrowed on","Return Date")
     var borrowerInfo = arrayListOf("James","Student","The Scarlet Letter","7","2022-10-22","2022-10-29")
     var bookBorrowDateStart = LocalDate.now()

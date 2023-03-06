@@ -12,21 +12,21 @@ fun main() {
     var bookAllowedToBorrowList = ArrayList<String>()
     var bookBorrowed = ArrayList<String>()
     var bookReturned = ArrayList<String>()
-    var bookName: String? = null
+    var bookName: String? = ""
     var bookAuthor: String = ""
     var bookPublisher: String = ""
     var bookISBN: Long = 0
     var bookType: String = ""
     var bookCondition: String = ""
     var bookQuantity: Int = 0
-    var bookRemarks: String? = null // for other book info
-    var bookBorrowStatus: String? = null
-    var totalItemsInLibrary: Int? = null
+    var bookRemarks: String = "" // for other book info
+    var bookBorrowStatus: String = ""
+    var totalItemsInLibrary: Int = 0
 
     // var for this app
     var borrowable = ArrayList<String>()
     var nonborrowable = ArrayList<String>()
-    var optionsInput:String? = null
+    var optionsInput:String? = ""
     var bookCharacteristic = ArrayList<String>()
     var bookCharacteristicColumn = arrayListOf("Book Name","Type","Author","Publisher","ISBN","Condition")
     var addBook = true

@@ -5,21 +5,21 @@ import java.time.LocalDate
 
 fun main(){
     var groceryItemList = ArrayList<String>()
-    var isPerishable: Boolean? = null
-    var itemSKU: String? = null
-    var itemColor: String? = null
-    var itemType: String? = null
-    var itemOnSaleTotal: Int? = null
-    var ItemSoldTotal: Int? = null
+    var isPerishable: Boolean = false
+    var itemSKU: String = ""
+    var itemColor: String = ""
+    var itemType: String = ""
+    var itemOnSaleTotal: Int = 0
+    var ItemSoldTotal: Int = 0
 
     // grocery cart var
-    var itemName: String? = null
-    var itemQuantity:Int? = null
-    var itemPrice:Float? = null
-    var optionsInput:String? = null
+    var itemName: String = ""
+    var itemQuantity:Int = 0
+    var itemPrice:Float = 0.0F
+    var optionsInput:String = ""
     var itemCount = 0
-    var itemTotal:Float? = null
-    var totalCost:Float? = null
+    var itemTotal:Float = 0.0F
+    var totalCost:Float = 0.0F
     var itemPriceRounded = ""
     var totalPerItemRounded = ""
     var totalCostRounded = ""

@@ -10,9 +10,9 @@ fun main(){
     var groceryItemList = ArrayList<String>()
     // item characteristic
     var itemName: String? = null
-    var isPerishable: Boolean? = null
-    var itemOnSaleTotal: Int? = null
-    var ItemSoldTotal: Int? = null
+    var isPerishable: Boolean = false
+    var itemOnSaleTotal: Int = 0
+    var ItemSoldTotal: Int = 0
 
     // var for this act
     var itemCount: Int = 0

@@ -6,31 +6,31 @@ fun main() {
     // student info
     val courseName = "Mobile App Development (Part-Time)"
     var studentList = ArrayList<String>()
-    var studentName: String? = null
+    var studentName: String= ""
     var batchNumber: String? = "MD2P"
-    var studentStatus: String? = null
-    var isDropped: Boolean? = null
-    var totalStudents: Int? = null
-    var attendanceCount: Float? = null
-    var numberOfLateAttendance: Float? = null
+    var studentStatus: String= ""
+    var isDropped: Boolean = false
+    var totalStudents: Int = 0
+    var attendanceCount: Float = 0.0F
+    var numberOfLateAttendance: Float = 0.0F
 
     // exercise,assignment, and project info per student
-    var exerciseStatus: String? = null
-    var exerciseCompleted: Int? = null
-    var exerciseInProgress: Int? = null
-    var exerciseCount: Int? = null
-    var assignmentStatus: String? = null
-    var assignmentCompleted: Int? = null
-    var assignmentInProgress: Int? = null
-    var assignmentCount: Int? = null
-    var projectStatus: String? = null
-    var projectCompleted: Int? = null
-    var projectInProgress: Int? = null
-    var projectCount: Int? = null
-    var capstoneProjectStatus: String? = null
+    var exerciseStatus: String= ""
+    var exerciseCompleted: Int = 0
+    var exerciseInProgress: Int = 0
+    var exerciseCount: Int = 0
+    var assignmentStatus: String= ""
+    var assignmentCompleted: Int = 0
+    var assignmentInProgress: Int = 0
+    var assignmentCount: Int = 0
+    var projectStatus: String= ""
+    var projectCompleted: Int = 0
+    var projectInProgress: Int = 0
+    var projectCount: Int = 0
+    var capstoneProjectStatus: String= ""
 
     // week status per student
-    var weekStatus: String? = null
-    var weeksTotal: Int? = null
+    var weekStatus: String= ""
+    var weeksTotal: Int = 0
 
 }

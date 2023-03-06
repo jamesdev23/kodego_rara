@@ -6,8 +6,8 @@ fun main() {
     // from activity 01_a
     val courseName = "Mobile App Development (Part-Time)"
     var studentList = arrayListOf("James","Bert","Jane","Mark","Jeff") // filler name
-    var studentName: String = ""
-    var batchNumber: String = ""
+    var studentName: String = "n/a"
+    var batchNumber: String = "n/a"
     var studentStatus = "Enrolled"
     var isDropped = "No"
     var attendanceCount = "n/a"
@@ -27,13 +27,13 @@ fun main() {
     var capstoneProjectStatus = "n/a"
     var weekStatus = "n/a"
     var weeksTotal = "n/a"
-    var totalStudents: Int? = null
+    var totalStudents: Int = 0
 
     // var for this activity
-    var optionsInput:String? = null
-    var firstName:String? = null
-    var lastName:String? = null
-    var startDate:String? = null
+    var optionsInput:String = "n/a"
+    var firstName:String = "n/a"
+    var lastName:String = "n/a"
+    var startDate:String = "n/a"
     var studentRecord = ArrayList<String>()
     var studentRecordColumn = arrayListOf("Student Name","Batch Number","Class Start","Status","Dropped","Attendance Count",
         "Late Attendance","Exercise Status","Exercise Completed","Exercise in Progress","Exercise Count",
