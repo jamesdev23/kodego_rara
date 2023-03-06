@@ -88,20 +88,22 @@ class Library{
         val forInternalUse = bookList.getValue(book.title) == "Internal Use"
         val forFixing = bookList.getValue(book.title) == "For Fixing"
 
-        if(user.borrowCount >= 5)
-            throw LibraryException.UserException.UserHas5orMoreItems()
+        when {
+            user.borrowCount >= 5 ->
+                throw LibraryException.UserException.UserHas5orMoreItems()
 
-        if(user.unpaidDues > 0.0)
-            throw LibraryException.UserException.UserHasUnpaidDues()
+            user.unpaidDues > 0.0 ->
+                throw LibraryException.UserException.UserHasUnpaidDues()
 
-        if(reserved)
-            throw LibraryException.ItemException.ItemIsReserved()
+            reserved ->
+                throw LibraryException.ItemException.ItemIsReserved()
 
-        if(forInternalUse)
-            throw LibraryException.ItemException.ItemIsForInternalUse()
+            forInternalUse ->
+                throw LibraryException.ItemException.ItemIsForInternalUse()
 
-        if(forFixing)
-            throw LibraryException.ItemException.ItemIsForFixing()
+            forFixing ->
+                throw LibraryException.ItemException.ItemIsForFixing()
+        }
 
         borrowedItem[user] = book
         ++user.borrowCount

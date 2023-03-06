@@ -21,26 +21,51 @@ internal class LibraryTest {
     fun borrowItem() {
 
         assertThrows<LibraryException.UserException.UserHas5orMoreItems> {
+            // expected: success
             user1.borrowCount = 5
+            library.borrowItem(user1, bookAvailable)
+
+            // expected: fail
+            user1.borrowCount = 1
             library.borrowItem(user1, bookAvailable)
         }
 
         assertThrows<LibraryException.UserException.UserHasUnpaidDues> {
+            // expected: success
             user1.borrowCount = 0
             user1.unpaidDues = 500.0
             library.borrowItem(user1,bookAvailable)
+
+            // expected: fail
+            user1.borrowCount = 0
+            user1.unpaidDues = 0.0
+            library.borrowItem(user1,bookAvailable)
+
+
         }
 
         assertThrows<LibraryException.ItemException.ItemIsReserved> {
+            // expected: success
             library.borrowItem(user2,bookReserved)
+
+            // expected: fail
+            library.borrowItem(user2,book1)
         }
 
         assertThrows<LibraryException.ItemException.ItemIsForInternalUse> {
+            // expected: success
             library.borrowItem(user2,bookForInteralUse)
+
+            // expected: fail
+            library.borrowItem(user2,book2)
         }
 
         assertThrows<LibraryException.ItemException.ItemIsForFixing> {
+            // expected: success
             library.borrowItem(user2,bookForFixing)
+
+            // expected: fail
+            library.borrowItem(user2,book3)
         }
 
     }

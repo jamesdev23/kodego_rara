@@ -61,12 +61,13 @@ sealed class GradesException(message:String): Exception(message) {
 
 class Grades {
     fun checkGrades(gradeList:IntArray){
-        if(gradeList.size > 10)
-            throw GradesException.InvalidInputException()
+        when {
+            gradeList.size > 10 ->
+                throw GradesException.InvalidInputException()
 
-        // using this instead of finding the zero grade one by one
-        if(gradeList.min() == 0 || gradeList.size < 10)
-            throw GradesException.IncompleteGradeException()
+            gradeList.min() == 0 || gradeList.size < 10 ->
+                throw GradesException.IncompleteGradeException()
+        }
 
     }
 }

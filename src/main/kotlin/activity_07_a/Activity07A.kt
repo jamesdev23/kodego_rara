@@ -63,52 +63,41 @@ sealed class GradesException(message:String): Exception(message) {
 
 class GradeChecking {
     fun checkGrades(grades:IntArray){
-        if(grades.size > 10)
-            throw GradesException.InvalidInputException()
-
-        // using this instead of finding the zero grade one by one
-        if(grades.size < 10 || grades.min() == 0)
-            throw GradesException.IncompleteGradeException()
-
-        if(grades.min() < 0 || grades.max() > 100)
-            throw GradesException.GradeOutOfRangeException()
+        when {
+            grades.size > 10 ->
+                throw GradesException.InvalidInputException()
+            grades.size < 10 || grades.min() == 0 ->
+                throw GradesException.IncompleteGradeException()
+            grades.min() < 0 || grades.max() > 100 ->
+                throw GradesException.GradeOutOfRangeException()
+        }
 
     }
     fun getAverage(gradeList:IntArray): Double{
         val resultAverage = gradeList.average()
 
-        if(resultAverage >= 94){
-            return 4.0
+        return when {
+            resultAverage >= 94 -> 4.0
+            resultAverage >= 89 -> 3.5
+            resultAverage >= 83 -> 3.0
+            resultAverage >= 78 -> 2.5
+            resultAverage >= 72 -> 2.0
+            resultAverage >= 66 -> 1.5
+            resultAverage >= 60 -> 1.0
+            resultAverage < 60 -> 0.0
+            else -> throw IllegalArgumentException("Invalid average value: $resultAverage")
         }
-        if(resultAverage >= 89){
-            return 3.5
-        }
-        if(resultAverage >= 83){
-            return 3.0
-        }
-        if(resultAverage >= 78){
-            return 2.5
-        }
-        if(resultAverage >= 72){
-            return 2.0
-        }
-        if(resultAverage >= 66){
-            return 1.5
-        }
-        if(resultAverage >= 60){
-            return 1.0
-        }
-        // return 0.0 if below 60
-        return 0.0
+
     }
 }
 fun main(){
+    var gradeChecking = GradeChecking()
 //    val grades1:IntArray = intArrayOf(75,80,83,85,90,95,80,91,82,99,100) // <- 11 grades
 //    val grades2:IntArray = intArrayOf(75,80,83,85,90,95,80,91,82,99) // ideal no. of grades (10 grades)
 //    val grades3:IntArray = intArrayOf(75,80,83,85,90,95,80,91,82) // <- only 9 grades
-//    var gradeChecking = GradeChecking()
+
 //
-//    // expected: invalid output exception
+    // expected: invalid input exception
 //    gradeChecking.checkGrades(grades1)
 //
 //    // expected: incomplete grade exception
