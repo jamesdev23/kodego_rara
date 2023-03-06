@@ -29,6 +29,8 @@ fun main(){
     val searchCategory2 = "middlename"
     val name3 = "en"
     val searchCategory3 = "nickname"
+    val name4 = "enzos"
+    val searchCategory4 = "nickname"
 
 
     searchResult = searchStudentWildSearch(searchTerm, students)
@@ -42,6 +44,10 @@ fun main(){
 
     searchResult = searchStudentWildSearch(name3, searchCategory3, students)
     showResult(searchResult)
+
+    searchResult = searchStudentWildSearch(name4, searchCategory4, students)
+    showResult(searchResult)
+
 
 
 }
@@ -60,11 +66,11 @@ fun searchStudentWildSearch(searchTerm:String, studentList: ArrayList<Student>):
             result.add(student)
             found = true
 
-            logger.info { "student: ${student.firstName} ${student.middleName} ${student.lastName} ${student.nickName}" }
+//            logger.info { "student: ${student.firstName} ${student.middleName} ${student.lastName} ${student.nickName}" }
         }
     }
 
-    // if match found, return a list of search result. otherwise, return empty arraylist
+    // returns empty arraylist if nothing found. Otherwise, returns ArrayList of students
     return if(!found) ArrayList() else result
 }
 
@@ -102,19 +108,18 @@ fun searchStudentWildSearch(name: String, searchCategory: String, studentList: A
             }
     }
 
-    // if match found, return a list of search result. otherwise, return empty arraylist
+    // returns empty arraylist if nothing found. Otherwise, returns ArrayList of students
     return if(!found) ArrayList() else result
 }
 
 // function for showing result
 fun showResult(studentList: ArrayList<Student>){
     if(studentList.isEmpty()) {
-        println("Search Result is empty.")
-        println("")
+        println("Search Result: Name not found.")
     }else {
         println("Search Result: ")
         for(student in studentList){
-            print("${student.firstName} ${student.middleName} ${student.lastName} (nickname: ${student.nickName})\n")
+            println("${student.firstName} ${student.middleName} ${student.lastName} (nickname: ${student.nickName})")
         }
         println("")
     }
