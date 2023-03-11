@@ -14,28 +14,36 @@ fun main() {
     print("Enter the 2nd number: ")
     val num2:Int = readLine()!!.toInt()
 
-    findPrimes(num1, num2)
+    var primeList: ArrayList<Int> = ArrayList()
+    primeList = findPrimes(num1,num2)
+
+    primeList.forEach{
+        print(it)
+        print(",")
+    }
 }
 
-fun findPrimes(num1: Int, num2: Int) {
+fun findPrimes(num1: Int, num2: Int): ArrayList<Int> {
+    var result = arrayListOf<Int>()
     if (num1 < 0 || num2 < 0) {
         println("No prime numbers found")
-        return
     }
     val low = min(num1, num2)
     val high = max(num1, num2)
 
     if (low == high && !isPrime(low)) {
         println("No prime numbers found")
-        return
     }
-    val primes = (low..high).filter { isPrime(it) }
 
-    if (primes.isNotEmpty()) {
-        println(primes.joinToString())
-    } else {
-        println("No prime numbers found")
+    for (num in low..high){
+        if(!isPrime(num)){
+            continue
+        }else{
+            result.add(num)
+        }
     }
+
+    return if (result.isEmpty()) { ArrayList() }else{ result }
 }
 
 fun isPrime(num: Int): Boolean {

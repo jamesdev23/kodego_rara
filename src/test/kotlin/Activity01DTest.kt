@@ -2,7 +2,7 @@ import activity_01_d.*
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 
-class MonetaryAppTest {
+internal class MonetaryAppTest {
     @Test
     fun testMonetaryApp() {
         // Set up test input

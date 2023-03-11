@@ -2,7 +2,7 @@ import activity_01_f.*
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 
-class UniqueCharsTest {
+internal class UniqueCharsTest {
 
     @Test
     fun testUniqueChars() {
