@@ -3,8 +3,8 @@ fun main() {
     val amountList = mutableListOf<Double>()
 
     // using for loop for monetary inputs
-    for(index in 0 .. 4) {
-        print("Enter a monetary amount: ")
+    for(index in 1 .. 5) {
+        print("Enter monetary amount #$index: ")
         val amount = readLine()!!.toDouble()
         amountList.add(amount)
     }
