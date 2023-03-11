@@ -8,14 +8,14 @@ class UniqueCharsTest {
     fun testUniqueChars() {
         val string1 = "Bird"
         val string2 = "Cat"
-        assertEquals("birdcat", findUniqueChars(string1, string2))
+        assertEquals("BIRDCAT", findUniqueChars(string1, string2))
 
         val string3 = "Bird"
         val string4 = "BigBird"
-        assertEquals("birdg", findUniqueChars(string3, string4))
+        assertEquals("BIRDG", findUniqueChars(string3, string4))
 
         val string5 = "Eat"
         val string6 = "Tea"
-        assertEquals("tea", findUniqueChars(string5, string6))
+        assertEquals("TEA", findUniqueChars(string5, string6))
     }
 }
