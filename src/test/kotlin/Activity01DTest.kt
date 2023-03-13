@@ -39,22 +39,21 @@ internal class MonetaryAppTest {
 
 
         // test results
+
+        // success
         assertEquals(75.0, result)
-
-        assertEquals(75.0, result2)
         assertEquals(0.0, result2)
-
-        assertEquals(75.0, result3)
         assertEquals( Double.POSITIVE_INFINITY, result3)
-
-        assertEquals(75.0, result4)
         assertEquals(Double.NaN, result4)
-
-        assertEquals(75.0, result5)
         assertEquals(-5.0, result5)
-
-        assertEquals(75.0, result6)
         assertEquals(5_000.0, result6)
+
+        // fail
+        assertEquals(75.0, result2)
+        assertEquals(75.0, result3)
+        assertEquals(75.0, result4)
+        assertEquals(75.0, result5)
+        assertEquals(75.0, result6)
 
     }
 }
