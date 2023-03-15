@@ -7,9 +7,9 @@ package activity_01_f
 
 fun main() {
     print("Enter the first string: ")
-    val string1 = readLine()!!.uppercase()
+    val string1 = readLine()!!.toString()
     print("Enter the second string: ")
-    val string2 = readLine()!!.uppercase()
+    val string2 = readLine()!!.toString()
     println("Unique characters in both strings: ")
     print(findUniqueChars(string1, string2))
 }
