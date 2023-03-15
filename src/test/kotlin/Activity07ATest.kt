@@ -65,30 +65,29 @@ internal class GradeCalTest {
         }
 
         // checking grade result
-        // format: 1st assert = success, 2nd = fail
 
+        // success
         assertEquals(4.0, gradeChecking.getAverage(intArrayOf(94,94,94,94,94,94,94,94,94,94)))
-        assertEquals(3.5, gradeChecking.getAverage(intArrayOf(94,94,95,95,96,96,97,98,99,100)))
-
         assertEquals(3.5, gradeChecking.getAverage(intArrayOf(89,89,89,89,89,89,89,89,89,89)))
-        assertEquals(4.0, gradeChecking.getAverage(intArrayOf(89,89,90,90,91,91,92,92,93,93)))
-
         assertEquals(3.0, gradeChecking.getAverage(intArrayOf(83,83,83,83,83,83,83,83,83,83)))
-        assertEquals(4.0, gradeChecking.getAverage(intArrayOf(83,83,84,84,85,85,86,86,87,88)))
-
         assertEquals(2.5, gradeChecking.getAverage(intArrayOf(78,78,78,78,78,78,78,78,78,78)))
-        assertEquals(4.0, gradeChecking.getAverage(intArrayOf(78,78,77,77,78,78,79,80,81,82)))
-
         assertEquals(2.0, gradeChecking.getAverage(intArrayOf(72,72,72,72,72,72,72,72,72,72)))
-        assertEquals(4.0, gradeChecking.getAverage(intArrayOf(72,72,73,73,74,74,75,75,76,77)))
-
         assertEquals(1.5, gradeChecking.getAverage(intArrayOf(66,66,66,66,66,66,66,66,66,66)))
-        assertEquals(4.0, gradeChecking.getAverage(intArrayOf(66,66,67,67,68,68,69,69,70,71)))
-
         assertEquals(1.0, gradeChecking.getAverage(intArrayOf(60,60,60,60,60,60,60,60,60,60)))
-        assertEquals(4.0, gradeChecking.getAverage(intArrayOf(60,60,61,61,62,62,63,63,64,65)))
-
         assertEquals(0.0, gradeChecking.getAverage(intArrayOf(59,59,59,59,59,59,59,59,59,59)))
+
+        // fail
+        assertEquals(3.5, gradeChecking.getAverage(intArrayOf(94,94,95,95,96,96,97,98,99,100)))
+        assertEquals(4.0, gradeChecking.getAverage(intArrayOf(89,89,90,90,91,91,92,92,93,93)))
+        assertEquals(4.0, gradeChecking.getAverage(intArrayOf(83,83,84,84,85,85,86,86,87,88)))
+        assertEquals(4.0, gradeChecking.getAverage(intArrayOf(78,78,77,77,78,78,79,80,81,82)))
+        assertEquals(4.0, gradeChecking.getAverage(intArrayOf(72,72,73,73,74,74,75,75,76,77)))
+        assertEquals(4.0, gradeChecking.getAverage(intArrayOf(66,66,67,67,68,68,69,69,70,71)))
+        assertEquals(4.0, gradeChecking.getAverage(intArrayOf(60,60,61,61,62,62,63,63,64,65)))
         assertEquals(4.0, gradeChecking.getAverage(intArrayOf(10,20,30,40,50,16,27,38,49,50)))
+
+
+
+
     }
 }
