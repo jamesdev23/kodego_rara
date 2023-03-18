@@ -1,5 +1,6 @@
 package activity_07_c
 
+import activity_06_c.Checkout
 import java.text.DecimalFormat
 import java.util.*
 import kotlin.collections.HashMap
@@ -109,28 +110,24 @@ class Cart(var customer:Customer){
 }
 
 class CartFunction {
-    fun checkAddCart(itemName: String, price: Double, quantity: Float) {
-        if (itemName.isEmpty())
-            throw CartException.EmptyOrNotANumberException.ItemNameIsEmpty()
-        if (price.isNaN())
-            throw CartException.EmptyOrNotANumberException.PriceIsNotANumber()
-        if (quantity.isNaN())
-            throw CartException.EmptyOrNotANumberException.QuantityIsNotANumber()
+    private fun checkAddCart(itemName: String, price: Double, quantity: Float) {
+        when {
+            itemName.isEmpty() -> throw CartException.EmptyOrNotANumberException.ItemNameIsEmpty()
+            price.isNaN() -> throw CartException.EmptyOrNotANumberException.PriceIsNotANumber()
+            quantity.isNaN() -> throw CartException.EmptyOrNotANumberException.QuantityIsNotANumber()
+        }
+
     }
 
-    fun checkCart(itemName: String, price: Double, quantity: Float) {
-        if (price >= 1_000_000.0)
-            throw CartException.QuantityPriceException.PriceExceedsMaxLimit()
-        if (quantity >= 1_000)
-            throw CartException.QuantityPriceException.QuantityExceedsMaxLimit()
-        if (price == 0.0)
-            throw CartException.QuantityPriceException.PriceIsZero()
-        if (price < 0.0)
-            throw CartException.QuantityPriceException.PriceBelowZero()
-        if (quantity == 0.0F)
-            throw CartException.QuantityPriceException.QuantityIsZero()
-        if (quantity < 0.0F)
-            throw CartException.QuantityPriceException.QuantityBelowZero()
+    private fun checkCart(itemName: String, price: Double, quantity: Float) {
+        when {
+            price >= 1_000_000.0 -> throw CartException.QuantityPriceException.PriceExceedsMaxLimit()
+            quantity >= 1_000 -> throw CartException.QuantityPriceException.QuantityExceedsMaxLimit()
+            price == 0.0 -> throw CartException.QuantityPriceException.PriceIsZero()
+            price < 0.0 -> throw CartException.QuantityPriceException.PriceBelowZero()
+            quantity == 0.0F -> throw CartException.QuantityPriceException.QuantityIsZero()
+            quantity < 0.0F -> throw CartException.QuantityPriceException.QuantityBelowZero()
+        }
     }
 
     fun addItemToCart(cart: Cart, grocery: Grocery, quantity: Float) {
@@ -201,19 +198,19 @@ sealed class CartException(message:String) : Exception(message){
 }
 
 fun main(){
-    var customer1 = Customer("James")
-    var cart1 = Cart(customer1)
-    var cartFunction = CartFunction()
-    var item1 = CannedGoods("Spam Regular Luncheon Meat 340g",228.0)
-    var item2 = BreadSpread("Nutella Chocolate Hazelnut Spread 680g",441.0)
-    var item3 = Condiments("Pepper Ground 28g",56.0)
-    var item4 = Poultry("Overpriced Egg",1_000_000.0)
-
-    cartFunction.addItemToCart(cart1,item1,1.0F)
+//    var customer1 = Customer("James")
+//    var cart1 = Cart(customer1)
+//    var cartFunction = CartFunction()
+//    var item1 = CannedGoods("Spam Regular Luncheon Meat 340g",228.0)
+//    var item2 = BreadSpread("Nutella Chocolate Hazelnut Spread 680g",441.0)
+//    var item3 = Condiments("Pepper Ground 28g",56.0)
+//    var item4 = Poultry("Overpriced Egg",1_000_000.0)
+//
+//    cartFunction.addItemToCart(cart1,item1,1.0F)
 //    cartFunction.addItemToCart(cart1,item2,10.0F)
 //    cartFunction.addItemToCart(cart1,item3,5.0F)
 //
 //    cartFunction.removeFromCart(cart1,item3)
 //
-    cartFunction.checkoutCart(cart1)
+//    cartFunction.checkoutCart(cart1)
 }

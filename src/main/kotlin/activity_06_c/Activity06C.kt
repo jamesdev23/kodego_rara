@@ -2,20 +2,15 @@ package activity_06_c
 
 class Checkout{
     fun checkCart(itemName: String, price: Double, quantity: Float) {
-        if (itemName.isEmpty())
-            throw CartException.EmptyException.ItemNameIsEmpty()
-        if (price >= 1_000_000.0)
-            throw CartException.QuantityPriceException.PriceExceedsMaxLimit()
-        if (quantity >= 1_000)
-            throw CartException.QuantityPriceException.QuantityExceedsMaxLimit()
-        if (price == 0.0)
-            throw CartException.QuantityPriceException.PriceIsZero()
-        if (price < 0.0)
-            throw CartException.QuantityPriceException.PriceBelowZero()
-        if (quantity == 0.0F)
-            throw CartException.QuantityPriceException.QuantityIsZero()
-        if (quantity < 0.0F)
-            throw CartException.QuantityPriceException.QuantityBelowZero()
+        when {
+            itemName.isEmpty() -> throw CartException.EmptyException.ItemNameIsEmpty()
+            price >= 1_000_000.0 -> throw CartException.QuantityPriceException.PriceExceedsMaxLimit()
+            quantity >= 1_000 -> throw CartException.QuantityPriceException.QuantityExceedsMaxLimit()
+            price == 0.0 -> throw CartException.QuantityPriceException.PriceIsZero()
+            price < 0.0 -> throw CartException.QuantityPriceException.PriceBelowZero()
+            quantity == 0.0F -> throw CartException.QuantityPriceException.QuantityIsZero()
+            quantity < 0.0F -> throw CartException.QuantityPriceException.QuantityBelowZero()
+        }
     }
 }
 
