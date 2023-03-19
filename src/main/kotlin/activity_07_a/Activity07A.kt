@@ -82,7 +82,6 @@ fun getAverage(gradeList:IntArray): Double {
 sealed class GradesException(message:String): Exception(message) {
     class InvalidInputException(message: String = "Invalid Input"): GradesException(message)
     class IncompleteGradeException(message: String = "Incomplete Grades"): GradesException(message)
-    class GradeOutOfRangeException(message: String = "Grades are not within 0 to 100 range"): GradesException(message)
 }
 
 fun main(){
