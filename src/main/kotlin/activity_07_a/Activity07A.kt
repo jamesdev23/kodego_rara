@@ -77,7 +77,7 @@ fun getAverage(gradeList:IntArray): Double {
     }
 }
 
-// exceptions from act6a and act7a
+// exceptions from activity 6A and 7A
 
 sealed class GradesException(message:String): Exception(message) {
     class InvalidInputException(message: String = "Invalid Input"): GradesException(message)
