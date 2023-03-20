@@ -2,7 +2,7 @@ import activity_01_h.*
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 
-internal class PrimeNumbers{
+internal class FindPrimeNumbersTest{
     @Test
     fun checkPrimeNumbersResult() {
         val expected1: ArrayList<Int> = arrayListOf(1,2,3,5,7)
