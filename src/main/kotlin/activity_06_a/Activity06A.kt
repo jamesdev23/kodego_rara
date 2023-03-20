@@ -1,5 +1,7 @@
 package activity_06_a
 
+// updated 3/20/23
+
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -13,32 +15,35 @@ open class Student(firstname: String,middlename: String,lastname: String) : Pers
     var id:String = ""
 }
 
-class CertificateStudent{
+class CertificateStudent(firstname: String,middlename: String,lastname: String):Student(firstname, middlename, lastname){
     var courseTaken:ArrayList<String> = ArrayList()
 }
 
-class UnderGraduateStudent{
-    var collegeList:ArrayList<String> = ArrayList()
-    var yearJoined:String = ""
-    var degreeTaken:String = ""
-    var degreeStart:String = ""
-    var yearOfDegree:Int = 0
+class UnderGraduateStudent(firstname: String,middlename: String,lastname: String):Student(firstname, middlename, lastname){
+    var collegeList: ArrayList<String> = ArrayList()
+    var yearJoined: String = ""
+    var degreeTakenList: ArrayList<String> = ArrayList()
+    var degreeStart: Int = 2020 // Int type because value is only a year instead of whole date (month/day/year)
+    var degreeYears: Int = 0
+    var degreeEnd: Int = 0
     var studentStatus = StudentStatus.UNKNOWN
-
-    fun collegeDegreeEnd(studentStatus:StudentStatus){
-        if(studentStatus == StudentStatus.GRADUATED){
-            var degreeEnd:String = ""
-        }
-    }
 }
 
-class MasterStudent{
+fun checkUndergradStudentCourse(undergradStudent: UnderGraduateStudent): Int {
+    var newDegreeEnd = 0
+    if(undergradStudent.studentStatus == StudentStatus.GRADUATED){
+        newDegreeEnd = undergradStudent.degreeStart + undergradStudent.degreeYears
+    }
+    return newDegreeEnd
+}
+
+class MasterStudent(firstname: String,middlename: String,lastname: String):Student(firstname, middlename, lastname){
     var collegeList:ArrayList<String> = ArrayList()
     var yearJoined:String = ""
     var masterDegreeTaken:String = ""
 }
 
-class GraduateStudent {
+class GraduateStudent(firstname: String,middlename: String,lastname: String):Student(firstname, middlename, lastname){
     var collegeList:ArrayList<String> = ArrayList()
     var yearJoined:String = ""
     var graduateDegreeTaken:String = ""

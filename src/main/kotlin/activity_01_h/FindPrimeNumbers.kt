@@ -22,11 +22,12 @@ fun main() {
 }
 
 fun findPrimes(num1: Int, num2: Int): ArrayList<Int> {
-    var result: ArrayList<Int> = ArrayList()
+    val result: ArrayList<Int> = ArrayList()
 
     if (num1 < 0 || num2 < 0) {
         println("No prime numbers found")
     }
+
     val low = min(num1, num2)
     val high = max(num1, num2)
 
