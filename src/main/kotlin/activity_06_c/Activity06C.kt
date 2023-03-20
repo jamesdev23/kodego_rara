@@ -1,16 +1,14 @@
 package activity_06_c
 
-class Checkout{
-    fun checkCart(itemName: String, price: Double, quantity: Float) {
-        when {
-            itemName.isEmpty() -> throw CartException.EmptyException.ItemNameIsEmpty()
-            price >= 1_000_000.0 -> throw CartException.QuantityPriceException.PriceExceedsMaxLimit()
-            quantity >= 1_000 -> throw CartException.QuantityPriceException.QuantityExceedsMaxLimit()
-            price == 0.0 -> throw CartException.QuantityPriceException.PriceIsZero()
-            price < 0.0 -> throw CartException.QuantityPriceException.PriceBelowZero()
-            quantity == 0.0F -> throw CartException.QuantityPriceException.QuantityIsZero()
-            quantity < 0.0F -> throw CartException.QuantityPriceException.QuantityBelowZero()
-        }
+fun checkCart(itemName: String, price: Double, quantity: Float) {
+    when {
+        itemName.isEmpty() -> throw CartException.EmptyException.ItemNameIsEmpty()
+        price >= 1_000_000.0 -> throw CartException.QuantityPriceException.PriceExceedsMaxLimit()
+        quantity >= 1_000 -> throw CartException.QuantityPriceException.QuantityExceedsMaxLimit()
+        price == 0.0 -> throw CartException.QuantityPriceException.PriceIsZero()
+        price < 0.0 -> throw CartException.QuantityPriceException.PriceBelowZero()
+        quantity == 0.0F -> throw CartException.QuantityPriceException.QuantityIsZero()
+        quantity < 0.0F -> throw CartException.QuantityPriceException.QuantityBelowZero()
     }
 }
 
@@ -29,13 +27,12 @@ sealed class CartException(message:String) : Exception(message){
 }
 
 fun main(){
-    val checkout = Checkout()
-    checkout.checkCart("",100.0,1.0F)
-    checkout.checkCart("Overpriced Item",1_000_000.0,1.0F)
-    checkout.checkCart("1000+ items",100.0,1_000.0F)
-    checkout.checkCart("Item w/ no price",0.0,10.0F)
-    checkout.checkCart("Item w/ no quantity",100.0,0.0F)
-    checkout.checkCart("negative price",-100.0,10.0F)
-    checkout.checkCart("negative quantity",100.0,-10.0F)
+    checkCart("",100.0,1.0F)
+    checkCart("Overpriced Item",1_000_000.0,1.0F)
+    checkCart("1000+ items",100.0,1_000.0F)
+    checkCart("Item w/ no price",0.0,10.0F)
+    checkCart("Item w/ no quantity",100.0,0.0F)
+    checkCart("negative price",-100.0,10.0F)
+    checkCart("negative quantity",100.0,-10.0F)
 
 }

@@ -6,32 +6,36 @@ import kotlin.test.assertEquals
 // updated: 3/6/23
 
 internal class GradeCheckingTest {
-
     @Test
     fun checkThrowsAndGrades() {
+        // success test case for InvalidInputException
         assertThrows<GradesException.InvalidInputException> {
-            // expected result: success
-            checkGrades(intArrayOf(81,82,83,84,85,86,87,88,89,100,91))    // size = 11
-            checkGrades(intArrayOf(81,82,83,84,85,86,87,88,89,100,91,88,82,90,90,90,90))    // size = 17
-
-            // expected result: fail
-            checkGrades(intArrayOf(81))   // size = 1
-            checkGrades(intArrayOf())   // size = 0
+            checkGrades(intArrayOf(81, 82, 83, 84, 85, 86, 87, 88, 89, 100, 91))    // size = 11
+            checkGrades(intArrayOf(81, 82, 83, 84, 85, 86, 87, 88, 89, 100, 91, 88, 82, 90, 90, 90, 90))    // size = 17
         }
 
+        // fail test case for InvalidInputException
+        assertThrows<GradesException.InvalidInputException> {
+            checkGrades(intArrayOf(81, 82, 83, 84, 85, 86, 87, 88, 100, 0))    // lowest grade is 0
+            checkGrades(intArrayOf(0, 0, 0, 0, 0, 0, 0, 0, 0, 0))    // lowest grade is 0
+        }
+
+        // success test case for IncompleteGradeException
         assertThrows<GradesException.IncompleteGradeException> {
-            // expected result: success
-            checkGrades(intArrayOf(81,82,83,84,85,86,87,88,100,0))    // lowest grade is 0
-            checkGrades(intArrayOf(0,0,0,0,0,0,0,0,0,0))    // lowest grade is 0
-
-            // expected result: fail
-            checkGrades(intArrayOf(81,82,83,84,85,86,87,88,89,100,91))    // size = 11
-            checkGrades(intArrayOf(81,82,83,84,85,86,87,88,89,100,91,88,82,90,90,90,90))    // size = 17
+            checkGrades(intArrayOf(81, 82, 83, 84, 85, 86, 87, 88, 100, 0))    // lowest grade is 0
+            checkGrades(intArrayOf(0, 0, 0, 0, 0, 0, 0, 0, 0, 0))    // lowest grade is 0
         }
+
+        // fail test case for IncompleteGradeException
+        assertThrows<GradesException.IncompleteGradeException> {
+            checkGrades(intArrayOf(81, 82, 83, 84, 85, 86, 87, 88, 89, 100, 91))    // size = 11
+            checkGrades(intArrayOf(81, 82, 83, 84, 85, 86, 87, 88, 89, 100, 91, 88, 82, 90, 90, 90, 90))    // size = 17
+        }
+
 
         // checking grade result
 
-        // success
+        // success test cases
         assertEquals(4.0, getAverage(intArrayOf(94,94,94,94,94,94,94,94,94,94)))
         assertEquals(3.5, getAverage(intArrayOf(89,89,89,89,89,89,89,89,89,89)))
         assertEquals(3.0, getAverage(intArrayOf(83,83,83,83,83,83,83,83,83,83)))
@@ -41,7 +45,7 @@ internal class GradeCheckingTest {
         assertEquals(1.0, getAverage(intArrayOf(60,60,60,60,60,60,60,60,60,60)))
         assertEquals(0.0, getAverage(intArrayOf(59,59,59,59,59,59,59,59,59,59)))
 
-        // fail
+        // fail test cases
         assertEquals(3.5, getAverage(intArrayOf(94,94,95,95,96,96,97,98,99,100)))
         assertEquals(4.0, getAverage(intArrayOf(89,89,90,90,91,91,92,92,93,93)))
         assertEquals(4.0, getAverage(intArrayOf(83,83,84,84,85,85,86,86,87,88)))

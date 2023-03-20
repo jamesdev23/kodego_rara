@@ -83,31 +83,33 @@ class Library{
 
     var borrowedItem:HashMap<User,Book> = HashMap()
 
-    fun borrowItem(user:User,book:Book){
-        val reserved = bookList.getValue(book.title) == "Reserved"
-        val forInternalUse = bookList.getValue(book.title) == "Internal Use"
-        val forFixing = bookList.getValue(book.title) == "For Fixing"
+}
 
-        when {
-            user.borrowCount >= 5 ->
-                throw LibraryException.UserException.UserHas5orMoreItems()
+private fun acceptAndBorrowItem(user: User, book: Book){
+    val library = Library()
+    val reserved = library.bookList.getValue(book.title) == "Reserved"
+    val forInternalUse = library.bookList.getValue(book.title) == "Internal Use"
+    val forFixing = library.bookList.getValue(book.title) == "For Fixing"
 
-            user.unpaidDues > 0.0 ->
-                throw LibraryException.UserException.UserHasUnpaidDues()
+    when {
+        user.borrowCount >= 5 ->
+            throw LibraryException.UserException.UserHas5orMoreItems()
 
-            reserved ->
-                throw LibraryException.ItemException.ItemIsReserved()
+        user.unpaidDues > 0.0 ->
+            throw LibraryException.UserException.UserHasUnpaidDues()
 
-            forInternalUse ->
-                throw LibraryException.ItemException.ItemIsForInternalUse()
+        reserved ->
+            throw LibraryException.ItemException.ItemIsReserved()
 
-            forFixing ->
-                throw LibraryException.ItemException.ItemIsForFixing()
-        }
+        forInternalUse ->
+            throw LibraryException.ItemException.ItemIsForInternalUse()
 
-        borrowedItem[user] = book
-        ++user.borrowCount
+        forFixing ->
+            throw LibraryException.ItemException.ItemIsForFixing()
     }
+
+    library.borrowedItem[user] = book
+    ++user.borrowCount
 
 }
 
@@ -140,20 +142,20 @@ fun main() {
 
     // user 5 or more borrowed items exception
     user1.borrowCount = 5
-    library.borrowItem(user1,book1)
+    acceptAndBorrowItem(user1,book1)
 
     // unpaid dues exception
     user1.unpaidDues = 500.0
-    library.borrowItem(user1,book1)
+    acceptAndBorrowItem(user1,book1)
 
     // "reserved" exception
-    library.borrowItem(user1,book2)
+    acceptAndBorrowItem(user1,book2)
 
     // "internal use" exception
-    library.borrowItem(user1,book3)
+    acceptAndBorrowItem(user1,book3)
 
     // "for fixing" exception
-    library.borrowItem(user1,book4)
+    acceptAndBorrowItem(user1,book4)
 
 }
 

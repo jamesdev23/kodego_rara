@@ -2,7 +2,7 @@ import activity_07_b.*
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 
-internal class LibraryTest {
+internal class AcceptAndacceptAndBorrowItemTest {
     private val library: Library = Library()
 
     val user1 = User("user1")
@@ -12,60 +12,97 @@ internal class LibraryTest {
     val book3 = Book("Book 3")
     val book4 = Book("Book 4")
 
-    val bookAvailable = book1
-    val bookReserved = book2
-    val bookForInteralUse = book3
-    val bookForFixing = book4
+    val available = book1
+    val reserved = book2
+    val forInteralUse = book3
+    val forFixing = book4
 
     @Test
-    fun borrowItem() {
-
+    fun acceptAndBorrowItem() {
+        // expected: success
         assertThrows<LibraryException.UserException.UserHas5orMoreItems> {
-            // expected: success
-            user1.borrowCount = 5
-            library.borrowItem(user1, bookAvailable)
+            user1.borrowCount = 10
+            user2.borrowCount = 20
 
-            // expected: fail
-            user1.borrowCount = 1
-            library.borrowItem(user1, bookAvailable)
+            acceptAndBorrowItem(user1, available)
+            acceptAndBorrowItem(user2, available)
         }
 
-        assertThrows<LibraryException.UserException.UserHasUnpaidDues> {
-            // expected: success
+        // expected: fail
+        assertThrows<LibraryException.UserException.UserHas5orMoreItems> {
             user1.borrowCount = 0
             user1.unpaidDues = 500.0
-            library.borrowItem(user1,bookAvailable)
+            user2.borrowCount = 0
+            user2.unpaidDues = 1_000.0
 
-            // expected: fail
+            acceptAndBorrowItem(user1, available)
+            acceptAndBorrowItem(user2, available)
+        }
+
+        // expected: success
+        assertThrows<LibraryException.UserException.UserHasUnpaidDues> {
             user1.borrowCount = 0
-            user1.unpaidDues = 0.0
-            library.borrowItem(user1,bookAvailable)
+            user1.unpaidDues = 500.0
+            user2.borrowCount = 0
+            user2.unpaidDues = 1_000.0
 
-
+            acceptAndBorrowItem(user1, available)
+            acceptAndBorrowItem(user2, available)
         }
 
+        // expected: fail
+        assertThrows<LibraryException.UserException.UserHasUnpaidDues> {
+            user1.borrowCount = 10
+            user2.borrowCount = 20
+
+            acceptAndBorrowItem(user1, available)
+            acceptAndBorrowItem(user2, available)
+        }
+
+
+        // expected: success
         assertThrows<LibraryException.ItemException.ItemIsReserved> {
-            // expected: success
-            library.borrowItem(user2,bookReserved)
-
-            // expected: fail
-            library.borrowItem(user2,book1)
+            acceptAndBorrowItem(user1, reserved)
+            acceptAndBorrowItem(user2, reserved)
         }
 
+        // expected: fail
+        assertThrows<LibraryException.ItemException.ItemIsReserved> {
+            user1.borrowCount = 10
+            user2.borrowCount = 20
+
+            acceptAndBorrowItem(user1, available)
+            acceptAndBorrowItem(user2, available)
+        }
+
+        // expected: success
         assertThrows<LibraryException.ItemException.ItemIsForInternalUse> {
-            // expected: success
-            library.borrowItem(user2,bookForInteralUse)
-
-            // expected: fail
-            library.borrowItem(user2,book2)
+            acceptAndBorrowItem(user1, forInteralUse)
+            acceptAndBorrowItem(user2, forInteralUse)
         }
 
-        assertThrows<LibraryException.ItemException.ItemIsForFixing> {
-            // expected: success
-            library.borrowItem(user2,bookForFixing)
+        // expected: fail
+        assertThrows<LibraryException.ItemException.ItemIsForInternalUse> {
+            user1.borrowCount = 10
+            user2.borrowCount = 20
 
-            // expected: fail
-            library.borrowItem(user2,book3)
+            acceptAndBorrowItem(user1, available)
+            acceptAndBorrowItem(user2, available)
+        }
+
+        // expected: success
+        assertThrows<LibraryException.ItemException.ItemIsForFixing> {
+            acceptAndBorrowItem(user1, forFixing)
+            acceptAndBorrowItem(user2, forFixing)
+        }
+
+        // expected: fail
+        assertThrows<LibraryException.ItemException.ItemIsForFixing> {
+            user1.borrowCount = 10
+            user2.borrowCount = 20
+
+            acceptAndBorrowItem(user1, available)
+            acceptAndBorrowItem(user2, available)
         }
 
     }

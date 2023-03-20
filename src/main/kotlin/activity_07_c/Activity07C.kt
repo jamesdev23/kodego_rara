@@ -1,6 +1,5 @@
 package activity_07_c
 
-import activity_06_c.Checkout
 import java.text.DecimalFormat
 import java.util.*
 import kotlin.collections.HashMap
@@ -100,85 +99,84 @@ class Vegetables(name:String, price:Double): Grocery(name, price) {
 }
 data class Customer(var name:String)
 
-class Cart(var customer:Customer){
+class Cart(var customer:Customer) {
     var uniqueID = ""
-    var items:HashMap<Grocery,Float> = HashMap()
+    var items: HashMap<Grocery, Float> = HashMap()
 
-    fun addItems(grocery:Grocery,quantity:Float){
+    fun addItems(grocery: Grocery, quantity: Float) {
         items[grocery] = quantity
     }
 }
 
-class CartFunction {
-    private fun checkAddCart(itemName: String, price: Double, quantity: Float) {
-        when {
-            itemName.isEmpty() -> throw CartException.EmptyOrNotANumberException.ItemNameIsEmpty()
-            price.isNaN() -> throw CartException.EmptyOrNotANumberException.PriceIsNotANumber()
-            quantity.isNaN() -> throw CartException.EmptyOrNotANumberException.QuantityIsNotANumber()
-        }
-
+// cart functions
+fun checkAddCart(itemName: String, price: Double, quantity: Float) {
+    when {
+        itemName.isEmpty() -> throw CartException.EmptyOrNotANumberException.ItemNameIsEmpty()
+        price.isNaN() -> throw CartException.EmptyOrNotANumberException.PriceIsNotANumber()
+        quantity.isNaN() -> throw CartException.EmptyOrNotANumberException.QuantityIsNotANumber()
     }
 
-    private fun checkCart(itemName: String, price: Double, quantity: Float) {
-        when {
-            price >= 1_000_000.0 -> throw CartException.QuantityPriceException.PriceExceedsMaxLimit()
-            quantity >= 1_000 -> throw CartException.QuantityPriceException.QuantityExceedsMaxLimit()
-            price == 0.0 -> throw CartException.QuantityPriceException.PriceIsZero()
-            price < 0.0 -> throw CartException.QuantityPriceException.PriceBelowZero()
-            quantity == 0.0F -> throw CartException.QuantityPriceException.QuantityIsZero()
-            quantity < 0.0F -> throw CartException.QuantityPriceException.QuantityBelowZero()
-        }
+}
+
+fun checkCart(itemName: String, price: Double, quantity: Float) {
+    when {
+        price >= 1_000_000.0 -> throw CartException.QuantityPriceException.PriceExceedsMaxLimit()
+        quantity >= 1_000 -> throw CartException.QuantityPriceException.QuantityExceedsMaxLimit()
+        price == 0.0 -> throw CartException.QuantityPriceException.PriceIsZero()
+        price < 0.0 -> throw CartException.QuantityPriceException.PriceBelowZero()
+        quantity == 0.0F -> throw CartException.QuantityPriceException.QuantityIsZero()
+        quantity < 0.0F -> throw CartException.QuantityPriceException.QuantityBelowZero()
     }
+}
 
-    fun addItemToCart(cart: Cart, grocery: Grocery, quantity: Float) {
-        // checks cart
-        checkAddCart(grocery.name,grocery.price,quantity)
+fun addItemToCart(cart: Cart, grocery: Grocery, quantity: Float) {
+    // checks cart
+    checkAddCart(grocery.name,grocery.price,quantity)
 
-        if(cart.items.containsKey(grocery)){
-            var newQuantity = cart.items.getValue(grocery) + quantity
-            cart.addItems(grocery, newQuantity)
-        }else {
-            cart.addItems(grocery, quantity)
-        }
-        println("Added ${grocery.name} (Qty: ${quantity.toInt()}) to cart.")
+    if(cart.items.containsKey(grocery)){
+        var newQuantity = cart.items.getValue(grocery) + quantity
+        cart.addItems(grocery, newQuantity)
+    }else {
+        cart.addItems(grocery, quantity)
     }
+    println("Added ${grocery.name} (Qty: ${quantity.toInt()}) to cart.")
+}
 
-    fun removeFromCart(cart: Cart, grocery: Grocery) {
-        // removes said item and its duplicate
-        if (cart.items.containsKey(grocery)) {
-            cart.items.remove(grocery)
-        }
-        println("Removed ${grocery.name} to cart.")
+fun removeFromCart(cart: Cart, grocery: Grocery) {
+    // removes said item and its duplicate
+    if (cart.items.containsKey(grocery)) {
+        cart.items.remove(grocery)
     }
+    println("Removed ${grocery.name} to cart.")
+}
 
-    fun checkoutCart(cart: Cart) {
-        var itemCost:Double
-        val totalCost:Double
-        val itemCostList:ArrayList<Double> = ArrayList()
-        val separator = CharArray(60) { '-' }
+fun checkoutCart(cart: Cart) {
+    var itemCost:Double
+    val totalCost:Double
+    val itemCostList:ArrayList<Double> = ArrayList()
+    val separator = CharArray(60) { '-' }
 
-        // checks cart and calculate total cost
-        for(items in cart.items.entries){
-            checkCart(items.key.name,items.key.price,items.value)
-            itemCost = items.key.price * items.value
-            itemCostList.add(itemCost)
-        }
-        totalCost = itemCostList.sum()
-
-        // print cart items
-        println(separator)
-        cart.items.forEach {
-            println("${it.key.name} | Qty: ${it.value.toInt()} | ₱ ${priceFormat(it.key.price)} | Cost: ₱ ${priceFormat((it.key.price) * it.value)}")
-        }
-        println(separator)
-
-        print("Total Cost: ₱ ${priceFormat(totalCost)} ")
+    // checks cart and calculate total cost
+    for(items in cart.items.entries){
+        checkCart(items.key.name,items.key.price,items.value)
+        itemCost = items.key.price * items.value
+        itemCostList.add(itemCost)
     }
+    totalCost = itemCostList.sum()
 
-    fun priceFormat(number:Double): String{
-        val decimalFormat = DecimalFormat("#,###.00")
-        return decimalFormat.format(number)
+    // print cart items
+    println(separator)
+    cart.items.forEach {
+        println("${it.key.name} | Qty: ${it.value.toInt()} | ₱ ${priceFormat(it.key.price)} | Cost: ₱ ${priceFormat((it.key.price) * it.value)}")
     }
+    println(separator)
+
+    print("Total Cost: ₱ ${priceFormat(totalCost)} ")
+}
+
+fun priceFormat(number:Double): String{
+    val decimalFormat = DecimalFormat("#,###.00")
+    return decimalFormat.format(number)
 }
 
 sealed class CartException(message:String) : Exception(message){
@@ -198,19 +196,18 @@ sealed class CartException(message:String) : Exception(message){
 }
 
 fun main(){
-//    var customer1 = Customer("James")
-//    var cart1 = Cart(customer1)
-//    var cartFunction = CartFunction()
-//    var item1 = CannedGoods("Spam Regular Luncheon Meat 340g",228.0)
-//    var item2 = BreadSpread("Nutella Chocolate Hazelnut Spread 680g",441.0)
-//    var item3 = Condiments("Pepper Ground 28g",56.0)
-//    var item4 = Poultry("Overpriced Egg",1_000_000.0)
-//
-//    cartFunction.addItemToCart(cart1,item1,1.0F)
-//    cartFunction.addItemToCart(cart1,item2,10.0F)
-//    cartFunction.addItemToCart(cart1,item3,5.0F)
-//
-//    cartFunction.removeFromCart(cart1,item3)
-//
-//    cartFunction.checkoutCart(cart1)
+    var customer1 = Customer("James")
+    var cart1 = Cart(customer1)
+    var item1 = CannedGoods("Spam Regular Luncheon Meat 340g",228.0)
+    var item2 = BreadSpread("Nutella Chocolate Hazelnut Spread 680g",441.0)
+    var item3 = Condiments("Pepper Ground 28g",56.0)
+    var item4 = Poultry("Overpriced Egg",1_000_000.0)
+
+    addItemToCart(cart1,item1,1.0F)
+    addItemToCart(cart1,item2,10.0F)
+    addItemToCart(cart1,item3,5.0F)
+
+    removeFromCart(cart1,item3)
+
+    checkoutCart(cart1)
 }

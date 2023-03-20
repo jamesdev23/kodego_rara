@@ -72,7 +72,6 @@ data class User(var name:String){
 }
 
 class Library{
-
     // book list w/ Status (Available/Reserved/Internal Use/For Fixing)
     var bookList:HashMap<String,String> = hashMapOf(
         "Book 1" to "Available",
@@ -82,32 +81,33 @@ class Library{
     )
 
     var borrowedItem:HashMap<User,Book> = HashMap()
+}
 
-    fun borrowItem(user:User,book:Book){
-        val reserved = bookList.getValue(book.title) == "Reserved"
-        val forInternalUse = bookList.getValue(book.title) == "Internal Use"
-        val forFixing = bookList.getValue(book.title) == "For Fixing"
+fun acceptAndBorrowItem(user:User,book:Book){
+    val library = Library()
+    val reserved = library.bookList.getValue(book.title) == "Reserved"
+    val forInternalUse = library.bookList.getValue(book.title) == "Internal Use"
+    val forFixing = library.bookList.getValue(book.title) == "For Fixing"
 
-        when {
-            user.borrowCount >= 5 ->
-                throw LibraryException.UserException.UserHas5orMoreItems()
+    when {
+        user.borrowCount >= 5 ->
+            throw LibraryException.UserException.UserHas5orMoreItems()
 
-            user.unpaidDues > 0.0 ->
-                throw LibraryException.UserException.UserHasUnpaidDues()
+        user.unpaidDues > 0.0 ->
+            throw LibraryException.UserException.UserHasUnpaidDues()
 
-            reserved ->
-                throw LibraryException.ItemException.ItemIsReserved()
+        reserved ->
+            throw LibraryException.ItemException.ItemIsReserved()
 
-            forInternalUse ->
-                throw LibraryException.ItemException.ItemIsForInternalUse()
+        forInternalUse ->
+            throw LibraryException.ItemException.ItemIsForInternalUse()
 
-            forFixing ->
-                throw LibraryException.ItemException.ItemIsForFixing()
-        }
-
-        borrowedItem[user] = book
-        ++user.borrowCount
+        forFixing ->
+            throw LibraryException.ItemException.ItemIsForFixing()
     }
+
+    library.borrowedItem[user] = book
+    ++user.borrowCount
 
 }
 
