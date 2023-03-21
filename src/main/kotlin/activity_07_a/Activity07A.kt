@@ -63,7 +63,7 @@ fun checkGrades(grades:IntArray){
     when {
         grades.size > 10 ->
             throw GradesException.InvalidInputException()
-        grades.contains(0) ->
+        grades.min() == 0 ->
             throw GradesException.IncompleteGradeException()
     }
 }
