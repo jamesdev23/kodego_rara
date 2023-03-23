@@ -1,20 +1,12 @@
 package activity_02_c
 
-import java.time.LocalDate
-
-// activity 01_c w/ data structure
-// desc: automate inventory system for grocery. identify item. after listing, identify characteristic, group item by category
-
 fun main(){
-    // from act01_c
     var groceryItemList = ArrayList<String>()
-    // item characteristic
     var itemName: String? = null
     var isPerishable: Boolean = false
     var itemOnSaleTotal: Int = 0
     var ItemSoldTotal: Int = 0
 
-    // var for this act
     var itemCount: Int = 0
     var itemCategory: String = ""
     var itemColor: String = ""
@@ -23,7 +15,6 @@ fun main(){
     var groceryItemCharacteristic = ArrayList<String>()
     var itemColumn = arrayListOf("Name","Count","Color","SKU")
     var optionsInput:String? = null
-    var addGrocery = true
     var itemPerishable = ArrayList<String>()
     var itemNonperishable = ArrayList<String>()
     var count = 0
@@ -36,7 +27,7 @@ fun main(){
     println("- Add Grocery Item Info")
     println("- Check Grocery Item List")
 
-    while(addGrocery) {
+    while(true) {
         println("Enter item name: ")
         itemName = readLine().toString()
         println("Enter item category (perishable/nonperishable): ")
@@ -59,7 +50,7 @@ fun main(){
         println("Do you want to add another grocery item? (Y/N): ")
         optionsInput = readLine().toString()
         if(optionsInput == "N" || optionsInput == "n"){
-            addGrocery = false
+            break
         }
     }
 

@@ -1,8 +1,6 @@
 package activity_03_a
 
-// make array of 20 names. make functions according to instruction
-
-private val nameList:ArrayList<String> = arrayListOf("Marco","Eugene","Sarah","Isaiah","Anthony","Henry","Elizabeth","Olivia",
+private val studentNameList:ArrayList<String> = arrayListOf("Marco","Eugene","Sarah","Isaiah","Anthony","Henry","Elizabeth","Olivia",
     "Sara","Maria","Mary","Christopher","Andrew","Daniel","Matthew","Michael","Nicholas","James","Brian","Ryan")
 
 
@@ -69,22 +67,22 @@ fun main(){
     }
 }
 
-fun isStudentInRecord(name: String,list: ArrayList<String> = nameList): Boolean {
-    return list.contains(name)
+fun isStudentInRecord(name: String): Boolean {
+    return studentNameList.contains(name)
 }
 
-fun addStudent(name: String,list: ArrayList<String> = nameList){
-    list.add(name)
+fun addStudent(name: String){
+    studentNameList.add(name)
     println("Added $name to list.")
 }
 
-fun removeStudent(name: String,list: ArrayList<String> = nameList){
-    list.remove(name)
+fun removeStudent(name: String){
+    studentNameList.remove(name)
     println("Removed $name to list.")
 }
 
-fun countStudent(list: ArrayList<String> = nameList): Int{
-    return list.size
+fun countStudent(): Int{
+    return studentNameList.size
 }
 
 fun searchStudent(name: String){
@@ -96,24 +94,24 @@ fun searchStudent(name: String){
 }
 
 fun searchStudentWildSearch(name: String){
-    for(index in nameList.indices){
-        if(nameList[index].contains(name,ignoreCase = true)){
-            println(nameList[index])
+    for(index in studentNameList.indices){
+        if(studentNameList[index].contains(name,ignoreCase = true)){
+            println(studentNameList[index])
         }
     }
 }
 
 fun searchStudentName(name: String){
-    for(index in nameList.indices){
-        if(nameList[index].equals(name,ignoreCase = true)){
-            println(nameList[index])
+    for(index in studentNameList.indices){
+        if(studentNameList[index].equals(name,ignoreCase = true)){
+            println(studentNameList[index])
         }
     }
 }
 
 
-fun showStudents(list: ArrayList<String> = nameList){
-    list.forEach {
+fun showStudents(){
+    studentNameList.forEach {
         println(it)
     }
 }

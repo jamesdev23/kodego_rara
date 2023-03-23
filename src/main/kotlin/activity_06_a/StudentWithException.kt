@@ -1,7 +1,5 @@
 package activity_06_a
 
-// updated 3/20/23
-
 import java.util.*
 import kotlin.collections.ArrayList
 

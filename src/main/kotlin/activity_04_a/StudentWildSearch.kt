@@ -1,8 +1,5 @@
 package activity_04_a
 
-// Student search using string and result is using Student class.
-// Also, another search function that will ask either first/last/nickname.
-
 import mu.KotlinLogging
 val logger = KotlinLogging.logger {  }
 
@@ -11,16 +8,17 @@ class Student (var firstName:String, var middleName:String, var lastName:String,
     var yearEnrolled:String = ""
 }
 
+private var studentList: ArrayList<Student> = arrayListOf(
+    Student("James","Nico","Rara","James"),
+    Student("Enzo", "Lynch", "Sierra","Enzo"),
+    Student("Alana","Robinson","Kosma","Lana"),
+    Student("Kenny","Hicks","Isa","Ken")
+)
 
 fun main(){
     var searchResult: ArrayList<Student> = ArrayList()
 
-    val students: ArrayList<Student> = arrayListOf(
-        Student("James","Nico","Rara","James"),
-        Student("Enzo", "Lynch", "Sierra","Enzo"),
-        Student("Alana","Robinson","Kosma","Lana"),
-        Student("Kenny","Hicks","Isa","Ken")
-    )
+
     val searchTerm = "jam"
 
     val name1 = "ra"
@@ -33,31 +31,30 @@ fun main(){
     val searchCategory4 = "nickname"
 
 
-    searchResult = searchStudentWildSearch(searchTerm, students)
+    searchResult = searchStudentWildSearch(searchTerm)
     showResult(searchResult)
 
-    searchResult = searchStudentWildSearch(name1, searchCategory1, students)
+    searchResult = searchStudentWildSearch(name1, searchCategory1)
     showResult(searchResult)
 
-    searchResult = searchStudentWildSearch(name2, searchCategory2, students)
+    searchResult = searchStudentWildSearch(name2, searchCategory2)
     showResult(searchResult)
 
-    searchResult = searchStudentWildSearch(name3, searchCategory3, students)
+    searchResult = searchStudentWildSearch(name3, searchCategory3)
     showResult(searchResult)
 
-    searchResult = searchStudentWildSearch(name4, searchCategory4, students)
+    searchResult = searchStudentWildSearch(name4, searchCategory4)
     showResult(searchResult)
 
 
 
 }
-fun searchStudentWildSearch(searchTerm:String, studentList: ArrayList<Student>): ArrayList<Student>{
+fun searchStudentWildSearch(searchTerm:String): ArrayList<Student>{
     val result:ArrayList<Student> = ArrayList()
     var found = false
 
     println("Search name: $searchTerm")
 
-    // searches student name from student list (lastname/middlename/firstname). if found, returns arraylist of students. if not, returns empty arraylist
     for(student in studentList){
         if(student.lastName.contains(searchTerm, ignoreCase = true) ||
             student.middleName.contains(searchTerm, ignoreCase = true) ||
@@ -65,17 +62,13 @@ fun searchStudentWildSearch(searchTerm:String, studentList: ArrayList<Student>):
 
             result.add(student)
             found = true
-
-//            logger.info { "student: ${student.firstName} ${student.middleName} ${student.lastName} ${student.nickName}" }
         }
     }
 
-    // returns empty arraylist if nothing found. Otherwise, returns ArrayList of students
     return if(!found) ArrayList() else result
 }
 
-// 2nd student wild search, but accepts either of lastname,middlename or nickname, depends  on search category.
-fun searchStudentWildSearch(name: String, searchCategory: String, studentList: ArrayList<Student>): ArrayList<Student>{
+fun searchStudentWildSearch(name: String, searchCategory: String): ArrayList<Student>{
     val result:ArrayList<Student> = ArrayList()
     var found = false
 
@@ -88,8 +81,6 @@ fun searchStudentWildSearch(name: String, searchCategory: String, studentList: A
                 if(student.lastName.contains(name, ignoreCase = true)){
                     result.add(student)
                     found = true
-//                    logger.info { "search: lastname. student: ${student.firstName} ${student.middleName}
-                //                    ${student.lastName} ${student.nickName}" }
                 }
             }
         "middlename" ->
@@ -108,17 +99,15 @@ fun searchStudentWildSearch(name: String, searchCategory: String, studentList: A
             }
     }
 
-    // returns empty arraylist if nothing found. Otherwise, returns ArrayList of students
     return if(!found) ArrayList() else result
 }
 
-// function for showing result
-fun showResult(studentList: ArrayList<Student>){
-    if(studentList.isEmpty()) {
+fun showResult(result: ArrayList<Student>){
+    if(result.isEmpty()) {
         println("Search Result: Name not found.")
     }else {
         println("Search Result: ")
-        for(student in studentList){
+        for(student in result){
             println("${student.firstName} ${student.middleName} ${student.lastName} (nickname: ${student.nickName})")
         }
         println("")

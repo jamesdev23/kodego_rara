@@ -1,13 +1,6 @@
 package activity_02_b
 
-import java.time.LocalDate
-
-// activity 01_b w/ data structure
-// desc: automate school library.identify items that can borrow.
-// after listing diff. item, identify the characteristic of items
-
 fun main() {
-    // from act. 01_b
     var bookList = ArrayList<String>()
     var bookAllowedToBorrowList = ArrayList<String>()
     var bookBorrowed = ArrayList<String>()
@@ -23,13 +16,11 @@ fun main() {
     var bookBorrowStatus: String = ""
     var totalItemsInLibrary: Int = 0
 
-    // var for this app
     var borrowable = ArrayList<String>()
     var nonborrowable = ArrayList<String>()
     var optionsInput:String? = ""
     var bookCharacteristic = ArrayList<String>()
     var bookCharacteristicColumn = arrayListOf("Book Name","Type","Author","Publisher","ISBN","Condition")
-    var addBook = true
     var count = 0
     var column = 0
 
@@ -37,11 +28,11 @@ fun main() {
     println("- Add Borrowable item")
     println("- Add Item Info")
     println("Proceed to add borrowable item...")
-    while(addBook) {
+    while(true) {
         println("Enter book name: ")
         bookName = readLine().toString()
         println("Adding book to list...")
-        // add info to book list
+
         bookList.add(bookName)
         bookCharacteristic.add(bookName)
         bookCharacteristic.add(bookType)
@@ -53,7 +44,7 @@ fun main() {
         println("Do you want to add another book? (Y/N): ")
         optionsInput = readLine().toString()
         if(optionsInput == "N" || optionsInput == "n"){
-            addBook = false
+            break
         }
     }
 
