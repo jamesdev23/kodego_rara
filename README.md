@@ -1,1 +1,1 @@
-Kode Go Output   
+Kode Go Output for Kotlin
