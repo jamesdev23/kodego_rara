@@ -32,8 +32,6 @@ fun isPrime(number: Int): Boolean {
     for (index in 2 until number) {
         if (number % index == 0) {
             result = false
-        }
-        if (index * index > number) {
             break
         }
     }
