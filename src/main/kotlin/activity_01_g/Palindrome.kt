@@ -1,7 +1,6 @@
 package activity_01_g
 
 fun main(){
-    var reverse = ""
     println("Enter a word: ")
     val word = readLine().orEmpty().trim()
 
