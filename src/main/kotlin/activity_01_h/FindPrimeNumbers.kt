@@ -13,16 +13,15 @@ fun main() {
 
     primesList = findPrimes(num1,num2)
     print(primesList.joinToString(", "))
+    if (primesList.isEmpty()) {
+        println("No prime numbers found")
+    }
 }
 
 fun findPrimes(num1: Int, num2: Int): List<Int> {
     val low = min(num1, num2)
     val high = max(num1, num2)
-    val primeNumbers = (low..high).filter { isPrime(it) }
-    if (primeNumbers.isEmpty()) {
-        println("No prime numbers found")
-    }
-    return primeNumbers
+    return (low..high).filter { isPrime(it) }
 }
 
 fun isPrime(number: Int): Boolean {

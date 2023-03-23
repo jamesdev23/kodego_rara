@@ -1,3 +1,5 @@
+package exercise_oop
+
 open class Product {
     var name:String = ""
     var price:Double = 0.0
@@ -11,21 +13,21 @@ class Fruit(name:String, price:Double) : Product(name, price) {
     var quantity:Float = 0.0F
     var quantityUnits:String = "per Piece"
 }
-class Shakes(name:String, price: Double):Product(name,price){
+class Shakes(name:String, price: Double): Product(name,price){
     var size: Any = ""
     var ingredients: ArrayList<String> = ArrayList()
     var addons: ArrayList<Any> = ArrayList()
 }
-class Juices(name:String,price:Double):Product(name,price){
+class Juices(name:String,price:Double): Product(name,price){
     var ingredients: ArrayList<String> = ArrayList()
     var size: Any = ""
 }
-class Sandwiches(name:String,price:Double):Product(name,price){
+class Sandwiches(name:String,price:Double): Product(name,price){
     var ingredients: ArrayList<String> = ArrayList()
     var addons: ArrayList<Any> = ArrayList()
     var breadType:Any = ""
 }
-class Salads(name:String,price:Double):Product(name,price){
+class Salads(name:String,price:Double): Product(name,price){
     var ingredients: ArrayList<String> = ArrayList()
     var dressing:Any = ""
     var addons: ArrayList<Any> = ArrayList()
@@ -43,35 +45,35 @@ enum class OrderStatus{
     UNKNOWN
 }
 
-open class Cart(var customer:Customer){
+open class Cart(var customer: Customer){
     var uniqueID:String = ""
     var items:HashMap<Product,Float> = HashMap()
-    var status:OrderStatus = OrderStatus.UNKNOWN
-    fun updateOrder(status:OrderStatus){
+    var status: OrderStatus = OrderStatus.UNKNOWN
+    fun updateOrder(status: OrderStatus){
         this.status = status
     }
-    fun addItems(product:Product,quantity:Float){
+    fun addItems(product: Product, quantity:Float){
         //items.put(product, quantity)
         items[product] = quantity
     }
-    fun addFruit(product: Fruit,quantity: Float){
+    fun addFruit(product: Fruit, quantity: Float){
         items[product] = quantity
     }
-    fun addShakes(product: Shakes,quantity: Float){
-        items[product] = quantity
-    }
-
-    fun addJuices(product: Juices,quantity: Float){
+    fun addShakes(product: Shakes, quantity: Float){
         items[product] = quantity
     }
 
-    fun addSandwiches(product: Sandwiches,quantity: Float){
+    fun addJuices(product: Juices, quantity: Float){
+        items[product] = quantity
+    }
+
+    fun addSandwiches(product: Sandwiches, quantity: Float){
         items[product] = quantity
     }
 }
 
 class SaladsOrder(customer: Customer) : Cart(customer){
-    fun addItems(product: Salads,quantity: Float){
+    fun addItems(product: Salads, quantity: Float){
         items[product] = quantity
     }
 }
@@ -81,7 +83,6 @@ data class Customer(var address:String,var mobilenumber:String,
 
 
 fun main(){
-    // vars
     var customer = Customer("","","","")
     var customerCart = Cart(customer)
     var fruits = arrayListOf("apple","banana","lemon","mango","strawberry")

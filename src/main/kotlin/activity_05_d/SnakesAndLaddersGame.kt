@@ -1,12 +1,5 @@
 package activity_05_d
 
-// game name: snakes and ladders
-// game rules: US rules
-// rules url:
-// https://gamerules.com/rules/snakes-and-ladders/#:~:text=GAME%20RULES&text=The%20players%20can%20never%20move,land%20on%20the%20number%20100.
-// board used:
-// https://gamerules.com/wp-content/uploads/Photo-1.1-1-750x750.jpg
-
 interface SnakesAndLadders {
     fun play()
 }
@@ -38,7 +31,12 @@ class SnakesAndLaddersGame(private val players: List<Player>): SnakesAndLadders 
     }
 
     private fun isGameOver(): Boolean {
-        return players.any { it.position == board.size }
+        val winner = players.firstOrNull { it.position == board.size }
+        if (winner != null) {
+            println("${winner.name} wins!")
+            return true
+        }
+        return false
     }
 }
 
@@ -99,7 +97,10 @@ class Dice {
 }
 
 fun main() {
-    val players: ArrayList<Player> = arrayListOf(Player("Player 1"), Player("Player 2"))
+    val player1 = Player("Player 1")
+    val player2 = Player("Player 2")
+    val players: ArrayList<Player> = arrayListOf(player1,player2)
+
     val snakesAndLaddersGame = SnakesAndLaddersGame(players)
     snakesAndLaddersGame.play()
 }

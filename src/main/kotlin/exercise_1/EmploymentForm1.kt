@@ -3,19 +3,14 @@ package exercise_1
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 
-// Changes: - fixed data type of some variables | - removed personal infos like birthdate and replaced dates with filler date.
-
 fun main() {
-    // declaring variables
     var applyingFor: String?
     var desiredSalary: Float? = null
-    var workStartDate = LocalDate.parse("2023-01-01")   // filler date
+    var workStartDate = LocalDate.parse("2023-01-01")
 
-    // date format
-    var dateFormat = DateTimeFormatter.ofPattern("MM-dd-yyyy")
+    val dateFormat = DateTimeFormatter.ofPattern("MM-dd-yyyy")
     var formattedWorkStartDate = workStartDate.format(dateFormat)
 
-    // personal information
     var lastName: String? = null
     var firstName: String? = null
     var middleName: String? = null
@@ -31,13 +26,11 @@ fun main() {
     var haveFelony: Boolean? = null
     var willDoDrugTest: Boolean? = null
 
-    // birthdate, age
-    var birthDate = LocalDate.parse("1991-01-01")   // filler date
-    var formattedBday = birthDate.format(dateFormat)
+    var birthDate = LocalDate.parse("1990-01-01")
+    var formattedBirthdate = birthDate.format(dateFormat)
     var age: Int? = null
     var minorAgeRange: IntRange = 0..17
 
-    // education var
     var schoolName1: String? = null
     var schoolName2: String? = null
     var schoolName3: String? = null
@@ -54,6 +47,4 @@ fun main() {
     var major2: String? = null
     var major3: String? = null
     var otherTraining: String? = null
-
-    // 10-9-22 tbc
 }

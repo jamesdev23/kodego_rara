@@ -147,7 +147,6 @@ class PersonalCare(){
     var manufacturerName:String = ""
 }
 
-// additional 5 grocery item as class
 class Dairy{
     var itemName:String = ""
     var quantity:Int = 0
@@ -201,9 +200,4 @@ class Kitchenware(){
     var sku:Int = 0
     var manufactureDate: Date = Date()
     var manufacturerName:String = ""
-}
-
-
-fun main(){
-
 }

@@ -1,4 +1,4 @@
-package activity_06_b
+package activity_07_b
 
 import java.util.*
 
@@ -42,13 +42,11 @@ class Publisher (var name: String){
 class Authors(var firstName: String, var lastName: String){
     var middleName: String = ""
     var dateOfBirth: Date = Date()
-    // class for books, magazines and newspaper
 }
 
 class Illustrator(var firstName: String, var lastName: String){
     var middleName: String = ""
     var dateOfBirth: Date = Date()
-    // class for comics
 }
 
 class audioVideoRecording(var length: Int, var dateRecorded: String, var title: String, var publisher: Publisher) {
@@ -64,16 +62,12 @@ enum class AudioVideoTypes {
     POWERPOINT
 }
 
-// added class and methods for act_6b
-
 data class User(var name:String){
     var borrowCount:Int = 0
     var unpaidDues:Double = 0.0
 }
 
 class Library{
-
-    // book list w/ Status (Available/Reserved/Internal Use/For Fixing)
     var bookList:HashMap<String,String> = hashMapOf(
         "Book 1" to "Available",
         "Book 2" to "Reserved",
@@ -82,10 +76,9 @@ class Library{
     )
 
     var borrowedItem:HashMap<User,Book> = HashMap()
-
 }
 
-private fun acceptAndBorrowItem(user: User, book: Book){
+fun acceptAndBorrowItem(user:User,book:Book){
     val library = Library()
     val reserved = library.bookList.getValue(book.title) == "Reserved"
     val forInternalUse = library.bookList.getValue(book.title) == "Internal Use"
@@ -126,39 +119,5 @@ sealed class LibraryException(message:String) : Exception(message){
 }
 
 fun main() {
-    val user1 = User("James")
-
-    val book1 = Book("Book 1")
-    val book2 = Book("Book 2")
-    val book3 = Book("Book 3")
-    val book4 = Book("Book 4")
-
-    val library = Library()
-
-    library.bookList[book1.title] = "Available"
-    library.bookList[book2.title] = "Reserved"
-    library.bookList[book3.title] = "Internal Use"
-    library.bookList[book4.title] = "For Fixing"
-
-    // user 5 or more borrowed items exception
-    user1.borrowCount = 5
-    acceptAndBorrowItem(user1,book1)
-
-    // unpaid dues exception
-    user1.unpaidDues = 500.0
-    acceptAndBorrowItem(user1,book1)
-
-    // "reserved" exception
-    acceptAndBorrowItem(user1,book2)
-
-    // "internal use" exception
-    acceptAndBorrowItem(user1,book3)
-
-    // "for fixing" exception
-    acceptAndBorrowItem(user1,book4)
 
 }
-
-
-
-

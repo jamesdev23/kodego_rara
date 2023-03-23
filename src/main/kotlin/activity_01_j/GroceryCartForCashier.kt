@@ -26,7 +26,7 @@ fun main(){
     var totalPerItem = ArrayList<Float>()
 
 
-    println("Grocery Cart")
+    println("Grocery exercise_oop.Cart")
     while(true){
         print("Enter item name: ")
         itemName = readLine()!!.toString()
@@ -54,7 +54,7 @@ fun main(){
     }
 
     println("Proceeds to Checkout...")
-    println("Items in Cart: ")
+    println("Items in exercise_oop.Cart: ")
     for(index in 0 until itemCount){
         itemPriceRounded = String.format("%.2f", itemsInCartPrice[index])
         totalPerItemRounded = String.format("%.2f", totalPerItem[index])

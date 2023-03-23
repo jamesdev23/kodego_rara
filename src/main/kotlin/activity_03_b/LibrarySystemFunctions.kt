@@ -1,8 +1,6 @@
 package activity_03_b
 
-// make array of 20 books. make functions according to instruction
-
-val bookList:ArrayList<String> = arrayListOf("Don Quixote","Alice\'s Adventures in Wonderland",
+private val bookList:ArrayList<String> = arrayListOf("Don Quixote","Alice\'s Adventures in Wonderland",
     "The Adventures of Huckleberry Finn","The Adventures of Tom Sawyer","Treasure Island","Pride and Prejudice",
     "Wuthering Heights","Jane Eyre","Moby Dick","The Scarlet Letter","Anna Karenina","Madame Bovary","War and Peace",
     "The stories of Anton Chekhov","Middlemarch","Crime and Punishment","Great Expectations","Emma",
@@ -71,22 +69,22 @@ fun main(){
     }
 }
 
-fun isBookInRecord(book: String,list: ArrayList<String> = bookList): Boolean {
-    return list.contains(book)
+fun isBookInRecord(book: String): Boolean {
+    return bookList.contains(book)
 }
 
-fun addBook(book: String,list: ArrayList<String> = bookList){
-    list.add(book)
+fun addBook(book: String){
+    bookList.add(book)
     println("Added $book to list.")
 }
 
-fun removeBook(book: String,list: ArrayList<String> = bookList){
-    list.remove(book)
+fun removeBook(book: String){
+    bookList.remove(book)
     println("Removed $book to list.")
 }
 
-fun countBooks(list: ArrayList<String> = bookList): Int{
-    return list.size
+fun countBooks(): Int{
+    return bookList.size
 }
 
 fun searchBook(book: String){
@@ -114,8 +112,8 @@ fun searchbookName(book: String){
 }
 
 
-fun showBooks(list: ArrayList<String> = bookList){
-    list.forEach {
+fun showBooks(){
+    bookList.forEach {
         println(it)
     }
 }

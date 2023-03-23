@@ -1,7 +1,5 @@
 package activity_07_a
 
-// updated 3/20/23
-
 import activity_05_a.StudentStatus
 import java.util.*
 import kotlin.collections.ArrayList
@@ -83,35 +81,10 @@ fun getAverage(gradeList:IntArray): Double {
     }
 }
 
-// exceptions from activity 6A and 7A
-
 sealed class GradesException(message:String): Exception(message) {
     class InvalidInputException(message: String = "Invalid Input"): GradesException(message)
     class IncompleteGradeException(message: String = "Incomplete Grades"): GradesException(message)
 }
 
 fun main(){
-//    var gradeChecking = GradeChecking()
-//    val grades1:IntArray = intArrayOf(75,80,83,85,90,95,80,91,82,99,100) // <- 11 grades
-//    val grades2:IntArray = intArrayOf(75,80,83,85,90,95,80,91,82,99) // ideal no. of grades (10 grades)
-//    val grades3:IntArray = intArrayOf(75,80,83,85,90,95,80,91,82) // <- only 9 grades
-
-//
-    // expected: invalid input exception
-//    gradeChecking.checkGrades(grades1)
-//
-//    // expected: incomplete grade exception
-//    grades2[0] = 0
-//    gradeChecking.checkGrades(grades2)
-//
-//    // also incomplete grade exception
-//    gradeChecking.checkGrades(grades3)
-
-//    grades2[0] = 80
-//    gradeChecking.checkGrades(grades2)
-//    var average1 = gradeChecking.getAverage(grades2)
-//    println(average1)
-
-
-
 }

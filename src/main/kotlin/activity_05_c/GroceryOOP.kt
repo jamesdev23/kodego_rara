@@ -1,7 +1,6 @@
 package activity_05_c
 
 import java.text.DecimalFormat
-import java.text.NumberFormat
 import java.util.*
 import kotlin.collections.ArrayList
 import kotlin.collections.HashMap
@@ -109,8 +108,6 @@ class Vegetables(name:String, price:Double): Grocery(name, price) {
     var weight:String = ""
     var sku:String = ""
 }
-
-// cart
 class Cart(var customer:Customer){
     var uniqueID:Any? = ""
     var items:HashMap<Grocery,Float> = HashMap()
@@ -120,10 +117,7 @@ class Cart(var customer:Customer){
     }
 }
 
-// customer
 data class Customer(var name:String)
-
-// add,remove and checkout cart
 class CartFunction {
     fun addItemToCart(cart: Cart, grocery: Grocery, quantity: Float) {
         // checks if item in cart. if it exists, updates quantity
@@ -151,7 +145,7 @@ class CartFunction {
         val separator = CharArray(60) { '-' }
 
         if (cart.items.isEmpty()) {
-            println("Cart is empty.")
+            println("exercise_oop.Cart is empty.")
         }
 
         // calculating total per item and total cost
@@ -189,7 +183,6 @@ fun main(){
     val item4 = Poultry("Overpriced Egg",1_000_000.0)
     val cartFunction = CartFunction()
 
-    // add cart items
     cartFunction.addItemToCart(cart1,item1,100.0F)
     cartFunction.addItemToCart(cart1,item1,200.0F)
     cartFunction.addItemToCart(cart1,item2,3.0F)
@@ -197,11 +190,8 @@ fun main(){
     cartFunction.addItemToCart(cart1,item3,3.0F)
     cartFunction.addItemToCart(cart1,item4,3.0F)
 
-
-    // remove cart item
     cartFunction.removeFromCart(cart1,item4)
 
-    // cart checkout
     cartFunction.checkoutCart(cart1)
 
 }

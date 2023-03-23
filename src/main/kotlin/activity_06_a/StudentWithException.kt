@@ -56,7 +56,6 @@ enum class StudentStatus {
     UNKNOWN,
 }
 
-// added for act06a
 sealed class GradesException(message:String): Exception(message) {
     class InvalidInputException(message: String = "Invalid Input"): GradesException(message)
     class IncompleteGradeException(message: String = "Incomplete Grades"): GradesException(message)
@@ -78,10 +77,8 @@ fun main(){
     val grades1:IntArray = intArrayOf(75,80,83,85,90,95,80,91,82,99,100) // <- 11 entries
     val grades2:IntArray = intArrayOf(75,80,83,85,90,95,80,91,82,99)
 
-    // expected: invalid output exception
     Grades().checkGrades(grades1)
 
-    // expected: incomplete grade exception
     grades2[2] = 0
     Grades().checkGrades(grades2)
 
