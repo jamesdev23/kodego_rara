@@ -1,11 +1,8 @@
 package activity_02_a
 
-// activity 01_a w/ data structure
-// A01_a: create student directory for this course. check student progress
 fun main() {
-    // from activity 01_a
     val courseName = "Mobile App Development (Part-Time)"
-    var studentList = arrayListOf("James","Bert","Jane","Mark","Jeff") // filler name
+    var studentList = arrayListOf("James","Bert","Jane","Mark","Jeff")
     var studentName: String = "n/a"
     var batchNumber: String = "n/a"
     var studentStatus = "Enrolled"
@@ -29,7 +26,6 @@ fun main() {
     var weeksTotal = "n/a"
     var totalStudents: Int = 0
 
-    // var for this activity
     var optionsInput:String = "n/a"
     var firstName:String = "n/a"
     var lastName:String = "n/a"
@@ -40,7 +36,6 @@ fun main() {
         "Assignment Status","Assignment Completed","Assignment in Progress","Assignment Count","Project Status",
         "Project in Progress","Project Completed","Project Count","Capstone Project Status")
     var column = 0
-    var addStudent = true
 
     println("Student Directory Menu:")
     println("- Add Student")
@@ -48,9 +43,8 @@ fun main() {
     println("- Check Student Progress")
     println(" ")
 
-    // add student
     println("Proceed to add student...")
-    while(addStudent) {
+    while(true) {
         println("Enter first name: ")
         firstName = readLine()!!.toString()
         if (firstName.isEmpty()) {
@@ -96,7 +90,7 @@ fun main() {
         println("Do you want to add another student? (Y/N): ")
         optionsInput = readLine().toString()
         if(optionsInput == "N" || optionsInput == "n"){
-            addStudent = false
+            break
         }
     }
 

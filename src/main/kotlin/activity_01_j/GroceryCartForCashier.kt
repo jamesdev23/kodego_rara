@@ -1,7 +1,4 @@
 package activity_01_j
-import java.time.LocalDate
-
-// grocery cart. user: cashier
 
 fun main(){
     var groceryItemList = ArrayList<String>()
@@ -12,7 +9,6 @@ fun main(){
     var itemOnSaleTotal: Int = 0
     var ItemSoldTotal: Int = 0
 
-    // grocery cart var
     var itemName: String = ""
     var itemQuantity:Int = 0
     var itemPrice:Float = 0.0F
@@ -24,8 +20,6 @@ fun main(){
     var totalPerItemRounded = ""
     var totalCostRounded = ""
 
-
-    // array list for carts
     var itemsInCart = ArrayList<String>()
     var itemsInCartQuantity = ArrayList<Int>()
     var itemsInCartPrice = ArrayList<Float>()
@@ -33,8 +27,7 @@ fun main(){
 
 
     println("Grocery Cart")
-    do{
-        var addToCart = true
+    while(true){
         print("Enter item name: ")
         itemName = readLine()!!.toString()
         print("Quantity (per piece): ")
@@ -56,9 +49,9 @@ fun main(){
         println("Would you like to add another item? (Y/N): ")
         optionsInput = readLine().toString()
         if(optionsInput == "N" || optionsInput == "n"){
-            addToCart = false
+            break
         }
-    } while(addToCart)
+    }
 
     println("Proceeds to Checkout...")
     println("Items in Cart: ")

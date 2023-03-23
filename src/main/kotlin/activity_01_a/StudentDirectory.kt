@@ -1,20 +1,15 @@
 package activity_01_a
 
-// updated 10-17-22
 fun main() {
-    // variable list
-    // student info
     val courseName = "Mobile App Development (Part-Time)"
     var studentList = ArrayList<String>()
-    var studentName: String= ""
-    var batchNumber: String? = "MD2P"
+    var studentName: String = ""
+    var batchNumber: String = "MD2P"
     var studentStatus: String= ""
     var isDropped: Boolean = false
     var totalStudents: Int = 0
     var attendanceCount: Float = 0.0F
     var numberOfLateAttendance: Float = 0.0F
-
-    // exercise,assignment, and project info per student
     var exerciseStatus: String= ""
     var exerciseCompleted: Int = 0
     var exerciseInProgress: Int = 0
@@ -28,8 +23,6 @@ fun main() {
     var projectInProgress: Int = 0
     var projectCount: Int = 0
     var capstoneProjectStatus: String= ""
-
-    // week status per student
     var weekStatus: String= ""
     var weeksTotal: Int = 0
 

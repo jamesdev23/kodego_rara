@@ -1,25 +1,16 @@
 package activity_01_f
 
-//  description: find unique characters in both string
-//  Union of Unique characters in both Strings
-//  scope: string, loops
-// updated: 3/20/23
-
 fun main() {
     print("string 1: ")
-    val string1:String = readLine()!!.toString()
+    val string1 = readLine()!!.toString().lowercase()
     print("String 2: ")
-    val string2:String = readLine()!!.toString()
+    val string2 = readLine()!!.toString().lowercase()
     print("Unique: ")
     print(findUniqueChars(string1, string2))
 }
 
-fun findUniqueChars(string1: String, string2: String): String{
+fun findUniqueChars(string1: String, string2: String): List<Char>{
     val uniqueChars = mutableListOf<Char>()
-
-    if (string1.length == string2.length && string1.toSet() == string2.toSet()) {
-        return string2
-    }
 
     for (char in string1 + string2) {
         if (char !in uniqueChars) {
@@ -27,5 +18,6 @@ fun findUniqueChars(string1: String, string2: String): String{
         }
     }
 
-    return uniqueChars.joinToString("")
+    uniqueChars.sort()
+    return uniqueChars
 }

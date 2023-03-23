@@ -5,7 +5,6 @@ import java.time.Period
 // Borrowing book and check record. User: Librarian
 
 fun main(){
-    var optionsInput:String = ""
     var optionYesNo:String = ""
     var bookBorrowerName:String = ""
     var bookTitle:String = ""
@@ -15,19 +14,9 @@ fun main(){
     var borrowerInfo = arrayListOf("James","Student","The Scarlet Letter","7","2022-10-22","2022-10-29")
     var bookBorrowDateStart = LocalDate.now()
     var bookBorrowed = arrayListOf("The Scarlet Letter")
-    var borrowerType = arrayOf(
-        "Visitor",
-        "Student",
-        "Faculty"
-    )
-
-    var borrowerTypeBorrowDuration = arrayOf(
-        "room-use",
-        "7 days",
-        "30 days"
-    )
-    var bookList = arrayListOf<String>(
-        "Don Quixote",
+    var borrowerType = arrayOf("Visitor", "Student", "Faculty")
+    var borrowerTypeBorrowDuration = arrayOf("room-use", "7 days", "30 days")
+    var bookList = arrayListOf<String>("Don Quixote",
         "Alice\'s Adventures in Wonderland",
         "The Adventures of Huckleberry Finn",
         "The Adventures of Tom Sawyer",
@@ -51,7 +40,6 @@ fun main(){
         "Herman Melville",
         "Nathaniel Hawthorne"
     )
-    var canBorrow = true
     var counter = 0
     var column = 0
 
@@ -59,7 +47,7 @@ fun main(){
     println("- Borrow a Book")
     println("- Borrowed Book Record")
 
-    while(canBorrow) {
+    while(true) {
         print("Enter Borrower's Name: ")
         bookBorrowerName = readLine().toString()
         borrowerInfo.add(bookBorrowerName)
@@ -67,23 +55,27 @@ fun main(){
         var tempBorrowerType = readLine().toString()
         borrowerInfo.add(tempBorrowerType)
 
-        if (tempBorrowerType == "visitor"){
-            println("Note: Any books borrowed by visitor is for room-use only, within 1 day.")
-            borrowDuration = 1
-        } else if (tempBorrowerType == "student") {
-            println("Note: Students can borrow a book up to 7 days")
-            borrowDuration = 7
-        } else if (tempBorrowerType == "faculty") {
-            println("Note: Faculty and other school staff can borrow a book up to 30 days")
-            borrowDuration = 30
-        } else {
-            println("Invalid option.")
-            borrowDuration = 1
+        when (tempBorrowerType) {
+            "visitor" -> {
+                println("Note: Any books borrowed by visitor is for room-use only, within 1 day.")
+                borrowDuration = 1
+            }
+            "student" -> {
+                println("Note: Students can borrow a book up to 7 days")
+                borrowDuration = 7
+            }
+            "faculty" -> {
+                println("Note: Faculty and other school staff can borrow a book up to 30 days")
+                borrowDuration = 30
+            }
+            else -> {
+                println("Invalid option.")
+                borrowDuration = 1
+            }
         }
         println("Book Title: ")
         bookTitle = readLine().toString()
 
-        // simple check if it can be borrowed
         if (bookBorrowed.contains(bookTitle)) {
             println("This book can not be borrowed.")
         } else {
@@ -98,8 +90,9 @@ fun main(){
         }
         print("Do you want to borrow another book? (Y/N): ")
         optionYesNo = readLine().toString()
+
         if(optionYesNo == "N" || optionYesNo == "n"){
-            canBorrow = false
+            break
         }
     }
 
@@ -119,6 +112,7 @@ fun main(){
             println("No entry found.")
         }else {
             println("Borrower Info: ")
+
             do{
                 println("${borrowerInfoColumn[column]}: ${borrowerInfo[counter]}")
                 ++ counter
